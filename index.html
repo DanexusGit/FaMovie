@@ -93,9 +93,10 @@ body.playing #app,body.playing #nv,body.playing #ft,body.playing #prof,body.play
 .ldbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#e50914,#ff4d5a);border-radius:6px;transition:width .25s}
 #ldt{font-size:15px;color:#ddd}#ldh{font-size:12px;color:#888;max-width:420px}
 #ver{position:absolute;right:calc(14px + env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));font-size:12px;color:#8a8a8a;letter-spacing:1px;background:#ffffff10;padding:4px 10px;border-radius:12px}
+.fonte,#fonte{font-size:12px;color:#8a8a8a;margin-top:8px}.fonte a,#fonte a{cursor:pointer;color:#bbb;text-decoration:underline}.fonte a.on,#fonte a.on{color:#e50914;font-weight:700;text-decoration:none}
 </style></head><body>
 <div id="intro" class="hid"><div class="rays"></div><div class="vig"></div><div class="glow"></div><div class="st"><i class="f1"></i><i class="f2"></i><i class="f3"></i></div></div>
-<div id="ld" class="hid"><div class="logo ldlogo">FAMILYMOVIE</div><div class="ldbar"><i id="ldb"></i></div><div id="ldt">Carregando capas…</div><div id="ldh">Na primeira vez pode demorar um pouco. Depois as capas ficam guardadas.</div><button id="lds" class="b b2 hid">Entrar agora</button><div id="ver"></div></div>
+<div id="ld" class="hid"><div class="logo ldlogo">FAMILYMOVIE</div><div class="ldbar"><i id="ldb"></i></div><div id="ldt">Carregando capas…</div><div id="ldh">Na primeira vez pode demorar um pouco. Depois as capas ficam guardadas.</div><button id="lds" class="b b2 hid">Entrar agora</button><div id="fonte"></div><div id="ver"></div></div>
 <div id="prof" class="hid"><div class="logo" >FAMILYMOVIE</div><h1>Quem está assistindo?</h1><div class="pl" id="pl"></div></div>
 <nav id="nv" class="hid"><span class="logo" onclick="go('home')">FAMILYMOVIE</span><a data-v="home" class="on">Início</a><a data-v="ser">Séries</a><a data-v="fil">Filmes</a><a data-v="inf" class="hm">Infantil</a><a data-v="lst">Minha Lista</a><span class="sp"></span><input id="q" placeholder="Títulos, gêneros…"><div class="mini" id="me" title="Trocar perfil"></div></nav>
 <main id="app" class="hid"></main><footer class="hid" id="ft">FamilyMovie · feito com ❤ para a família</footer><div class="md" id="md"></div>
@@ -266,9 +267,11 @@ $('#me').onclick=()=>{$('#prof').classList.remove('hid');['#nv','#app','#ft'].fo
 window.go=v=>{view=v;$('#q').value='';render()};document.querySelectorAll('nav a').forEach(a=>a.onclick=()=>go(a.dataset.v));
 $('#q').oninput=()=>{view='q';render()};addEventListener('scroll',()=>$('#nv').classList.toggle('s',scrollY>40));
 /* Capas: Wikipédia (cartaz do artigo) -> TVMaze (séries) -> iTunes (reserva). Sem chave/API paga. Cache local. */
-const PU=(()=>{try{return JSON.parse(localStorage.getItem('dp_pu12')||'{}')}catch(e){return{}}})();
-const savePU=()=>{try{localStorage.setItem('dp_pu12',JSON.stringify(PU))}catch(e){}};
-for(const x of ALL){const u=(x.k||[])[0];if(u&&u.startsWith('http'))PU[x.id]=u}
+const FONTE=(()=>{try{const q=new URLSearchParams(location.search).get('fonte');if(q==='wikipedia'||q==='imp'){localStorage.setItem('dp_fonte',q);return q}return localStorage.getItem('dp_fonte')==='wikipedia'?'wikipedia':'imp'}catch(e){return'imp'}})();
+const PUK='dp_pu13_'+FONTE;
+const PU=(()=>{try{return JSON.parse(localStorage.getItem(PUK)||'{}')}catch(e){return{}}})();
+const savePU=()=>{try{localStorage.setItem(PUK,JSON.stringify(PU))}catch(e){}};
+if(FONTE==='imp')for(const x of ALL){const u=(x.k||[])[0];if(u&&u.startsWith('http'))PU[x.id]=u}
 const toks=s=>s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/'/g,'').replace(/[^a-z0-9 ]/g,' ').split(/\s+/).filter(w=>w&&!/^(19|20)\d\d$/.test(w)&&!['the','a','of','and','film','filme','in','de','o','e'].includes(w));
 function best(q,list){const qt=toks(q),qn=qt.filter(w=>/^\d+$/.test(w));let b=null,bs=.55;for(const [title,url] of list){if(!url)continue;const pt=toks(title),pn=pt.filter(w=>/^\d+$/.test(w));if(pn.some(w=>!qn.includes(w))||qn.some(w=>!pn.includes(w)))continue;const sc=qt.filter(w=>pt.includes(w)).length/qt.length-.02*pt.filter(w=>!qt.includes(w)).length;if(sc>bs){bs=sc;b=url}}return b}
 async function wiki(q,lang){const u=`https://${lang}.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(q)}&gsrlimit=5&prop=pageimages&piprop=thumbnail&pithumbsize=500&format=json`;let d;try{d=await jp(u)}catch(e){d=await(await fetch(u+'&origin=*')).json()}return best(q,Object.values(d.query?.pages||{}).sort((a,b)=>a.index-b.index).map(p=>[p.title,p.thumbnail&&p.thumbnail.source]))}
@@ -281,14 +284,16 @@ const vars=v=>{if(v.startsWith('http'))return[v];const m=v.match(/^(.*)(_ver\d+)
 const load=u=>new Promise(r=>{const i=new Image();i.referrerPolicy='no-referrer';i.onload=()=>{const q=i.naturalWidth/i.naturalHeight;r(q>.55&&q<.82?u:null)};i.onerror=()=>r(null);i.src=u;setTimeout(()=>r(null),9000)});
 const itTV=async x=>{const d=await jp(`https://itunes.apple.com/search?media=tvShow&entity=tvSeason&country=US&limit=8&term=${encodeURIComponent(x.q)}`);const r=(d.results||[]).find(r=>toks(r.collectionName||'').includes(x.kw));return r&&r.artworkUrl100&&r.artworkUrl100.replace('100x100bb','500x750bb')};
 const L=async f=>{try{const v=await f();return v?await load(v):null}catch(e){return null}};
-const VERSION='v2.1.0';
+const VERSION='v2.2.0';
 const RESERVA=false; /* true = liga fontes de reserva (Wikipédia/iTunes) — podem trazer capas erradas */
+const WIKI_TITULOS=['Homem-Aranha 2','Homem-Aranha 3']; /* teste: estes usam a Wikipédia primeiro (e o IMP só se a Wikipédia falhar) */
 const RESERVA_TITULOS={'Quarteto Fantástico (1994)':'The Fantastic Four unreleased film'}; /* o IMP não tem esse pôster */
 const CAPAS_MANUAIS={}; /* 'Título do filme':'link da página ou da imagem do IMP Awards' */
 const posterOf=u=>(/\.html?$/.test(u)?u.replace(/\/([^\/]+)\.html?$/,'/posters/$1.jpg'):u).replace(/^http:/,'https:');
 async function resolve(x){if(PU[x.id])return;let u=null;const m=CAPAS_MANUAIS[x.t];
 if(m)u=await load(posterOf(m));
-if(!u)for(const c of [...new Set((x.k||[]).flatMap(vars))].slice(0,30)){u=await load(IMP(c));if(u)break}
+if(!u&&!x.s&&(FONTE==='wikipedia'||WIKI_TITULOS.includes(x.t))){if(x.e)u=await L(()=>wiki(`${x.e} ${x.y} film`,'en'));if(!u)u=await L(()=>wiki(x.t+' filme','pt'))}
+if(!u&&FONTE==='imp')for(const c of [...new Set((x.k||[]).flatMap(vars))].slice(0,30)){u=await load(IMP(c));if(u)break}
 if(!u&&RESERVA_TITULOS[x.t])u=await L(()=>wiki(RESERVA_TITULOS[x.t],'en'));
 if(!u&&x.s)u=await L(async()=>{const d=await(await fetch('https://api.tvmaze.com/singlesearch/shows?q='+encodeURIComponent(x.q))).json();return d.image&&(d.image.original||d.image.medium)});
 if(!u&&RESERVA&&!x.s){if(x.e)u=await L(()=>wiki(`${x.e} ${x.y} film`,'en'));if(!u)u=await L(()=>itunes(x.e||x.t,x.y));if(!u)u=await L(()=>wiki(x.t+' filme','pt'))}
@@ -296,7 +301,7 @@ if(u){PU[x.id]=u;savePU();apply(x.id)}}
 async function preloadAll(prog){const todo=ALL.filter(x=>!PU[x.id]);let done=ALL.length-todo.length,i=0;prog(done);
 const worker=async()=>{while(i<todo.length){const x=todo[i++];x.qd=1;try{await Promise.race([resolve(x),new Promise(r=>setTimeout(r,40000))])}catch(e){}prog(++done)}};
 await Promise.all(Array.from({length:6},worker))}
-function startLoad(){const ld=$('#ld'),bar=$('#ldb'),t=$('#ldt'),sk=$('#lds');$('#ver').textContent='FamilyMovie '+VERSION;ld.classList.remove('hid');let fin=0;
+function startLoad(){const ld=$('#ld'),bar=$('#ldb'),t=$('#ldt'),sk=$('#lds');$('#ver').textContent='FamilyMovie '+VERSION+' · capas: '+(FONTE==='imp'?'IMP Awards':'Wikipédia');ld.classList.remove('hid');let fin=0;
 const finish=()=>{if(fin)return;fin=1;ld.classList.add('hid');$('#prof').classList.remove('hid')};sk.onclick=finish;setTimeout(()=>sk.classList.remove('hid'),25000);
 preloadAll(n=>{const p=Math.round(n/ALL.length*100);bar.style.width=p+'%';t.textContent=`Carregando capas… ${n} / ${ALL.length} (${p}%)`}).then(finish)}
 const Q=[];let busy=0;function enq(x){if(x.qd||PU[x.id])return;x.qd=1;Q.push(x);pump()}function pump(){while(busy<6&&Q.length&&!document.body.classList.contains('playing')){busy++;resolve(Q.shift()).finally(()=>{busy--;pump()})}}
@@ -344,6 +349,8 @@ window.closeP=()=>{$('#pf').src='about:blank';$('#pv').classList.add('hid');docu
 window.tip=()=>{const t=$('#tip');t.classList.remove('hid');clearTimeout(window._tp);window._tp=setTimeout(()=>t.classList.add('hid'),7000)};
 function tudum(){try{const a=new(window.AudioContext||window.webkitAudioContext)(),n=a.currentTime;[[0,.6,60],[.45,1.7,48]].forEach(([t,d,f])=>{const o=a.createOscillator(),g=a.createGain();o.frequency.setValueAtTime(f*2.4,n+t);o.frequency.exponentialRampToValueAtTime(f,n+t+.3);g.gain.setValueAtTime(.0001,n+t);g.gain.exponentialRampToValueAtTime(.95,n+t+.03);g.gain.exponentialRampToValueAtTime(.0001,n+t+d);o.connect(g).connect(a.destination);o.start(n+t);o.stop(n+t+d)})}catch(e){}}
 function intro(snd,cb){const el=$('#intro');el.classList.remove('hid','go');void el.offsetWidth;requestAnimationFrame(()=>requestAnimationFrame(()=>{el.classList.add('go');if(snd)tudum()}));let d=0;const end=()=>{if(d)return;d=1;el.classList.add('hid');cb&&cb()};el.onclick=end;setTimeout(end,2800)}
+window.setFonte=f=>{try{localStorage.setItem('dp_fonte',f)}catch(e){}location.reload()};
+{const h=`Fonte das capas: <a onclick="setFonte('imp')" class="${FONTE==='imp'?'on':''}">IMP Awards</a> · <a onclick="setFonte('wikipedia')" class="${FONTE==='wikipedia'?'on':''}">Wikipédia (teste)</a>`;$('#fonte').innerHTML=h;$('#ft').insertAdjacentHTML('beforeend','<div class="fonte">'+h+'</div>')}
 intro(0,startLoad);
 addEventListener('keydown',e=>{if(e.key!=='Escape')return;if(!$('#pv').classList.contains('hid')){if(!document.fullscreenElement)closeP()}else closeM()});
 </script></body></html>
