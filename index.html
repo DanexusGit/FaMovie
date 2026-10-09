@@ -260,8 +260,8 @@ $('#me').onclick=()=>{$('#prof').classList.remove('hid');['#nv','#app','#ft'].fo
 window.go=v=>{view=v;$('#q').value='';render()};document.querySelectorAll('nav a').forEach(a=>a.onclick=()=>go(a.dataset.v));
 $('#q').oninput=()=>{view='q';render()};addEventListener('scroll',()=>$('#nv').classList.toggle('s',scrollY>40));
 /* Capas: Wikipédia (cartaz do artigo) -> TVMaze (séries) -> iTunes (reserva). Sem chave/API paga. Cache local. */
-const PU=(()=>{try{return JSON.parse(localStorage.getItem('dp_pu9')||'{}')}catch(e){return{}}})();
-const savePU=()=>{try{localStorage.setItem('dp_pu9',JSON.stringify(PU))}catch(e){}};
+const PU=(()=>{try{return JSON.parse(localStorage.getItem('dp_pu10')||'{}')}catch(e){return{}}})();
+const savePU=()=>{try{localStorage.setItem('dp_pu10',JSON.stringify(PU))}catch(e){}};
 for(const x of ALL){const u=(x.k||[])[0];if(u&&u.startsWith('http'))PU[x.id]=u}
 const toks=s=>s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/'/g,'').replace(/[^a-z0-9 ]/g,' ').split(/\s+/).filter(w=>w&&!/^(19|20)\d\d$/.test(w)&&!['the','a','of','and','film','filme','in','de','o','e'].includes(w));
 function best(q,list){const qt=toks(q),qn=qt.filter(w=>/^\d+$/.test(w));let b=null,bs=.55;for(const [title,url] of list){if(!url)continue;const pt=toks(title),pn=pt.filter(w=>/^\d+$/.test(w));if(pn.some(w=>!qn.includes(w))||qn.some(w=>!pn.includes(w)))continue;const sc=qt.filter(w=>pt.includes(w)).length/qt.length-.02*pt.filter(w=>!qt.includes(w)).length;if(sc>bs){bs=sc;b=url}}return b}
@@ -270,23 +270,19 @@ function jp(u){return new Promise((ok,no)=>{const cb='_j'+Math.random().toString
 let itP=Promise.resolve();
 const itunes=(q,y)=>{const r=itP.then(async()=>{const d=await jp(`https://itunes.apple.com/search?media=movie&entity=movie&country=US&limit=6&term=${encodeURIComponent(q)}`);return best(q,(d.results||[]).filter(r=>!y||Math.abs(+(r.releaseDate||'').slice(0,4)-y)<=1).map(r=>[r.trackName,r.artworkUrl100&&r.artworkUrl100.replace('100x100bb','500x750bb')]))});itP=r.catch(()=>{}).then(()=>new Promise(k=>setTimeout(k,3300)));return r};
 const IMP=c=>c.startsWith('http')?c:`https://www.impawards.com/${c.split('/')[0]}/posters/${c.split('/')[1]}.jpg`;
-const vars=v=>{if(v.startsWith('http')||/_ver\d+$/.test(v))return[v];let o=[v,v.replace(/spider_man/g,'spiderman').replace(/spider_verse/g,'spiderverse'),v.replace(/x_men/g,'xmen')];o=[...new Set(o.flatMap(w=>[w,w.replace(/_two$/,'_2').replace(/_three$/,'_3').replace(/_four$/,'_4').replace(/_five$/,'_5')]))];return[...new Set([o,...[1,2,3,4].map(n=>o.map(w=>w+'_ver'+n))].flat())]};
-const load=u=>new Promise(r=>{const i=new Image();i.referrerPolicy='no-referrer';i.onload=()=>{const q=i.naturalWidth/i.naturalHeight;r(q>.55&&q<.82?u:null)};i.onerror=()=>r(null);i.src=u;setTimeout(()=>r(null),5000)});
+const vars=v=>{if(v.startsWith('http')||/_ver\d+$/.test(v))return[v];let o=[v,v.replace(/spider_man/g,'spiderman').replace(/spider_verse/g,'spiderverse'),v.replace(/x_men/g,'xmen')];o=[...new Set(o.flatMap(w=>[w,w.replace(/_two$/,'_2').replace(/_three$/,'_3').replace(/_four$/,'_4').replace(/_five$/,'_5')]))];return[...new Set([o,...[1,2,3,4,5,6].map(n=>o.map(w=>w+'_ver'+n))].flat())]};
+const load=u=>new Promise(r=>{const i=new Image();i.referrerPolicy='no-referrer';i.onload=()=>{const q=i.naturalWidth/i.naturalHeight;r(q>.55&&q<.82?u:null)};i.onerror=()=>r(null);i.src=u;setTimeout(()=>r(null),9000)});
 const itTV=async x=>{const d=await jp(`https://itunes.apple.com/search?media=tvShow&entity=tvSeason&country=US&limit=8&term=${encodeURIComponent(x.q)}`);const r=(d.results||[]).find(r=>toks(r.collectionName||'').includes(x.kw));return r&&r.artworkUrl100&&r.artworkUrl100.replace('100x100bb','500x750bb')};
 const L=async f=>{try{const v=await f();return v?await load(v):null}catch(e){return null}};
-const MISS=(()=>{try{return JSON.parse(localStorage.getItem('dp_miss9')||'{}')}catch(e){return{}}})();
-const saveMiss=()=>{try{localStorage.setItem('dp_miss9',JSON.stringify(MISS))}catch(e){}};
-async function resolve(x){if(PU[x.id]||x.c==='Z')return;if(MISS[x.id]&&Date.now()-MISS[x.id]<432e5)return;let u=null;
-const early=!x.s&&x.e?wiki(`${x.e} ${x.y} film`,'en').catch(()=>null):null;
-const ps=[...new Set((x.k||[]).flatMap(vars))].slice(0,12).map(c=>load(IMP(c)));
-for(const p of ps){u=await p;if(u)break}
+async function resolve(x){if(PU[x.id])return;let u=null;
+for(const c of (x.k||[]).flatMap(vars)){u=await load(IMP(c));if(u)break}
 if(!u){if(x.s){u=await L(async()=>{const d=await(await fetch('https://api.tvmaze.com/singlesearch/shows?q='+encodeURIComponent(x.q))).json();return d.image&&(d.image.original||d.image.medium)});if(!u)u=await L(()=>itTV(x));if(!u)u=await L(()=>wiki(x.q+' TV series','en'))}
-else{if(early)u=await L(()=>early);if(!u)u=await L(()=>itunes(x.e||x.t,x.y));if(!u)u=await L(()=>wiki(x.t+' filme','pt'))}}
-if(u){PU[x.id]=u;savePU();apply(x.id)}else{MISS[x.id]=Date.now();saveMiss()}}
-const Q=[];let busy=0;function enq(x,hi){if(x.qd||PU[x.id])return;x.qd=1;hi?Q.unshift(x):Q.push(x);pump()}function pump(){while(busy<8&&Q.length&&!document.body.classList.contains('playing')){busy++;resolve(Q.shift()).finally(()=>{busy--;pump()})}}
+else{if(x.e)u=await L(()=>wiki(`${x.e} ${x.y} film`,'en'));if(!u)u=await L(()=>itunes(x.e||x.t,x.y));if(!u)u=await L(()=>wiki(x.t+' filme','pt'))}}
+if(u){PU[x.id]=u;savePU();apply(x.id)}}
+const Q=[];let busy=0;function enq(x){if(x.qd||PU[x.id])return;x.qd=1;Q.push(x);pump()}function pump(){while(busy<6&&Q.length&&!document.body.classList.contains('playing')){busy++;resolve(Q.shift()).finally(()=>{busy--;pump()})}}
 function apply(id){document.querySelectorAll(`.c[data-id="${id}"]`).forEach(c=>{if(c.querySelector('img.p'))return;const im=new Image();im.className='p';im.decoding='async';im.referrerPolicy='no-referrer';im.alt='';im.onload=()=>c.classList.add('ok');im.onerror=()=>im.remove();im.src=PU[id];c.prepend(im)});heroFill()}
 function heroFill(){const f=window.HF,h=$('#hero');if(!f||!h||!PU[f.id])return;h.style.setProperty('--h',`url(${PU[f.id]}) center/cover`);const p=$('#hpost');p.src=PU[f.id];p.style.display='block'}
-let IO;function fill(){if(!IO)IO=new IntersectionObserver(es=>{for(const e of es)if(e.isIntersecting){IO.unobserve(e.target);const x=byId(e.target.dataset.id);if(x)enq(x,true)}},{rootMargin:'300px 700px'});document.querySelectorAll('.c[data-id]').forEach(c=>{const x=byId(c.dataset.id);if(PU[x.id])apply(x.id);else if(!c.dataset.o){c.dataset.o=1;IO.observe(c)}});if(window.HF)enq(window.HF,true);heroFill()}
+function fill(){document.querySelectorAll('.c[data-id]').forEach(c=>{const x=byId(c.dataset.id);PU[x.id]?apply(x.id):enq(x)});heroFill()}
 const nEps=x=>x.S.reduce((a,s)=>a+s.length,0);
 const card=(x,r)=>`<div class="c${PU[x.id]?' ok':''}" data-id="${x.id}" style="${bg(x.t)}" onclick="open_('${x.id}')">${PU[x.id]?`<img class="p" loading="lazy" referrerpolicy="no-referrer" alt="" src="${PU[x.id]}" onerror="this.remove()">`:''}${x.s?'<u>S</u>':''}${x.s?`<i>${x.S.length} TEMP.</i>`:''}<b>${x.t}</b><div class="n">${x.t}</div>${r?`<em>${r}</em>`:''}</div>`;
 function row(t,l,top){if(!l.length)return'';const id='r'+Math.random().toString(36).slice(2,7);return`<div class="row ${top?'t10':''}"><h3>${t}</h3><button class="ar l" onclick="sc('${id}',-1)">‹</button><div class="sc" id="${id}">${l.map((x,i)=>card(x,top?i+1:0)).join('')}</div><button class="ar r" onclick="sc('${id}',1)">›</button></div>`}
