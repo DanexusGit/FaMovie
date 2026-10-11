@@ -1,3 +1,0 @@
-Esta pasta deve conter uma imagem .jpg para cada filme/série, com o nome exato que está em ../lista_de_capas.txt
-(exemplo:  Toy Story 4.jpg  /  Homem-Aranha 2.jpg).
-Para baixar todas automaticamente, rode  baixar_capas.py  (veja o LEIA-ME.txt).
