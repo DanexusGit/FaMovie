@@ -368,10 +368,11 @@ function login(i){U=i;kid=P[i][2];$('#prof').classList.add('hid');['#nv','#app',
 window.go=v=>{window.gsel='';if(v==='cat')window.catSel=null;view=v;$('#q').value='';$('#sb').classList.remove('open');render()};document.querySelectorAll('nav a').forEach(a=>a.onclick=()=>go(a.dataset.v));
 addEventListener('scroll',()=>$('#nv').classList.toggle('s',scrollY>40));
 /* Capas: Wikipédia (cartaz do artigo) -> TVMaze (séries) -> iTunes (reserva). Sem chave/API paga. Cache local. */
-const PU={},VERSION='v9.0.0';
+const PU={},VERSION='v9.1.0';
 const toks=s=>s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/'/g,'').replace(/[^a-z0-9 ]/g,' ').split(/\s+/).filter(w=>w&&!/^(19|20)\d\d$/.test(w)&&!['the','a','of','and','film','filme','in','de','o','e'].includes(w));
 const capaFile=t=>t.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[\u2013\u2014]/g,'-').replace(/\s*:\s*/g,' - ').replace(/[\\/*?"<>|]/g,'').replace(/\s+/g,' ').trim();
-const capaURL=x=>'capas/'+encodeURIComponent(capaFile(x.o||x.t))+'.jpg';
+const CAPAS=(()=>{try{const q=(new URLSearchParams(location.search).get('capas')||'').replace(/[^A-Za-z0-9_-]/g,'');if(q){localStorage.setItem('dp_capas',q);return q}return localStorage.getItem('dp_capas')||'capas'}catch(e){return'capas'}})();
+const capaURL=x=>CAPAS+'/'+encodeURIComponent(capaFile(x.o||x.t))+'.jpg';
 const load=u=>new Promise(r=>{const i=new Image();i.onload=()=>r(u);i.onerror=()=>r(null);i.src=u;setTimeout(()=>r(null),15000)});
 async function resolve(x){x.qd=1;if(PU[x.id])return;const u=await load(capaURL(x));if(u){PU[x.id]=u;apply(x.id)}}
 async function preloadAll(){ALL.forEach(x=>x.qd=1);let i=0;const w=async()=>{while(i<ALL.length){const x=ALL[i++];try{await resolve(x)}catch(e){}}};await Promise.all(Array.from({length:8},w))}
