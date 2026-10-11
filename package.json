@@ -1,0 +1,51 @@
+{
+  "name": "famovie",
+  "version": "1.0.0",
+  "description": "FaMovie desktop app",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --no-sandbox",
+    "package": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^33.1.1",
+    "electron-builder": "^25.1.4"
+  },
+  "build": {
+    "appId": "com.danexusgit.famovie",
+    "productName": "FaMovie",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "index.html",
+      "main.js",
+      "preload.js",
+      "capas/**/*",
+      "**/*.js",
+      "**/*.css"
+    ],
+    "win": {
+      "target": [
+        "portable",
+        "nsis"
+      ],
+      "artifactName": "FaMovie-${version}-win.${ext}"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "artifactName": "FaMovie-${version}-linux.${ext}"
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "artifactName": "FaMovie-${version}-mac.${ext}"
+    }
+  }
+}
