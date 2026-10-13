@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>FaMovie — Minha Biblioteca</title>
+<title>FaMovie</title>
 <meta name="theme-color" content="#141414">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 44'%3E%3Cpath d='M0 0 L4.2 0 L6 44 L0 44 Z' fill='%23e50914'/%3E%3Cpath d='M0 0 L4.2 0 L16 44 L10.6 44 Z' fill='%23e50914'/%3E%3Cpath d='M11.8 0 L16 0 L16 44 L10.2 44 Z' fill='%23e50914'/%3E%3C/svg%3E">
 <style>
@@ -118,6 +118,8 @@ img{display:block}
 .marca{display:inline-flex;align-items:center;gap:.12em;line-height:0}
 .marca-f{height:.78em;width:auto;display:block}
 .marca-nome{color:#fff;font-weight:900;letter-spacing:-.05em;line-height:1;font-size:1em}
+/* o nome como TEXTO (herói, tela de perfis...): só a palavra em vermelho, sem a logo */
+.marca-texto{color:var(--vermelho);font-weight:900;letter-spacing:-.045em;line-height:1;font-style:normal;white-space:nowrap}
 .m-fa{color:var(--vermelho)}
 .m-mv{color:#fff}
 
@@ -140,6 +142,7 @@ img{display:block}
 @keyframes subirPerfil{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 @keyframes aparecer{from{opacity:0}to{opacity:1}}
 #perfis .logo-perfis{font-size:clamp(28px,4.4vw,52px);font-weight:900;letter-spacing:-.06em;line-height:1;user-select:none}
+#perfis .logo-perfis .marca-texto{font-size:1em;letter-spacing:-.045em}
 #perfis h1{font-size:clamp(22px,2.7vw,40px);font-weight:400;margin:0;letter-spacing:.005em;text-align:center}
 .perfis-grade{display:flex;gap:clamp(13px,1.7vw,24px);flex-wrap:wrap;justify-content:center;max-width:1120px}
 .perfil{display:flex;flex-direction:column;align-items:center;gap:11px;width:clamp(96px,10vw,132px);transition:transform .2s;cursor:pointer}
@@ -781,10 +784,11 @@ footer .cols a:hover{color:#fff;text-decoration:underline}
 /* marca no herói: F vermelho + aMovie branco + tipo (FILME/SÉRIE) */
 #hero .tag{align-items:center;gap:0;letter-spacing:0}
 #hero .tag::before{display:none}                       /* fora o tracinho vermelho solto */
-#hero .tag b.marca-fa{display:inline-flex;align-items:center;color:#fff;font-weight:700}
-#hero .tag .marca{gap:.14em}
-#hero .tag .marca-f{height:1.5em;flex:0 0 auto;width:auto;filter:drop-shadow(0 1px 6px rgba(0,0,0,.6))}
-#hero .tag .marca-nome{color:#fff;font-weight:800;font-size:1em;letter-spacing:-.028em;text-transform:none}
+#hero .tag b.marca-fa{display:inline-flex;align-items:center;color:#fff;font-weight:700}  /* legado: não usado */
+#hero .tag .marca-texto{
+  font-size:1.02em;font-weight:900;letter-spacing:-.045em;text-transform:none;
+  text-shadow:0 2px 10px rgba(0,0,0,.65);
+}
 #hero .tag > span{                 /* só o "FILME"/"SÉRIE" — a marca é um span aninhado e não entra aqui */
   font-size:.78em;letter-spacing:.3em;color:#cfcfcf;font-weight:700;text-transform:uppercase;
   margin-left:14px;padding-left:14px;border-left:1px solid rgba(255,255,255,.38);
@@ -949,7 +953,7 @@ body.dispositivo-movel .painel-ed{width:100%}
 
 /* ajuste fino: selo do herói no celular não corta */
 body.dispositivo-movel #hero .tag{gap:7px;flex-wrap:wrap}
-body.dispositivo-movel #hero .tag .marca-fa{font-size:19px}
+body.dispositivo-movel #hero .tag .marca-texto{font-size:19px}
 body.dispositivo-movel #hero .tag > span{font-size:10.5px;letter-spacing:.16em;margin-left:7px;padding-left:9px}
 body.dispositivo-movel #hero .conteudo{padding-right:6px}
 
@@ -1071,6 +1075,10 @@ body.dispositivo-movel .ep-card p{-webkit-line-clamp:2}
               .ed-aba{padding:7px 11px;font-size:12px}
   .ed-rodape .btn-cheio,.ed-rodape .btn-linha{padding:11px 16px;font-size:13px}
 }
+
+/* marcador de versão (Configurações) */
+.versao-app{margin-top:14px;font-size:12.5px;color:#8c8c8c;text-align:center}
+.versao-app b{color:#e50914}
 
 </style>
 </head>
@@ -1533,11 +1541,12 @@ function listaNovidades(){
 function marcaF(classe){
   return `<svg class="${classe || 'marca-f'}" viewBox="0 0 58 159" aria-hidden="true"><path d="M0 0h58v18H22v50h32v17H22v74H0z" fill="#ff0000"/></svg>`;
 }
-function marcaHTML(){
-  return cfg.marca === 'FaMovie'
-    ? `<span class="marca" role="img" aria-label="FaMovie">${marcaF('marca-f')}<b class="marca-nome">aMovie</b></span>`
-    : esc(cfg.marca);
+/* nos TEXTOS da interface o nome aparece como texto vermelho, sem a logo (a logo fica só na lateral) */
+function marcaTexto(){
+  const nome = (!cfg.marca || cfg.marca === 'NETFLIX') ? 'FaMovie' : cfg.marca;
+  return `<b class="marca-texto">${esc(nome)}</b>`;
 }
+function marcaHTML(){ return marcaTexto(); }   /* compatibilidade com chamadas antigas */
 /* na barra lateral fica só o F, como o "N" da Netflix */
 function logoLateralHTML(){
   return cfg.marca === 'FaMovie' ? `<span class="marca" role="img" aria-label="FaMovie">${marcaF('marca-f')}</span>` : esc(cfg.marca);
@@ -1845,7 +1854,7 @@ function montarHero(){
     <div class="fundo" style="background-image:url('${fundoDe(h)}')"></div>
     <div class="veuL"></div><div class="veuB"></div>
     <div class="conteudo">
-      <div class="tag"><b class="marca-fa">${marcaHTML()}</b><span>${h.tipo === 'serie' ? 'SÉRIE' : 'FILME'}</span></div>
+      <div class="tag">${marcaTexto()}<span>${h.tipo === 'serie' ? 'SÉRIE' : 'FILME'}</span></div>
       ${logo ? `<img class="logo-titulo" src="${IMG}w780${logo}" alt="${esc(h.titulo)}">` : `<h1>${esc(h.titulo)}</h1>`}
       <div class="meta">
         <span class="rb verde">${relevancia(h)}% relevante</span>
@@ -2235,6 +2244,7 @@ function abrirConfig(){
     </div>
     <div class="pg"><i id="cfg-pg"></i></div>
     <div class="status" id="cfg-status"></div>
+    <div class="versao-app">FaMovie <b>v18</b> · interface ajustada para janelas pequenas</div>
     <div class="stat">
       <div><b>${ITENS.length}</b><span>títulos</span></div>
       <div><b>${FILMES.length}</b><span>filmes</span></div>
@@ -2619,9 +2629,11 @@ let ehMobile = false;
 function detectarDispositivo(){
   const ua = navigator.userAgent || '';
   const uaMovel = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|Mobile|webOS|BlackBerry|Tablet/i.test(ua);
-  let estreita = false;
-  try{ estreita = window.matchMedia ? window.matchMedia('(max-width: 820px)').matches : (window.innerWidth <= 820); }catch(e){ estreita = window.innerWidth <= 820; }
-  definirDispositivo(uaMovel || estreita);
+  let dedo = false;
+  try{ dedo = (navigator.maxTouchPoints || 0) > 0 && window.matchMedia('(pointer: coarse)').matches; }catch(e){ dedo = false; }
+  /* computador com a janela estreita NÃO vira celular: só aparelho de toque (ou tela minúscula) */
+  const minuscula = window.innerWidth <= 560;
+  definirDispositivo(uaMovel || minuscula || (dedo && window.innerWidth <= 1180));
   return ehMobile;
 }
 function definirDispositivo(movel){
@@ -2669,12 +2681,12 @@ function boot(){
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
 
 window.NF = { ITENS, FILMES, SERIES, meta, abrirModal, tocar, sincronizarTudo, trocarPerfil,
-  itens, filmes, series, perfilAtual, perfilInfantil, sugestoes, fecharPlayer, clusterizar, colecaoDe, abrirGrade, ordenarCatalogo, definirDispositivo, detectarDispositivo, srcAvatar, avatarClas, marcaF, abrirEditor, montarPerfis, tocarIntro, logoLateralHTML,
+  itens, filmes, series, perfilAtual, perfilInfantil, sugestoes, fecharPlayer, clusterizar, colecaoDe, abrirGrade, ordenarCatalogo, definirDispositivo, detectarDispositivo, srcAvatar, avatarClas, marcaF, marcaTexto, abrirEditor, montarPerfis, tocarIntro, logoLateralHTML,
   get ehMobile(){ return ehMobile; },
   get perfis(){ return perfis; }, get perfilAtivo(){ return perfilAtivo; },
   get cfg(){ return cfg; }, set cfg(v){ cfg = v; salvar(LS.cfg, cfg); } };
 })();
 
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a4a158f448c3b3a6',t:'MTc5MTkyNTk5OA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a4a1721c3e925d23',t:'MTc5MTkyNzAyOQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
