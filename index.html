@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>FaMovie</title>
+<title>FaMovie — Minha Biblioteca</title>
 <meta name="theme-color" content="#141414">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 44'%3E%3Cpath d='M0 0 L4.2 0 L6 44 L0 44 Z' fill='%23e50914'/%3E%3Cpath d='M0 0 L4.2 0 L16 44 L10.6 44 Z' fill='%23e50914'/%3E%3Cpath d='M11.8 0 L16 0 L16 44 L10.2 44 Z' fill='%23e50914'/%3E%3C/svg%3E">
 <style>
@@ -38,81 +38,128 @@ img{display:block}
 ::-webkit-scrollbar-track{background:transparent}
 .escondido{display:none !important}
 
-/* ================= ABERTURA: F → FaMovie → F → F expandindo (estilo Netflix) ================= */
+/* ================= ABERTURA (roteiro "TUDUM") — LEVE: só transform/opacity, sem filtros ================= */
 #intro{
   position:fixed;inset:0;background:#000;z-index:9000;display:flex;align-items:center;justify-content:center;
-  overflow:hidden;transition:opacity .3s ease;
-  --fa: clamp(88px, min(26vh, 22vw), 300px);   /* altura do F na 1ª fase */
-  --lt: calc(var(--fa) * .62);                 /* tamanho das letras do título */
-  --meio: 3.15em;                              /* metade do nome (o JS ajusta com a medida real) */
+  overflow:hidden;transition:opacity .55s ease;contain:layout paint;
+  --fa: clamp(118px, 33vh, 300px);          /* altura do F */
+  --nm: clamp(30px, 9.2vh, 74px);           /* tamanho do nome embaixo */
 }
 #intro .in-palco{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
 
-/* 1) o F aparece no centro, grande */
-#intro .in-f{
-  height:var(--fa);width:auto;display:block;opacity:0;transform:scale(.55);filter:blur(12px);
-  animation:inF .85s cubic-bezier(.16,.9,.25,1.05) .05s forwards,
-            inPulso .6s ease 1.5s,
-            inSai .55s cubic-bezier(.5,0,.9,.2) 4.55s forwards;
+/* a "câmera": é a ÚNICA coisa grande que escala (fica numa camada própria do GPU) */
+#intro .in-cam{
+  position:relative;display:flex;flex-direction:column;align-items:center;gap:clamp(6px,1.3vh,16px);
+  transform-origin:50% 36%;will-change:transform,opacity;
+  animation:inZoom 1.5s cubic-bezier(.5,.03,.9,.4) 1.5s forwards,
+            inDesintegra .85s ease 3.05s forwards;
 }
-@keyframes inF{0%{opacity:0;transform:scale(.55);filter:blur(12px)}60%{opacity:1;filter:blur(1px)}100%{opacity:1;transform:scale(1);filter:blur(0)}}
-@keyframes inPulso{0%{transform:scale(1)}45%{transform:scale(1.07)}100%{transform:scale(1)}}
-@keyframes inSai{0%{opacity:1;transform:scale(1)}55%{opacity:1}100%{opacity:0;transform:scale(3.4);filter:blur(5px)}}
+@keyframes inZoom{from{transform:scale(1)}to{transform:scale(7.4)}}
+@keyframes inDesintegra{0%{opacity:1;transform:scale(7.4)}60%{opacity:.45;transform:scale(8.1)}100%{opacity:0;transform:scale(8.8)}}
 
-/* 2) o "aMovie" (vermelho) sai de dentro do F. Só transform/clip — nada de "travar":
-      o conjunto começa deslocado para o F ficar no centro e desliza para 0, deixando o nome
-      inteiro centralizado quando as letras acabam de sair.
-   3) o nome fica 2s na tela e depois se retrai para dentro do F (e o F volta ao centro). */
-#intro .in-centro{
-  position:relative;display:flex;align-items:center;font-size:var(--lt);z-index:3;flex:0 0 auto;
-  transform:translateX(var(--meio));
-  animation:inPalco 1.05s cubic-bezier(.22,.9,.2,1) .95s forwards, inPalcoV .6s cubic-bezier(.55,0,.9,.2) 3.75s forwards;
+/* ---- CENA 1: o silêncio quebra com a 1ª batida + feixe vertical de luz vermelha ---- */
+#intro .in-feixe{
+  position:absolute;left:50%;top:50%;width:3px;height:56vh;pointer-events:none;will-change:transform,opacity;
+  transform:translate(-50%,-50%) scaleY(0);opacity:0;
+  background:linear-gradient(180deg,transparent,#ff2a2a 12%,#fff 50%,#ff2a2a 88%,transparent);
+  box-shadow:0 0 30px 8px rgba(229,9,20,.5);
+  animation:inFeixe .6s cubic-bezier(.2,.9,.3,1) .04s forwards;
 }
-@keyframes inPalco{from{transform:translateX(var(--meio))}to{transform:translateX(0)}}
-@keyframes inPalcoV{from{transform:translateX(0)}to{transform:translateX(var(--meio))}}
-#intro .in-nome{
-  display:flex;flex:0 0 auto;white-space:nowrap;
-  clip-path:inset(0 100% 0 0);
-  animation:inAbre 1.05s cubic-bezier(.22,.9,.2,1) .95s forwards, inFecha .6s cubic-bezier(.55,0,.9,.2) 3.75s forwards;
+@keyframes inFeixe{
+  0%{opacity:0;transform:translate(-50%,-50%) scaleY(.04)}
+  16%{opacity:1;transform:translate(-50%,-50%) scaleY(1)}
+  60%{opacity:.9;transform:translate(-50%,-50%) scaleY(1)}
+  100%{opacity:0;transform:translate(-50%,-50%) scaleY(1.03)}
 }
-@keyframes inAbre{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
-@keyframes inFecha{from{clip-path:inset(0 0 0 0)}to{clip-path:inset(0 100% 0 0)}}
-#intro .in-nome span{
-  flex:0 0 auto;color:var(--vermelho);font-weight:900;font-size:1em;letter-spacing:-.055em;line-height:1;
-  opacity:0;transform:translateX(-.12em);animation:inLetra .4s ease forwards;
-}
-@keyframes inLetra{to{opacity:1;transform:translateX(0)}}
 
-/* 4) o F se amplia e vira a abertura da Netflix: letra gigante feita de fitas coloridas */
-#intro .in-final{
-  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;
-  animation:inFinalAparece .35s linear 4.6s forwards, inFinalZoom 1.35s cubic-bezier(.6,0,.85,.2) 5.1s forwards;
+/* o F em 3 camadas (profundidade 3D). Nasce de baixo para cima e vibra no 2º impacto.
+   Sem filtros pesados: é isso que travava o zoom. */
+#intro .in-svg{
+  position:relative;height:var(--fa);width:calc(var(--fa) * 58 / 159);
+  clip-path:inset(100% 0 0 0);opacity:0;
+  animation:inNasce .42s cubic-bezier(.25,.9,.3,1) .05s forwards,
+            inVibra .32s ease .55s,
+            inSomeF .7s ease 1.75s forwards;
 }
-@keyframes inFinalAparece{from{opacity:0;transform:scale(.55)}to{opacity:1;transform:scale(1)}}
-@keyframes inFinalZoom{0%{opacity:1;transform:scale(1)}70%{opacity:1}100%{opacity:0;transform:scale(5.4)}}
+#intro .in-svg svg{position:absolute;inset:0;height:100%;width:100%}
+#intro .in-prof1{transform:translateX(-6px)}  #intro .in-prof1 path{fill:#a80000}
+#intro .in-prof2{transform:translateX(-11px)} #intro .in-prof2 path{fill:#5e0000}
+@keyframes inNasce{0%{opacity:0;clip-path:inset(100% 0 0 0)}55%{opacity:1}100%{opacity:1;clip-path:inset(0 0 0 0)}}
+@keyframes inVibra{0%,100%{transform:translateX(0)}14%{transform:translateX(-3px)}32%{transform:translateX(3px)}52%{transform:translateX(-2px)}72%{transform:translateX(2px)}}
+@keyframes inSomeF{to{opacity:.1}}
+
+/* brilho vermelho atrás do F: fica FORA da câmera (não escala) e some antes do zoom */
 #intro .in-glow{
-  position:absolute;width:120vh;height:120vh;border-radius:50%;pointer-events:none;
-  background:radial-gradient(circle,rgba(229,9,20,.30),rgba(229,9,20,.06) 45%,transparent 68%);
-  animation:inGlow 1.1s ease 4.6s both;
+  position:absolute;left:50%;top:50%;width:92vh;height:92vh;margin:-46vh 0 0 -46vh;border-radius:50%;
+  pointer-events:none;will-change:opacity;
+  background:radial-gradient(circle,rgba(229,9,20,.30),rgba(229,9,20,.07) 46%,transparent 70%);
+  animation:inGlow .9s ease .5s both, inGlowSai .6s ease 1.95s forwards;
 }
-@keyframes inGlow{0%{opacity:0;transform:scale(.55)}55%{opacity:1}100%{opacity:.65;transform:scale(1)}}
-#intro .in-mascara{
-  height:84vh;width:calc(84vh * 58 / 159);overflow:hidden;display:flex;gap:3px;align-items:stretch;
+@keyframes inGlow{0%{opacity:0;transform:scale(.55)}55%{opacity:1}100%{opacity:.7;transform:scale(1)}}
+@keyframes inGlowSai{to{opacity:0}}
+
+/* ---- CENA 2: o nome "FaMovie" logo abaixo do F ---- */
+#intro .in-nome{
+  font-size:var(--nm);font-weight:900;letter-spacing:-.05em;line-height:1;color:var(--vermelho);
+  text-shadow:0 0 22px rgba(229,9,20,.4),0 3px 12px rgba(0,0,0,.7);
+  opacity:0;transform:translateY(12px);
+  animation:inNome .5s cubic-bezier(.2,.9,.25,1) .56s forwards;
+}
+@keyframes inNome{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* ---- CENA 3: a letra se fragmenta e revela os filamentos (sobem UMA vez e param) ---- */
+#intro .in-fitas{
+  position:absolute;left:0;top:0;height:var(--fa);width:100%;overflow:hidden;contain:paint;
+  display:flex;gap:2px;align-items:stretch;opacity:0;
   -webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 58 159'><path d='M0 0h58v18H22v50h32v17H22v74H0z' fill='%23fff'/></svg>") center/100% 100% no-repeat;
   mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 58 159'><path d='M0 0h58v18H22v50h32v17H22v74H0z' fill='%23fff'/></svg>") center/100% 100% no-repeat;
+  animation:inRevela .3s ease 1.55s forwards;
 }
-#intro .in-mascara i{flex:1 1 0;height:112%;transform:translateY(102%);animation:inFita 2.2s cubic-bezier(.3,.85,.3,1) forwards}
-@keyframes inFita{0%{transform:translateY(102%)}20%{transform:translateY(0)}72%{transform:translateY(0)}100%{transform:translateY(-104%)}}
+@keyframes inRevela{to{opacity:1}}
+#intro .in-fitas i{flex:1 1 0;height:126%;border-radius:2px;transform:translateY(102%);will-change:transform;
+  animation:inSobe var(--dur,.9s) cubic-bezier(.25,.85,.3,1) var(--at,0s) forwards}
+@keyframes inSobe{from{transform:translateY(102%)}to{transform:translateY(-6%)}}
 
-/* flash claro e saída */
-#intro .in-flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;animation:inFlash .5s ease 5.85s}
-@keyframes inFlash{0%{opacity:0}18%{opacity:.85}100%{opacity:0}}
+/* feixes de velocidade em direção ao espectador (6, em espaço de tela, só transform/opacity) */
+#intro .in-veloz{position:absolute;inset:-12% 0;pointer-events:none}
+#intro .in-veloz i{
+  position:absolute;top:0;bottom:0;width:2px;border-radius:2px;opacity:0;left:calc(50% + var(--x));
+  background:linear-gradient(180deg,transparent,var(--c),transparent);
+  animation:inVeloz 1.25s cubic-bezier(.35,.55,.6,1) calc(1.55s + var(--d)) forwards;
+}
+@keyframes inVeloz{
+  0%{opacity:0;transform:scaleY(.1) translateX(0)}
+  30%{opacity:.8}
+  100%{opacity:0;transform:scaleY(1.15) translateX(calc(var(--x) * .55))}
+}
+
+/* ---- CENA 4: a luz preenche a tela e se dispersa para as laterais ---- */
+#intro .in-flash{
+  position:absolute;inset:0;pointer-events:none;opacity:0;will-change:opacity;
+  background:radial-gradient(circle at 50% 44%,#fff,rgba(255,90,90,.8) 40%,rgba(229,9,20,0) 72%);
+  animation:inFlash .6s ease 3.12s;
+}
+@keyframes inFlash{0%{opacity:0}18%{opacity:.92}100%{opacity:0}}
+#intro .in-dispersa{position:absolute;inset:0;pointer-events:none}
+#intro .in-dispersa i{
+  position:absolute;top:-12%;bottom:-12%;width:70%;opacity:0;will-change:transform,opacity;
+  animation:inDispersa .8s cubic-bezier(.3,.5,.7,1) 3.08s forwards;
+}
+#intro .in-dispersa i:first-child{left:-28%;--dx:-.5;background:radial-gradient(ellipse at 78% 50%,rgba(255,255,255,.45),transparent 62%)}
+#intro .in-dispersa i:last-child{right:-28%;--dx:.5;background:radial-gradient(ellipse at 22% 50%,rgba(255,255,255,.45),transparent 62%)}
+@keyframes inDispersa{0%{opacity:0;transform:translateX(0)}30%{opacity:.85}100%{opacity:0;transform:translateX(calc(var(--dx) * 55%))}}
+
 #intro.escondido{opacity:0;pointer-events:none}
 #intro .pular{
   position:absolute;right:26px;bottom:26px;font-size:13px;color:#8c8c8c;z-index:5;
   border:1px solid #333;border-radius:3px;padding:8px 14px;letter-spacing:.05em;text-transform:uppercase;
 }
 #intro .pular:hover{color:#fff;border-color:#777}
+
+/* ---- desempenho: enquanto a abertura ou a tela de perfis cobre tudo, o app nem é pintado ---- */
+#lateral,#hero,#conteudo,footer,header{transition:opacity .4s ease}
+body.app-oculta #lateral,body.app-oculta #hero,body.app-oculta #conteudo,
+body.app-oculta footer,body.app-oculta header{visibility:hidden;opacity:0}
 
 /* ---- LOGO (o Fzinho vermelho da interface) ---- */
 .marca{display:inline-flex;align-items:center;gap:.12em;line-height:0}
@@ -1212,7 +1259,7 @@ function perfilInfantil(){ return !!perfilAtual().infantil; }
 function trocarPerfil(i){
   perfilAtivo = i; salvar(LS.ativo, i);
   carregarEstadoPerfil();
-  montarLateral(); renderTudo();
+  montarLateral(); renderizarAppAgora(); renderTudo();
 }
 carregarEstadoPerfil();
 
@@ -1886,6 +1933,12 @@ function montarHero(){
 }
 
 /* ---------------- RENDER ---------------- */
+/* ---- renderização adiada: a home é montada DEPOIS, escondida atrás da abertura/perfis ----
+   (montar 178 títulos de uma vez travava os primeiros quadros da abertura) */
+let appRenderizada = false, _renderPend = null;
+function renderizarAppAgora(){ if (appRenderizada) return; appRenderizada = true; clearTimeout(_renderPend); renderTudo(); }
+function renderizarAppDepois(ms){ if (appRenderizada) return; clearTimeout(_renderPend); _renderPend = setTimeout(renderizarAppAgora, ms); }
+
 function renderTudo(){
   montarLateral();
   montarHero();
@@ -2244,7 +2297,7 @@ function abrirConfig(){
     </div>
     <div class="pg"><i id="cfg-pg"></i></div>
     <div class="status" id="cfg-status"></div>
-    <div class="versao-app">FaMovie <b>v18</b> · interface ajustada para janelas pequenas</div>
+    <div class="versao-app">FaMovie <b>v20</b> · abertura lisa (60 fps) + transição para os perfis</div>
     <div class="stat">
       <div><b>${ITENS.length}</b><span>títulos</span></div>
       <div><b>${FILMES.length}</b><span>filmes</span></div>
@@ -2328,7 +2381,10 @@ function srcAvatar(p, tam){
   if (p.tipo === 'rosto') return avatarSVG(p.cor, p.face, tam || 264);
   return avatarClas(p.cor || '#e50914', p.clas || 'sorriso', tam);
 }
-function abrirTelaPerfis(){ montarPerfis(); telaPerfis.classList.remove('escondido'); }
+function abrirTelaPerfis(){
+  montarPerfis(); telaPerfis.classList.remove('escondido');
+  renderizarAppDepois(1500);  /* enquanto você escolhe o perfil, a home é montada sem ninguém ver */
+}
 
 function montarPerfis(){
   telaPerfis.innerHTML = `
@@ -2514,7 +2570,7 @@ function abrirEditor(idx){
     salvar(LS.perfis, perfis);
     if (perfilAtivo >= perfis.length) perfilAtivo = perfis.length - 1;
     salvar(LS.ativo, perfilAtivo);
-    carregarEstadoPerfil(); montarPerfis(); montarLateral(); renderTudo();
+    carregarEstadoPerfil(); montarPerfis(); montarLateral(); renderizarAppDepois(0);
     caixa.remove(); toast('Perfil excluído');
   };
   $('#ed-salvar').onclick = async () => {
@@ -2548,6 +2604,9 @@ function tudumSom(){
   try{
     const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return;
     const ctx = new AC();
+    /* sem gesto do usuário o navegador deixa o áudio suspenso: tenta retomar; se não voltar
+       na hora, segue sem som (a abertura nunca trava por causa disso) */
+    if (ctx.state === 'suspended' && ctx.resume) { try{ ctx.resume(); }catch(e){} }
     const master = ctx.createGain(); master.gain.value = .5; master.connect(ctx.destination);
     const rev = ctx.createConvolver();
     const len = ctx.sampleRate * 1.2, buf = ctx.createBuffer(2, len, ctx.sampleRate);
@@ -2570,44 +2629,67 @@ function tudumSom(){
         o.start(t0); o.stop(t0 + dur + .05);
       });
     }
-    const t = ctx.currentTime + .06;
-    golpe(58.27, t, .75, .85);        // "ta"
-    golpe(87.31, t + .30, 2.6, 1.0);  // "dum"
+    const t = ctx.currentTime + .04;
+    golpe(58.27, t, .70, .95);          // "TU"  — 1ª batida (junto com o feixe de luz)
+    golpe(87.31, t + .52, 2.4, 1.15);   // "DUM" — 2ª batida (junto com o nome FaMovie)
+    golpe(46.25, t + .78, 1.1, .22);    // eco
+    golpe(40.00, t + 1.05, .9, .12);    // eco distante
+    /* zumbido de sintetizador que se espalha até o silêncio */
+    const zumb = ctx.createOscillator(), zg = ctx.createGain(), lp = ctx.createBiquadFilter();
+    zumb.type = 'sawtooth'; zumb.frequency.setValueAtTime(41, t + .5); zumb.frequency.linearRampToValueAtTime(36, t + 3.8);
+    lp.type = 'lowpass'; lp.frequency.value = 210;
+    zg.gain.setValueAtTime(0, t + .5);
+    zg.gain.linearRampToValueAtTime(.05, t + 1.1);
+    zg.gain.exponentialRampToValueAtTime(.0001, t + 3.8);
+    zumb.connect(lp); lp.connect(zg); zg.connect(master); zg.connect(rev); rev.connect(master);
+    zumb.start(t + .5); zumb.stop(t + 3.9);
   }catch(e){}
 }
 function tocarIntro(){
   if (!cfg.intro){ intro.classList.add('escondido'); return; }
   intro.classList.remove('escondido');
-  const CORES_RAIO = ['#e50914','#ff6f00','#f5c518','#46d369','#22c1d6','#5199e4','#b026ff','#ff5fa2','#ffffff'];
-  const fitas = Array.from({ length: 34 }, (_, i) =>
-    `<i style="animation-delay:${(4.6 + (i % 17) * .028 + Math.random() * .05).toFixed(2)}s;background:${CORES_RAIO[i % CORES_RAIO.length]}"></i>`).join('');
-  const titulo = 'aMovie'.split('').map((l, i) =>
-    `<span style="animation-delay:${(1.05 + i * .035).toFixed(2)}s">${l}</span>`).join('');
+  /* filamentos: vermelho, azul, roxo, amarelo e rosa (como no roteiro) */
+  const CORES_FIO = ['#e50914','#ff2b2b','#5199e4','#2f6bff','#b026ff','#8a2be2','#f5c518','#ffd23f','#ff5fa2','#ff1493','#22c1d6','#ffffff'];
+  const fitas = Array.from({ length: 18 }, (_, i) => {
+    const c = CORES_FIO[i % CORES_FIO.length];
+    const at = (1.5 + (i % 9) * .05 + Math.random() * .05).toFixed(2);
+    const dur = (.8 + (i % 4) * .09).toFixed(2);
+    return `<i style="--at:${at}s;--dur:${dur}s;background:${c}"></i>`;
+  }).join('');
+  const feixes = Array.from({ length: 6 }, (_, i) => {
+    const x = ((i - 2.5) * 132 + (Math.random() * 36 - 18)).toFixed(0);
+    return `<i style="--x:${x}px;--d:${((i % 3) * .07).toFixed(2)}s;--c:${CORES_FIO[(i * 2 + 1) % CORES_FIO.length]}"></i>`;
+  }).join('');
   intro.innerHTML = `
     <div class="in-palco">
-      <div class="in-centro">
-        ${marcaF('in-f')}
-        <span class="in-nome">${titulo}</span>
+      <div class="in-feixe"></div>
+      <div class="in-glow"></div>
+      <div class="in-veloz">${feixes}</div>
+      <div class="in-cam">
+        <div class="in-letra">
+          <div class="in-svg">${marcaF('in-prof2')}${marcaF('in-prof1')}${marcaF('in-f')}</div>
+          <div class="in-fitas">${fitas}</div>
+        </div>
+        <div class="in-nome">${esc(cfg.marca || 'FaMovie')}</div>
       </div>
-      <div class="in-final"><div class="in-glow"></div><div class="in-mascara">${fitas}</div></div>
+      <div class="in-dispersa"><i></i><i></i></div>
       <div class="in-flash"></div>
     </div>
     <button class="pular" id="pular-intro">Pular abertura</button>`;
-  /* mede a largura real das letras: assim o conjunto fica sempre centralizado na tela */
-  const nomeEl = intro.querySelector('.in-nome'), centroEl = intro.querySelector('.in-centro');
-  centroEl.style.setProperty('--meio', (nomeEl.getBoundingClientRect().width / 2) + 'px');
-  setTimeout(tudumSom, 4700);   /* o 'tá-dum' entra junto com a expansão do F */
-  const fim = () => {
+  setTimeout(tudumSom, 40);                 /* a 1ª batida cai no exato instante do feixe de luz */
+  /* a tela de perfis já começa a entrar POR BAIXO, no fim do zoom: a abertura vira a tela de perfis */
+  setTimeout(() => { if (!sessaoIniciada){ sessaoIniciada = true; abrirTelaPerfis(); } }, 3350);
+  const fim = (imediato) => {
     if (intro.dataset.fim) return;
     intro.dataset.fim = '1';
-    /* a tela de perfis entra JUNTO com o fade da abertura: assim a home nunca aparece por trás */
     if (!sessaoIniciada){ sessaoIniciada = true; abrirTelaPerfis(); }
+    if (imediato) intro.style.transition = 'opacity .28s ease';   /* ao pular, sai rapidinho */
     intro.classList.add('escondido');
-    setTimeout(() => { delete intro.dataset.fim; }, 400);
+    setTimeout(() => { delete intro.dataset.fim; intro.style.transition = ''; }, 600);
   };
-  $('#pular-intro').onclick = fim;
-  setTimeout(fim, 6450);
-  document.addEventListener('keydown', function esc(e){ if (e.key === 'Enter'){ fim(); document.removeEventListener('keydown', esc); } });
+  $('#pular-intro').onclick = () => fim(true);
+  setTimeout(fim, 4050);
+  document.addEventListener('keydown', function esc(e){ if (e.key === 'Enter'){ fim(true); document.removeEventListener('keydown', esc); } });
 }
 let sessaoIniciada = false;
 
@@ -2645,6 +2727,18 @@ let _redimT = null;
 window.addEventListener('resize', () => { clearTimeout(_redimT); _redimT = setTimeout(detectarDispositivo, 220); });
 window.addEventListener('orientationchange', () => setTimeout(detectarDispositivo, 300));
 
+function ligarOcultacaoDoApp(){
+  const atualizar = () => {
+    const cobrindo = !intro.classList.contains('escondido') || !telaPerfis.classList.contains('escondido');
+    document.body.classList.toggle('app-oculta', cobrindo);
+  };
+  try{
+    const obs = new MutationObserver(atualizar);
+    obs.observe(intro, { attributes: true, attributeFilter: ['class'] });
+    obs.observe(telaPerfis, { attributes: true, attributeFilter: ['class'] });
+  }catch(e){}
+  atualizar();
+}
 function boot(){
   detectarDispositivo();
   const hero = el('div'); hero.id = 'hero';
@@ -2664,8 +2758,9 @@ function boot(){
   telaPerfis.classList.add('escondido');
   document.body.append(header, hero, cont, footer, telaBusca, modal, player, config, intro, telaPerfis);
   montarPerfis();
-  renderTudo();
-  tocarIntro();
+  ligarOcultacaoDoApp();     /* enquanto a abertura/perfis cobre a tela, o app não é pintado */
+  renderizarAppDepois(4200); /* se algo der errado, a home entra sozinha logo depois da abertura */
+  tocarIntro();              /* a abertura começa na hora, sem esperar a home */
   if (!temTMDB()){
     setTimeout(() => {
       toast('Dica: abra o menu do perfil → "Gerenciar capas (TMDB)" e cole sua chave para baixar todas as capas.');
@@ -2681,12 +2776,12 @@ function boot(){
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
 
 window.NF = { ITENS, FILMES, SERIES, meta, abrirModal, tocar, sincronizarTudo, trocarPerfil,
-  itens, filmes, series, perfilAtual, perfilInfantil, sugestoes, fecharPlayer, clusterizar, colecaoDe, abrirGrade, ordenarCatalogo, definirDispositivo, detectarDispositivo, srcAvatar, avatarClas, marcaF, marcaTexto, abrirEditor, montarPerfis, tocarIntro, logoLateralHTML,
+  itens, filmes, series, perfilAtual, perfilInfantil, sugestoes, fecharPlayer, clusterizar, colecaoDe, abrirGrade, ordenarCatalogo, definirDispositivo, detectarDispositivo, srcAvatar, avatarClas, marcaF, marcaTexto, abrirEditor, montarPerfis, tocarIntro, logoLateralHTML, renderizarAppAgora,
   get ehMobile(){ return ehMobile; },
   get perfis(){ return perfis; }, get perfilAtivo(){ return perfilAtivo; },
   get cfg(){ return cfg; }, set cfg(v){ cfg = v; salvar(LS.cfg, cfg); } };
 })();
 
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a4a1721c3e925d23',t:'MTc5MTkyNzAyOQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a4a264d73cf12507',t:'MTc5MTkzNjk3MQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
