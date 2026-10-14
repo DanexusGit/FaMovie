@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>FaMovie — Minha Biblioteca</title>
+<title>FaMovie</title>
 <meta name="theme-color" content="#141414">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 44'%3E%3Cpath d='M0 0 L4.2 0 L6 44 L0 44 Z' fill='%23e50914'/%3E%3Cpath d='M0 0 L4.2 0 L16 44 L10.6 44 Z' fill='%23e50914'/%3E%3Cpath d='M11.8 0 L16 0 L16 44 L10.2 44 Z' fill='%23e50914'/%3E%3C/svg%3E">
 <style>
@@ -1710,6 +1710,38 @@ body.dispositivo-movel #modal .caixa{min-height:100dvh}
 #modal .meta .idade.dezesseis,#modal .meta-ep .idade.dezesseis{background:#e50914;color:#fff}
 #modal .meta .idade.dezoito,#modal .meta-ep .idade.dezoito{background:#000;color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.5)}
 
+/* ================= v38: SELEÇÃO por setas (controle de TV / teclado) =================
+   O item selecionado ganha anel branco; nos cartões o efeito é o mesmo do hover
+   (cresce e mostra o painel), então dá para navegar o app inteiro sem "mouse". */
+.foco-tv{outline:3px solid #fff!important;outline-offset:2px;border-radius:8px}
+.card.foco-tv,.card-sem.foco-tv,.ep.foco-tv,.perfil.foco-tv{
+  outline:3px solid #fff!important;outline-offset:3px;
+  transform:scale(1.06);z-index:90;box-shadow:0 16px 40px rgba(0,0,0,.85)
+}
+.card.foco-tv .info{opacity:1;transition:opacity .22s .08s}
+.card.foco-tv .capa img{transform:scale(1.05)}
+.card.top.foco-tv{transform:scale(1.05) translateY(-3px)}
+#lateral .ic.foco-tv{color:#fff;background:rgba(255,255,255,.14)}
+#lateral .logo-mini.foco-tv,#lateral #menu-perfil.foco-tv{background:rgba(255,255,255,.12)}
+.btn.foco-tv,.btn-info.foco-tv,.btn-gerenciar.foco-tv,.chip.foco-tv,.ver-tudo.foco-tv{outline:3px solid #fff!important;outline-offset:3px}
+#modal .acao.foco-tv .circulo{border-color:#fff;background:#fff;color:#000}
+#modal .acao.foco-tv .circulo svg{fill:#000}
+#modal .acao.foco-tv .rotulo{color:#fff;font-weight:700}
+#modal .acao.primaria.foco-tv .circulo{background:#e50914;border-color:#fff}
+#modal .acao.primaria.foco-tv .circulo svg{fill:#fff}
+#modal .fechar.foco-tv{background:#fff;color:#000;transform:scale(1.08)}
+#modal .card-sem.foco-tv .tx{background:rgba(255,255,255,.09)}
+#modal .seta-eps.foco-tv,#modal .seta-eps.foco-tv:hover{background:#e50914;border-color:#fff}
+#perfis .perfil.foco-tv img.avatar,#perfis .perfil.foco-tv .avatar{border-color:#fff}
+#perfis .perfil.foco-tv span{color:#fff}
+.selecionado-por-seta{scroll-margin:90px}
+
+/* ================= v39: as CATEGORIAS não acompanham a rolagem do catálogo =================
+   (elas ficavam grudadas no topo e cortavam os cartões por baixo; agora rolam junto com a lista) */
+#tela-busca #filtros{position:static;top:auto;z-index:auto;background:none;padding:0 0 4px;margin:16px 0 10px}
+/* nas fileiras as setinhas de rolagem são coisa de mouse: com o controle quem rola é a própria seleção */
+.fileira .seta,#modal .seta-eps{pointer-events:auto}
+
 </style>
 </head>
 <body>
@@ -2237,7 +2269,7 @@ function montarLateral(){
   const perfil = perfilAtual();
   const nov = listaNovidades();
   header.innerHTML = `
-    <div class="logo-mini" id="logo" title="${esc(cfg.marca)}">${logoLateralHTML()}</div>
+    <div class="logo-mini" id="logo" tabindex="0" role="button" title="${esc(cfg.marca)}">${logoLateralHTML()}</div>
     <div class="ics">
       <button class="ic" id="abre-busca" title="Buscar">${SVG.busca2}</button>
       <button class="ic" data-ir="inicio" title="Início">${SVG.casa}</button>
@@ -2249,7 +2281,7 @@ function montarLateral(){
       <button class="ic" id="sino" title="Novidades">${SVG.sino2}<span class="bolha">${nov.length}</span>
         <div class="painel-sino">
           <h4>Novidades no FaMovie</h4>
-          ${nov.map(i => `<div class="linha" data-chave="${esc(i.chave)}" title="${esc(i.titulo)}">
+          ${nov.map(i => `<div class="linha" tabindex="0" role="button" data-chave="${esc(i.chave)}" title="${esc(i.titulo)}">
              <img loading="lazy" decoding="async" src="${thumbDe(i,300)}" alt="">
              <div class="tx"><b>${esc(i.titulo)}</b>${i.tipo==='serie' ? 'Temporada completa disponível' : 'Adicionado recentemente'}<span class="nova">NOVO</span></div>
            </div>`).join('')}
@@ -2258,7 +2290,7 @@ function montarLateral(){
     </div>
     <div class="fim-lateral">
       <button class="ic" id="abre-config" title="Ajustes / capas (TMDB)">${SVG.engrenagem}</button>
-      <div class="menu-perfil" id="menu-perfil" title="${esc(perfil.nome)}">
+      <div class="menu-perfil" id="menu-perfil" tabindex="0" role="button" title="${esc(perfil.nome)}">
         <img class="avatar" src="${srcAvatar(perfil, 64)}" alt="">
         <div class="dropdown">
           <div class="cab-perfis">Trocar de perfil</div>
@@ -2303,6 +2335,7 @@ function cardItem(item, opts){
   opts = opts || {};
   if (opts.top) return cardTop(item, opts.pos, opts.linha);
   const c = el('div', 'card' + (opts.poster ? ' poster' : ''));
+  c.tabIndex = 0; c.setAttribute('role', 'button'); c.setAttribute('aria-label', item.titulo);
   const m = meta[item.chave];
   const p = progressoDe(item);
   const largura = opts.poster ? 342 : 300;
@@ -2835,7 +2868,7 @@ function abrirModal(item){
       <h3>Títulos semelhantes</h3>
       <div class="grade-sem">
         ${semelhantes.slice(0, 6).map(s2 => `
-          <div class="card-sem" data-chave="${esc(s2.chave)}" title="${esc(s2.titulo)}${porQueSem(item, s2) ? ' — semelhante por: ' + porQueSem(item, s2) : ''}">
+          <div class="card-sem" tabindex="0" role="button" data-chave="${esc(s2.chave)}" title="${esc(s2.titulo)}${porQueSem(item, s2) ? ' — semelhante por: ' + porQueSem(item, s2) : ''}">
             <div class="im"><img loading="lazy" decoding="async" src="${thumbDe(s2,300)}" alt=""><div class="playme">${SVG.play.replace('<svg','<svg style="width:34px;height:34px;fill:#fff"')}</div></div>
             <div class="tx">
               <div class="l1"><span class="match">${relevancia(s2)}% relevante</span>${anoDe(s2)?`<span>${anoDe(s2)}</span>`:''}<span class="ano" style="margin-left:auto">${idadeDe(s2)}</span></div>
@@ -3103,7 +3136,7 @@ function abrirConfig(){
     </div>
     <div class="pg"><i id="cfg-pg"></i></div>
     <div class="status" id="cfg-status"></div>
-    <div class="versao-app">FaMovie <b>v37</b> · semelhantes por título, franquia, produtora e história + classificação indicativa real</div>
+    <div class="versao-app">FaMovie <b>v39</b> · navegação por setas (controle de TV e teclado): seleção item por item</div>
     <div class="stat">
       <div><b>${ITENS.length}</b><span>títulos</span></div>
       <div><b>${FILMES.length}</b><span>filmes</span></div>
@@ -3204,7 +3237,7 @@ function montarPerfis(){
     <h1>Quem está assistindo?</h1>
     <div class="perfis-grade">
       ${perfis.map((p,i) => `
-        <div class="perfil" data-p="${i}" style="animation-delay:${(0.56 + i * .075).toFixed(2)}s">
+        <div class="perfil" tabindex="0" role="button" data-p="${i}" style="animation-delay:${(0.56 + i * .075).toFixed(2)}s">
           <div class="avatar-caixa">
             ${blocoAvatar(p, 264)}
             <button class="lapis" data-edit="${i}" title="Personalizar perfil" aria-label="Personalizar perfil"><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg></button>
@@ -3212,7 +3245,7 @@ function montarPerfis(){
           <span>${esc(p.nome)}</span>
           ${p.infantil ? '<span class="selo-kids">INFANTIL</span>' : ''}
         </div>`).join('')}
-      <div class="perfil add" id="add-perfil" style="animation-delay:${(0.56 + perfis.length * .075).toFixed(2)}s">
+      <div class="perfil add" id="add-perfil" tabindex="0" role="button" style="animation-delay:${(0.56 + perfis.length * .075).toFixed(2)}s">
         <div class="avatar-caixa"><div class="avatar vazio">+</div></div>
         <span>Adicionar perfil</span>
       </div>
@@ -3569,6 +3602,240 @@ function tocarIntro(){
 }
 let sessaoIniciada = false;
 
+/* ---------------- NAVEGAÇÃO POR SETAS (controle de TV e teclado do computador) ----------------
+   As setas não empurram o "mouse" do navegador: elas MOVEM A SELEÇÃO de item em item, como numa
+   TV. Cada elemento ganha um anel branco (e os cartões crescem, igual ao hover), a tela rola
+   sozinha para manter o selecionado à vista, OK/Enter abre e o botão VOLTAR do controle sai. */
+const NAV_SEL = [
+  '#lateral .logo-mini', '#lateral .ic', '#lateral #menu-perfil',
+  '#lateral .dropdown a', '#lateral .painel-sino .linha',
+  '#hero .btn', '#hero .btn-info',
+  '#tela-busca #q', '#tela-busca #limpa-busca', '#filtros .chip', '#grade .card',
+  '.fileira h2 .ver-tudo', '.fileira .card',
+  '#modal .fechar', '#modal .acao', '#modal #m-temp', '#modal .trilho-eps .ep',
+  '#modal .card-sem', '#modal .voltar-flutuante',
+  '#perfis .perfil', '#perfis .btn-gerenciar',
+  '#config button', '#config input', '#config select',
+  '#editor-perfil button', '#editor-perfil input',
+  '#player .voltar-flutuante'
+].join(',');
+
+function navVisivel(el){
+  if (!el || el.disabled || el.tabIndex < 0) return false;
+  if (el.closest('.escondido')) return false;
+  /* fora de cena (home escondida pela aba Busca/Explorar, fileira fechada…) não é destino */
+  try{ const b = el.getBoundingClientRect(); if (b.width < 2 || b.height < 2) return false; }catch(e){}
+  /* painéis que aparecem com a classe '.on' (config, editor, sino) */
+  if (el.closest('#config') && !el.closest('#config').classList.contains('on')) return false;
+  if (el.closest('#editor-perfil') && !el.closest('#editor-perfil').classList.contains('on')) return false;
+  const r = el.getBoundingClientRect();
+  if (r.width < 3 || r.height < 3) return false;
+  const st = getComputedStyle(el);
+  if (st.visibility === 'hidden' || st.display === 'none' || +st.opacity < .06) return false;
+  /* aceita o que está um pouco fora da tela (a rolagem acompanha depois) */
+  return r.bottom > -innerHeight * 1.4 && r.top < innerHeight * 2.4 && r.right > -innerWidth && r.left < innerWidth * 2;
+}
+function navLista(){
+  const playerOn = player && player.classList.contains('on');
+  const modalOn = modal && !modal.classList.contains('escondido');
+  const perfisOn = telaPerfis && !telaPerfis.classList.contains('escondido');
+  const cfgOn = config && config.classList.contains('on');
+  const edEl = $('#editor-perfil');
+  const edOn = edEl && edEl.classList.contains('on');
+  let raiz = document;
+  if (playerOn) raiz = player;
+  else if (cfgOn) raiz = config;
+  else if (edOn) raiz = edEl;
+  else if (modalOn) raiz = modal;
+  else if (perfisOn) raiz = telaPerfis;
+  /* Busca/Explorar são páginas: a barra lateral continua valendo (antes a seta ← não achava a lateral) */
+  return [...raiz.querySelectorAll(NAV_SEL)].filter(navVisivel);
+}
+function navMarcar(el){
+  document.querySelectorAll('.foco-tv').forEach(x => x.classList.remove('foco-tv'));
+  if (!el) return;
+  el.classList.add('foco-tv');
+  /* margens de rolagem: o item selecionado nunca fica por baixo da barra da busca nem colado na borda */
+  let topo = 10;
+  if (telaBusca && telaBusca.classList.contains('on')){
+    try{
+      medirTopoBusca();
+      const v = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--topo-busca-h'));
+      if (v) topo = v + 14;
+    }catch(e){}
+  }
+  el.style.scrollMarginTop = topo + 'px';
+  el.style.scrollMarginBottom = '44px';
+  try{ el.focus({preventScroll:true}); }catch(e){ try{ el.focus(); }catch(e2){} }
+  try{ el.scrollIntoView({block:'nearest', inline:'nearest', behavior:'smooth'}); }
+  catch(e){ try{ if (typeof el.scrollIntoView === 'function') el.scrollIntoView(); }catch(e2){} }
+}
+function navAtual(){
+  const a = document.activeElement;
+  if (a && a.classList && a.classList.contains('foco-tv')) return a;
+  const dentro = navLista();
+  return dentro.includes(a) ? a : null;
+}
+function navMover(dir){
+  const lista = navLista();
+  if (!lista.length) return false;
+  const atual = navAtual();
+  if (!atual){ navMarcar(lista[0]); return true; }
+  const horiz = (dir === 'esq' || dir === 'dir');
+  const naLateral = !!(atual.closest && atual.closest('#lateral'));
+  const alvo = atual.getBoundingClientRect();
+  const separacao = (r1, r2, eixo) => eixo === 'y'
+    ? Math.max(0, Math.max(r1.top, r2.top) - Math.min(r1.bottom, r2.bottom))
+    : Math.max(0, Math.max(r1.left, r2.left) - Math.min(r1.right, r2.right));
+  const ax = alvo.left + alvo.width / 2, ay = alvo.top + alvo.height / 2;
+  let mesma = null, mesmaNota = Infinity;      /* vizinho natural: mesma linha (esq/dir) ou mesma coluna (cima/baixo) */
+  let trilho = null, trilhoNota = Infinity;    /* barra lateral: a coluna de referência da TV */
+  let outro = null, outroNota = Infinity;      /* plano B (só cima/baixo e saída da lateral) */
+  lista.forEach(el => {
+    if (el === atual) return;
+    const r = el.getBoundingClientRect();
+    if (r.width < 2 || r.height < 2) return;
+    const bx = r.left + r.width / 2, by = r.top + r.height / 2;
+    const dx = bx - ax, dy = by - ay;
+    let principal, secundaria;
+    if (dir === 'dir'){ if (dx < 6) return; principal = dx; secundaria = Math.abs(dy); }
+    else if (dir === 'esq'){ if (dx > -6) return; principal = -dx; secundaria = Math.abs(dy); }
+    else if (dir === 'baixo'){ if (dy < 6) return; principal = dy; secundaria = Math.abs(dx); }
+    else { if (dy > -6) return; principal = -dy; secundaria = Math.abs(dx); }
+    /* está "na mesma linha/coluna"? a folga é pequena, medida pelo vão entre os dois (não pelo centro) */
+    const folga = horiz ? separacao(alvo, r, 'y') <= Math.min(alvo.height, r.height) * .18
+                        : separacao(alvo, r, 'x') <= Math.max(16, Math.min(alvo.width, r.width) * .3);
+    const nota = principal + secundaria * (horiz ? 1.5 : .2);
+    if (folga && nota < mesmaNota){ mesmaNota = nota; mesma = el; }
+    /* plano B (só cima/baixo e saída da barra lateral): vale o mais perto na direção, mas ainda "na coluna".
+       Na barra lateral a folga é livre: acabou a coluna de ícones, descer entra no conteúdo. */
+    if (!horiz && (naLateral || separacao(alvo, r, 'x') <= Math.max(40, Math.min(alvo.width, r.width) * .6))){
+      if (secundaria + principal * .35 < outroNota){ outroNota = secundaria + principal * .35; outro = el; }
+    } else if (horiz && secundaria + principal * .35 < outroNota){ outroNota = secundaria + principal * .35; outro = el; }
+    /* candidatos na barra lateral (trilho de ícones da esquerda) */
+    if (horiz && !naLateral && el.closest && el.closest('#lateral')){
+      const nLat = Math.abs(dy) + principal * .25;
+      if (nLat < trilhoNota){ trilhoNota = nLat; trilho = el; }
+    }
+  });
+  if (mesma){ navMarcar(mesma); return true; }
+  if (horiz){
+    /* ← sem vizinho na linha: entra na BARRA LATERAL (nunca nas categorias por engano) */
+    if (dir === 'esq' && !naLateral && trilho){ navMarcar(trilho); return true; }
+    /* → estando na barra lateral: sai para o conteúdo mais próximo naquela altura */
+    if (dir === 'dir' && naLateral && outro){ navMarcar(outro); return true; }
+    return false;                 /* fim da linha: fica onde está (não pula para os chips nem para o topo) */
+  }
+  if (outro){ navMarcar(outro); return true; }
+  return false;
+}
+function navAtivar(){
+  const el = navAtual();
+  if (!el) return false;
+  if (el.tagName === 'INPUT' || el.tagName === 'SELECT' || el.tagName === 'TEXTAREA'){
+    try{ el.focus(); }catch(e){}
+    return true;
+  }
+  el.click();
+  return true;
+}
+function navVoltar(){
+  if (player && player.classList.contains('on')){ fecharPlayer(); return true; }
+  if (modal && !modal.classList.contains('escondido')){
+    const f = $('#m-fechar'); if (f) f.click(); else modal.classList.add('escondido');
+    return true;
+  }
+  const edEl = $('#editor-perfil');
+  if (edEl && edEl.classList.contains('on')){ const x = $('#ed-cancelar') || $('#ed-salvar'); if (x) x.click(); return true; }
+  const cfgEl = $('#config');
+  if (cfgEl && cfgEl.classList.contains('on')){ const x = $('#cfg-fechar'); if (x) x.click(); return true; }
+  if (telaBusca.classList.contains('on')){ fecharBusca(); return true; }
+  return false;
+}
+/* a temporada muda com as setas laterais quando o seletor está selecionado (jeito "TV") */
+function navTemporada(dir){
+  const sel = document.activeElement;
+  if (!sel || sel.id !== 'm-temp') return false;
+  const i = sel.selectedIndex + (dir === 'dir' ? 1 : -1);
+  if (i < 0 || i >= sel.options.length) return true;               /* engole a tecla no limite */
+  sel.selectedIndex = i;
+  sel.dispatchEvent(new Event('change', {bubbles:true}));
+  return true;
+}
+function ligarNavegacaoSetas(){
+  const bloqueado = { 'ArrowUp':1, 'ArrowDown':1, 'ArrowLeft':1, 'ArrowRight':1 };
+  const mapa = { 37:'esq', 38:'cima', 39:'dir', 40:'baixo',     /* teclado/controle padrão */
+                 4:'esq', 5:'dir', 29460:'cima', 29461:'baixo' };
+  document.addEventListener('keydown', ev => {
+    /* dentro do player (vídeo), as setas são do vídeo */
+    if (player && player.classList.contains('on')){
+      if (ev.keyCode === 10009 || ev.key === 'Backspace' || ev.key === 'Escape'){ ev.preventDefault(); fecharPlayer(); }
+      return;
+    }
+    const k = ev.key;
+    const ativo = document.activeElement;
+    const emCampo = ativo && (ativo.tagName === 'INPUT' || ativo.tagName === 'TEXTAREA');
+    const dir = mapa[ev.keyCode];
+    /* escrevendo num campo: ← → andam o cursor (↑ ↓ saem do campo e navegam) */
+    if (emCampo && (k === 'ArrowLeft' || k === 'ArrowRight' || ev.keyCode === 37 || ev.keyCode === 39)){
+      if (ativo.value && ativo.value.length) return;
+    }
+    if (emCampo && ativo.type && ativo.type !== 'text' && (k === 'ArrowUp' || k === 'ArrowDown')) return;
+    if (dir && (bloqueado[k] || ev.keyCode in mapa || !k)){
+      if (navTemporada(dir)){ ev.preventDefault(); return; }
+      if (navMover(dir)){ ev.preventDefault(); return; }   /* andou a seleção: a tecla é nossa, a página não rola */
+      return;                                             /* nada naquela direção: deixa o navegador rolar */
+    }
+    if (k === 'Enter' || ev.keyCode === 13 || ev.keyCode === 29443 || k === 'OK'){
+      if (navAtual()){ ev.preventDefault(); navAtivar(); }
+      return;
+    }
+    if (ev.keyCode === 10009 || k === 'Back' || k === 'BrowserBack' || k === 'XF86Back' || k === 'GoBack'){
+      if (navVoltar()) ev.preventDefault();
+      return;
+    }
+    if (k === 'Backspace'){
+      if (navVoltar()) ev.preventDefault();
+    }
+  }, true);
+
+  /* ao abrir algo, o foco já vai para dentro (a seleção continua de onde o dedo/controle estava) */
+  let focoAntes = null;
+  const obs = new MutationObserver(() => {
+    const modalOn = modal && !modal.classList.contains('escondido');
+    const perfisOn = telaPerfis && !telaPerfis.classList.contains('escondido');
+    const playerOn = player && player.classList.contains('on');
+    if (playerOn){
+      const v = $('#player .voltar-flutuante'); if (v) navMarcar(v);
+      return;
+    }
+    if (modalOn){
+      if (!focoAntes) focoAntes = document.activeElement;
+      if (!modal.querySelector('.foco-tv')){
+        const alvo = $('#m-play') || modal.querySelector('.acao') || $('#m-fechar');
+        setTimeout(() => { if (!modal.classList.contains('escondido') && !modal.querySelector('.foco-tv') && alvo) navMarcar(alvo); }, 60);
+      }
+      return;
+    }
+    if (perfisOn){
+      if (!telaPerfis.querySelector('.foco-tv')){ const p2 = $('#perfis .perfil'); if (p2) setTimeout(() => navMarcar(p2), 80); }
+      return;
+    }
+    /* busca aberta: o controle já cai dentro do campo, pronto para digitar */
+    if (telaBusca.classList.contains('on')){
+      if (!focoAntes) focoAntes = document.activeElement;
+      if (!telaBusca.querySelector('.foco-tv')){
+        const q = $('#q', telaBusca);
+        if (q) setTimeout(() => { if (telaBusca.classList.contains('on') && !telaBusca.querySelector('.foco-tv') && q) navMarcar(q); }, 70);
+      }
+      return;
+    }
+    /* nada aberto: devolve o foco para onde estava */
+    if (focoAntes && document.contains(focoAntes)) { navMarcar(focoAntes); focoAntes = null; }
+  });
+  [modal, telaPerfis, player, telaBusca].forEach(alvo => { try{ obs.observe(alvo, {attributes:true, attributeFilter:['class']}); }catch(e){} });
+}
+
 /* ---------------- TOAST ---------------- */
 function toast(msg){
   let t = $('#toast');
@@ -3639,7 +3906,8 @@ function boot(){
      sem abertura: monta agora mesmo */
   if (!cfg.intro) renderizarAppDepois(0);
   tocarIntro();              /* a abertura começa na hora, sem esperar a home */
-  ligarTelaCheiaAutomatica();   /* entrar no site já em tela cheia (no 1º toque, como o navegador exige) */
+  ligarTelaCheiaAutomatica();
+  ligarNavegacaoSetas();   /* setas do controle da TV e do teclado movem a SELEÇÃO, item por item */   /* entrar no site já em tela cheia (no 1º toque, como o navegador exige) */
   /* dica única: quem abre o arquivo direto (sem o atalho) fica sabendo do atalho de som + tela cheia */
   setTimeout(() => {
     try{
@@ -3674,5 +3942,5 @@ window.NF = { ITENS, FILMES, SERIES, meta, abrirModal, tocar, sincronizarTudo, t
 })();
 
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a4a915f4edc27be8',t:'MTc5MjAwNzE0MA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a4aa2fba4e76ad09',t:'MTc5MjAxODY4MQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
