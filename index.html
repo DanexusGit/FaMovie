@@ -1893,9 +1893,8 @@ html{scroll-behavior:smooth}
 .caixa-botoes h2{margin:5px 0 0;font-size:27px;letter-spacing:-.03em}.selo-botoes{font-size:10px;font-weight:900;letter-spacing:.14em;color:#ff5b64}.caixa-botoes header button{display:grid;place-items:center;width:43px;height:43px;border:1px solid rgba(255,255,255,.24);border-radius:50%;background:transparent;color:#fff;cursor:pointer;transition:.18s}.caixa-botoes header button:hover{background:#fff;color:#111;transform:scale(1.06)}.caixa-botoes header button svg{width:20px;height:20px}
 .intro-botoes{margin:14px 25px 16px;color:#aaa;font-size:13px;line-height:1.55}.numeros-botoes{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.09);margin:0 25px;border:1px solid rgba(255,255,255,.09);border-radius:8px;overflow:hidden}.numeros-botoes div{padding:11px 10px;background:#161616;text-align:center}.numeros-botoes b{display:block;color:#fff;font-size:22px;line-height:1.1;font-variant-numeric:tabular-nums}.numeros-botoes span{display:block;margin-top:4px;color:#888;text-transform:uppercase;letter-spacing:.08em;font-size:9px;font-weight:800}.status-botoes{margin:14px 25px 10px;padding:10px 12px;border-left:3px solid #e50914;background:rgba(229,9,20,.09);color:#ddd;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.lista-botoes{margin:0 25px;min-height:0;flex:1;overflow:auto;border:1px solid rgba(255,255,255,.11);border-radius:7px;background:#090909}.lista-botoes ol{list-style:none;margin:0;padding:0}.lista-botoes li{display:grid;grid-template-columns:64px 112px minmax(0,1fr);gap:10px;padding:8px 11px;border-bottom:1px solid rgba(255,255,255,.065);font-size:12px;line-height:1.35}.lista-botoes li:last-child{border-bottom:0}.lista-botoes time{color:#777;font-variant-numeric:tabular-nums}.lista-botoes b{color:#ff8a90;font-weight:800;text-transform:capitalize}.lista-botoes span{color:#d7d7d7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.caixa-botoes footer{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:14px 25px 21px;color:#777;font-size:11px}.caixa-botoes footer .btn-linha{padding:9px 13px;border-color:rgba(255,255,255,.26);color:#eee;font-size:12px}
 @media (max-width:600px){#painel-botoes{padding:10px}#painel-botoes .caixa-botoes{width:100%;max-height:94vh}.caixa-botoes header{padding:18px 17px 9px}.intro-botoes{margin:12px 17px 14px}.numeros-botoes{margin:0 17px}.numeros-botoes b{font-size:19px}.status-botoes{margin:12px 17px 9px}.lista-botoes{margin:0 17px}.lista-botoes li{grid-template-columns:55px 92px minmax(0,1fr);gap:7px;font-size:11px}.caixa-botoes footer{padding:12px 17px 16px;align-items:flex-end}.caixa-botoes footer span{max-width:55%}}
-/* Fora do PC, o ponteiro físico vira direcional; o anel branco mostra onde o "cursor" está. */
-body.mouse-setas,body.mouse-setas *{cursor:none!important}
-body.mouse-setas #controle-tela,body.mouse-setas #controle-tela *,body.mouse-setas #painel-botoes,body.mouse-setas #painel-botoes *{cursor:pointer!important}
+/* Fora do PC, o movimento do mouse é traduzido em setas; o cursor continua VISÍVEL. */
+body.mouse-setas .foco-tv{outline-width:3px}
 
 </style>
 </head>
@@ -3548,7 +3547,7 @@ function abrirConfig(){
           <input type="checkbox" id="cfg-controle" ${controleTelaLigado() ? 'checked' : ''} style="width:18px;height:18px;accent-color:#e50914">
           Mostrar o CONTROLE NA TELA (setas + OK + voltar, para TV)
         </label>
-        <div style="font-size:12px;color:#8c8c8c;margin-top:8px">Na TV/tablet, um <b style="color:#e5e5e5">mouse/ponteiro físico já funciona como direcional</b>: mova para escolher, clique para OK e use o botão direito para VOLTAR. O CONTROLE NA TELA continua como reserva. No computador, o mouse segue normal e as <b style="color:#e5e5e5">setas do teclado</b> navegam.</div>
+        <div style="font-size:12px;color:#8c8c8c;margin-top:8px">Na TV/tablet, o movimento de um <b style="color:#e5e5e5">mouse/ponteiro físico é literalmente traduzido em setas</b>: mover envia ← ↑ → ↓, clique envia OK e botão direito envia VOLTAR. O cursor continua visível. O CONTROLE NA TELA continua como reserva. No computador, o mouse segue normal.</div>
         <div style="font-size:12px;color:#8c8c8c;margin-top:8px">No computador o app tenta tela cheia no seu primeiro toque, clique ou rolagem. Movimento do mouse e setas do teclado não pedem mais tela cheia. A abertura começa <b style="color:#e5e5e5">sempre muda</b>; se quiser ouvi-la, use só o botão <b style="color:#e5e5e5">Ligar o som</b>. O atalho <b>ABRIR-FAMOVIE-CHEIO</b> continua recomendado para tela cheia e trailers dentro do app.</div>
           <button class="btn-linha" id="cfg-cheio-agora" style="margin-left:8px">Entrar em tela cheia agora</button></div>
       </div>
@@ -4204,7 +4203,9 @@ function tratarTecla(ev){
   const k = ev.key || '';
   const ativo = document.activeElement;
   const emCampo = ativo && (ativo.tagName === 'INPUT' || ativo.tagName === 'TEXTAREA');
-  const dir = mapa[ev.keyCode || ev.which];
+  /* aceita key moderna também: assim eventos traduzidos do mouse não dependem de keyCode legado */
+  const porNome = {ArrowLeft:'esq', ArrowUp:'cima', ArrowRight:'dir', ArrowDown:'baixo'};
+  const dir = mapa[ev.keyCode || ev.which] || porNome[k];
   /* escrevendo num campo: ← → andam o cursor (↑ ↓ saem do campo e navegam) */
   if (emCampo && (k === 'ArrowLeft' || k === 'ArrowRight' || ev.keyCode === 37 || ev.keyCode === 39)){
     if (ativo.value && ativo.value.length) return false;
@@ -4299,6 +4300,12 @@ function mouseSetasPodeUsar(ev){
   if (ev && ev.pointerType === 'touch') return false;  /* toque continua sendo toque */
   return !mouseSetasIgnorar(ev && ev.target);
 }
+function traduzirMouseEmTecla(tecla){
+  /* A conversão é literal: mouse → KeyboardEvent. O mesmo tratarTecla das setas físicas recebe
+     ArrowLeft/Right/Up/Down, Enter e BrowserBack, sem caminho paralelo de navegação. */
+  const dispara = tipo => document.dispatchEvent(new KeyboardEvent(tipo, {key:tecla, code:tecla, bubbles:true, cancelable:true}));
+  dispara('keydown'); dispara('keyup');
+}
 function moverMouseComoSetas(ev){
   if (!mouseSetasPodeUsar(ev)) return;
   const x = Number(ev.clientX), y = Number(ev.clientY);
@@ -4308,22 +4315,20 @@ function moverMouseComoSetas(ev){
   mouseSetas.x = x; mouseSetas.y = y;
   const limiar = Math.max(30, Math.round(Math.min(innerWidth, innerHeight) * .045));
   if (Math.max(Math.abs(mouseSetas.ax), Math.abs(mouseSetas.ay)) < limiar) return;
-  let dir;
-  if (Math.abs(mouseSetas.ax) >= Math.abs(mouseSetas.ay)) dir = mouseSetas.ax > 0 ? 'dir' : 'esq';
-  else dir = mouseSetas.ay > 0 ? 'baixo' : 'cima';
+  let tecla;
+  if (Math.abs(mouseSetas.ax) >= Math.abs(mouseSetas.ay)) tecla = mouseSetas.ax > 0 ? 'ArrowRight' : 'ArrowLeft';
+  else tecla = mouseSetas.ay > 0 ? 'ArrowDown' : 'ArrowUp';
   mouseSetas.ax = mouseSetas.ay = 0;
-  navMover(dir);
+  traduzirMouseEmTecla(tecla);
 }
 function cliqueMouseComoSetas(ev){
   if (!ev.isTrusted || !mouseSetasPodeUsar(ev)) return;
   if (ev.button === 2){
-    ev.preventDefault(); ev.stopImmediatePropagation(); navVoltar(); return;
+    ev.preventDefault(); ev.stopImmediatePropagation(); traduzirMouseEmTecla('BrowserBack'); return;
   }
-  if (ev.button !== 0) return;
-  const atual = navAtual();
-  if (!atual) return;
-  /* clique físico vira o OK do controle; o .click() programático que ele gera passa normalmente. */
-  ev.preventDefault(); ev.stopImmediatePropagation(); navAtivar();
+  if (ev.button !== 0 || !navAtual()) return;
+  /* clique físico vira Enter/OK; a ação é idêntica à do controle/teclado. */
+  ev.preventDefault(); ev.stopImmediatePropagation(); traduzirMouseEmTecla('Enter');
 }
 function ligarMouseComoSetas(){
   if (ligarMouseComoSetas.ligado) return;
@@ -4503,5 +4508,5 @@ window.NF = { ITENS, FILMES, SERIES, meta, TRAILERS, abrirModal, tocar, abrirTra
 })();
 
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a4b1f707fcc68dd8',t:'MTc5MjEwMDI0NQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a4b2265bec1f181d',t:'MTc5MjEwMjE4NA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
