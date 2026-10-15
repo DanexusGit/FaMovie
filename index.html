@@ -38,118 +38,11 @@ img{display:block}
 ::-webkit-scrollbar-track{background:transparent}
 .escondido{display:none !important}
 
-/* ================= ABERTURA (roteiro "TUDUM") — LEVE: só transform/opacity, sem filtros ================= */
+/* ================= ABERTURA EM VÍDEO =================
+   A única abertura é o MP4 enviado; não existe animação alternativa em CSS. */
 #intro{
   position:fixed;inset:0;background:#000;z-index:9000;display:flex;align-items:center;justify-content:center;
   overflow:hidden;transition:opacity .34s ease;contain:layout paint;
-  --fa: clamp(118px, 33vh, 300px);          /* altura do F */
-  --nm: clamp(30px, 9.2vh, 74px);           /* tamanho do nome embaixo */
-}
-#intro .in-palco{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
-
-/* a "câmera": é a ÚNICA coisa grande que escala (fica numa camada própria do GPU) */
-#intro .in-cam{
-  position:relative;display:flex;flex-direction:column;align-items:center;gap:clamp(6px,1.3vh,16px);
-  transform-origin:50% 36%;will-change:transform,opacity;
-  animation:inZoom 1.5s cubic-bezier(.5,.03,.9,.4) 1.5s forwards,
-            inDesintegra .7s ease 3s forwards;
-}
-@keyframes inZoom{from{transform:scale(1)}to{transform:scale(4.8)}}
-@keyframes inDesintegra{0%{opacity:1}55%{opacity:.45}100%{opacity:0}}
-
-/* ---- CENA 1: o silêncio quebra com a 1ª batida + feixe vertical de luz vermelha ---- */
-#intro .in-feixe{
-  position:absolute;left:50%;top:50%;width:3px;height:56vh;pointer-events:none;will-change:transform,opacity;
-  transform:translate(-50%,-50%) scaleY(0);opacity:0;
-  background:linear-gradient(180deg,transparent,#ff2a2a 12%,#fff 50%,#ff2a2a 88%,transparent);
-  box-shadow:0 0 30px 8px rgba(229,9,20,.5);
-  animation:inFeixe .6s cubic-bezier(.2,.9,.3,1) .04s forwards;
-}
-@keyframes inFeixe{
-  0%{opacity:0;transform:translate(-50%,-50%) scaleY(.04)}
-  16%{opacity:1;transform:translate(-50%,-50%) scaleY(1)}
-  60%{opacity:.9;transform:translate(-50%,-50%) scaleY(1)}
-  100%{opacity:0;transform:translate(-50%,-50%) scaleY(1.03)}
-}
-
-/* o F em 3 camadas (profundidade 3D). Nasce de baixo para cima e vibra no 2º impacto.
-   Sem filtros pesados: é isso que travava o zoom. */
-#intro .in-svg{
-  position:relative;height:var(--fa);width:calc(var(--fa) * 58 / 159);
-  clip-path:inset(100% 0 0 0);opacity:0;
-  animation:inNasce .42s cubic-bezier(.25,.9,.3,1) .05s forwards,
-            inVibra .32s ease .55s,
-            inSomeF .7s ease 1.75s forwards;
-}
-#intro .in-svg svg{position:absolute;inset:0;height:100%;width:100%}
-#intro .in-prof1{transform:translateX(-6px)}  #intro .in-prof1 path{fill:#a80000}
-#intro .in-prof2{transform:translateX(-11px)} #intro .in-prof2 path{fill:#5e0000}
-@keyframes inNasce{0%{opacity:0;clip-path:inset(100% 0 0 0)}55%{opacity:1}100%{opacity:1;clip-path:inset(0 0 0 0)}}
-@keyframes inVibra{0%,100%{transform:translateX(0)}14%{transform:translateX(-3px)}32%{transform:translateX(3px)}52%{transform:translateX(-2px)}72%{transform:translateX(2px)}}
-@keyframes inSomeF{to{opacity:.1}}
-
-/* brilho vermelho atrás do F: fica FORA da câmera (não escala) e some antes do zoom */
-#intro .in-glow{
-  position:absolute;left:50%;top:50%;width:92vh;height:92vh;margin:-46vh 0 0 -46vh;border-radius:50%;
-  pointer-events:none;will-change:opacity;
-  background:radial-gradient(circle,rgba(229,9,20,.30),rgba(229,9,20,.07) 46%,transparent 70%);
-  animation:inGlow .9s ease .5s both, inGlowSai .6s ease 1.95s forwards;
-}
-@keyframes inGlow{0%{opacity:0;transform:scale(.55)}55%{opacity:1}100%{opacity:.7;transform:scale(1)}}
-@keyframes inGlowSai{to{opacity:0}}
-
-/* ---- CENA 2: o nome "FaMovie" logo abaixo do F ---- */
-#intro .in-nome{
-  font-size:var(--nm);font-weight:900;letter-spacing:-.05em;line-height:1;color:var(--vermelho);
-  text-shadow:0 0 22px rgba(229,9,20,.4),0 3px 12px rgba(0,0,0,.7);
-  opacity:0;transform:translateY(12px);
-  animation:inNome .5s cubic-bezier(.2,.9,.25,1) .56s forwards;
-}
-@keyframes inNome{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-
-/* ---- CENA 3: a letra se fragmenta e revela os filamentos (sobem UMA vez e param) ---- */
-#intro .in-fitas{
-  position:absolute;left:0;top:0;height:var(--fa);width:100%;overflow:hidden;contain:paint;
-  display:flex;gap:2px;align-items:stretch;opacity:0;
-  /* o F é um polígono retilíneo: clip-path (aplicado na composição) é MUITO mais leve que máscara SVG,
-     que era o que travava no fim da abertura, quando a letra dá zoom */
-  -webkit-clip-path:polygon(0% 0%,100% 0%,100% 11.32%,37.93% 11.32%,37.93% 42.77%,93.1% 42.77%,93.1% 53.46%,37.93% 53.46%,37.93% 100%,0% 100%);
-  clip-path:polygon(0% 0%,100% 0%,100% 11.32%,37.93% 11.32%,37.93% 42.77%,93.1% 42.77%,93.1% 53.46%,37.93% 53.46%,37.93% 100%,0% 100%);
-  animation:inRevela .3s ease 1.55s forwards;
-}
-@keyframes inRevela{to{opacity:1}}
-#intro .in-fitas i{flex:1 1 0;height:126%;border-radius:2px;transform:translateY(102%);will-change:transform;
-  animation:inSobe var(--dur,.9s) cubic-bezier(.25,.85,.3,1) var(--at,0s) forwards}
-@keyframes inSobe{from{transform:translateY(102%)}to{transform:translateY(-6%)}}
-
-/* feixes de velocidade em direção ao espectador (6, em espaço de tela, só transform/opacity) */
-#intro .in-veloz{position:absolute;inset:-12% 0;pointer-events:none}
-#intro .in-veloz i{
-  position:absolute;top:0;bottom:0;width:2px;border-radius:2px;opacity:0;left:calc(50% + var(--x));
-  background:linear-gradient(180deg,transparent,var(--c),transparent);
-  animation:inVeloz 1.25s cubic-bezier(.35,.55,.6,1) calc(1.55s + var(--d)) forwards;
-}
-@keyframes inVeloz{
-  0%{opacity:0;transform:scaleY(.1) translateX(0)}
-  30%{opacity:.8}
-  100%{opacity:0;transform:scaleY(1.15) translateX(calc(var(--x) * .55))}
-}
-
-/* ---- CENA 4: a luz preenche a tela e se dispersa para as laterais ---- */
-#intro .in-flash{
-  /* .01 em vez de 0: assim o navegador JÁ desenha a textura antes (camada transparente é
-     ignorada — e era rascunhada na hora do clarão, causando o engasgo no fim) */
-  position:absolute;inset:0;pointer-events:none;opacity:.01;will-change:opacity;contain:paint;
-  background:
-    radial-gradient(circle at 50% 44%, #fff 0%, rgba(255,130,130,.8) 15%, rgba(229,9,20,.2) 36%, rgba(229,9,20,0) 58%),
-    linear-gradient(90deg, rgba(255,255,255,.4), rgba(255,255,255,0) 22%, rgba(255,255,255,0) 78%, rgba(255,255,255,.4));
-  animation:inFlash .8s cubic-bezier(.35,.2,.6,1) 3.05s;
-}
-@keyframes inFlash{
-  0%{opacity:.01;transform:scale(.94)}
-  22%{opacity:.95}
-  60%{opacity:.55;transform:scale(1.04)}
-  100%{opacity:.01;transform:scale(1.16)}
 }
 #intro.escondido{opacity:0;pointer-events:none}
 #intro .pular{
@@ -1609,6 +1502,7 @@ body.dispositivo-movel #modal .caixa{min-height:100dvh}
 #modal .fechar:hover{transform:scale(1.08)}
 #intro .in-video{position:absolute;inset:0;background:#000;display:flex;align-items:center;justify-content:center}
 #intro .in-video video{width:100%;height:100%;object-fit:cover;display:block;background:#000}
+#intro .in-video-erro span{color:#d8d8d8;font-size:15px;letter-spacing:.08em;text-transform:uppercase}
 #intro .pular.som{right:auto;left:26px;color:#fff;border-color:#666}
 @media (orientation:portrait){ #intro .in-video video{object-fit:contain} }
 
@@ -3917,17 +3811,20 @@ function tudumSom(){
 function tocarIntro(){
   if (!cfg.intro){ intro.classList.add('escondido'); return; }
   intro.classList.remove('escondido');
-  /* ---- abertura em VÍDEO (anexada): é a oficial. Se o navegador não puder reproduzir,
-     cai na animação feita em CSS (o app nunca fica sem abertura nem travado). ---- */
+  /* ---- abertura em VÍDEO: sempre o MP4 enviado. Na TV, primeiro usamos o arquivo físico
+     abertura.mp4 (muito mais compatível que data URI em Tizen/webOS); o MP4 embutido é reserva. ---- */
   let vid = null;
   let temVideo = false;
-  /* TVs Tizen/webOS frequentemente dizem que aceitam MP4, mas recusam vídeo em data URI e deixam
-     uma tela preta. Nelas usamos a abertura em CSS, que é leve e garantida. */
   const reservaTV = ehAparelhoTV();
-  try{ temVideo = !reservaTV && !!INTRO_VIDEO && !!document.createElement('video').canPlayType('video/mp4'); }catch(e){ temVideo = false; }
+  /* Não confiamos em canPlayType: Tizen antigo pode responder vazio e ainda tocar o MP4 pelo
+     decodificador nativo. Com o arquivo presente, sempre tentamos o vídeo oficial. */
+  try{ temVideo = !!INTRO_VIDEO; }catch(e){ temVideo = false; }
   if (temVideo){
+    const fontesVideo = reservaTV
+      ? `<source src="abertura.mp4" type="video/mp4"><source src="${INTRO_VIDEO}" type="video/mp4">`
+      : `<source src="${INTRO_VIDEO}" type="video/mp4">`;
     intro.innerHTML = `
-      <div class="in-video"><video id="in-vid" src="${INTRO_VIDEO}" preload="auto" autoplay muted playsinline disablepictureinpicture></video></div>
+      <div class="in-video"><video id="in-vid" preload="auto" autoplay muted playsinline disablepictureinpicture>${fontesVideo}</video></div>
       <button class="pular" id="pular-intro">Pular abertura</button>`;
     vid = $('#in-vid');
     /* ÁUDIO MANUAL, como você pediu: a abertura sempre começa MUDA.
@@ -3950,52 +3847,25 @@ function tocarIntro(){
     }catch(e){}
     try{ vid.onended = () => fim(false); }catch(e){}
   }
-  /* filamentos: vermelho, azul, roxo, amarelo e rosa (como no roteiro) */
-  const CORES_FIO = ['#e50914','#ff2b2b','#5199e4','#2f6bff','#b026ff','#8a2be2','#f5c518','#ffd23f','#ff5fa2','#ff1493','#22c1d6','#ffffff'];
-  const fitas = Array.from({ length: 12 }, (_, i) => {
-    const c = CORES_FIO[i % CORES_FIO.length];
-    const at = (1.5 + (i % 9) * .05 + Math.random() * .05).toFixed(2);
-    const dur = (.8 + (i % 4) * .09).toFixed(2);
-    return `<i style="--at:${at}s;--dur:${dur}s;background:${c}"></i>`;
-  }).join('');
-  const feixes = Array.from({ length: 6 }, (_, i) => {
-    const x = ((i - 2.5) * 132 + (Math.random() * 36 - 18)).toFixed(0);
-    return `<i style="--x:${x}px;--d:${((i % 3) * .07).toFixed(2)}s;--c:${CORES_FIO[(i * 2 + 1) % CORES_FIO.length]}"></i>`;
-  }).join('');
-  const htmlReservaIntro = `
-    <div class="in-palco">
-      <div class="in-feixe"></div>
-      <div class="in-glow"></div>
-      <div class="in-veloz">${feixes}</div>
-      <div class="in-cam">
-        <div class="in-letra">
-          <div class="in-svg">${marcaF('in-prof2')}${marcaF('in-prof1')}${marcaF('in-f')}</div>
-          <div class="in-fitas">${fitas}</div>
-        </div>
-        <div class="in-nome">${esc(cfg.marca || 'FaMovie')}</div>
-      </div>
-      <div class="in-flash"></div>
-    </div>
-    <button class="pular" id="pular-intro">Pular abertura</button>`;
-  const montarReservaIntro = () => {
-    if (!intro.isConnected || intro.dataset.fim || !temVideo) return;
-    temVideo = false;
-    if (vid){ try{ vid.pause(); vid.removeAttribute('src'); vid.load(); }catch(e){} }
-    intro.innerHTML = htmlReservaIntro;
-  };
-  if (!temVideo) intro.innerHTML = htmlReservaIntro;
-  else if (vid){
-    /* Não deixa TV/decodificador instável prender a abertura em preto: troca pela versão CSS. */
-    const falhouVideo = () => montarReservaIntro();
-    vid.addEventListener('error', falhouVideo, {once:true});
+  if (!temVideo){
+    /* Não substitui pelo desenho antigo: mantém somente uma tela de carregamento do VÍDEO oficial. */
+    intro.innerHTML = `<div class="in-video in-video-erro"><span>Carregando a abertura…</span></div><button class="pular" id="pular-intro">Pular abertura</button>`;
+  } else if (vid){
+    /* Em TV, se o arquivo físico falhar, força uma nova tentativa pelo mesmo MP4 embutido — nunca a abertura antiga. */
+    const tentarVideoEmbutido = () => {
+      if (!reservaTV || !vid || vid.dataset.embutido === '1') return;
+      vid.dataset.embutido = '1';
+      try{
+        vid.innerHTML = `<source src="${INTRO_VIDEO}" type="video/mp4">`;
+        vid.load(); vid.muted = true;
+        const p = vid.play(); if (p && p.catch) p.catch(() => {});
+      }catch(e){}
+    };
+    vid.addEventListener('error', tentarVideoEmbutido, {once:true});
     vid.addEventListener('stalled', () => setTimeout(() => {
-      if (vid && (vid.readyState < 2 || (vid.paused && vid.currentTime < .08))) falhouVideo();
+      if (vid && vid.readyState < 2) tentarVideoEmbutido();
     }, 450), {once:true});
-    setTimeout(() => {
-      if (vid && temVideo && (vid.readyState < 2 || (vid.paused && vid.currentTime < .08))) falhouVideo();
-    }, 1300);
   }
-  /* A reserva em CSS também fica silenciosa: áudio só é ligado pelo botão da abertura em vídeo. */
   setTimeout(() => { try{ montarPerfis(); }catch(e){} }, 1900);   /* monta os perfis escondidos (fora do momento crítico) */
   /* a tela de perfis já começa a entrar POR BAIXO, no fim do zoom: a abertura vira a tela de perfis */
   setTimeout(() => { if (!sessaoIniciada){ sessaoIniciada = true; abrirTelaPerfis(); } }, 3400);
@@ -4300,11 +4170,55 @@ function mouseSetasPodeUsar(ev){
   if (ev && ev.pointerType === 'touch') return false;  /* toque continua sendo toque */
   return !mouseSetasIgnorar(ev && ev.target);
 }
+function eventoDeComandoMouse(tipo, tecla, codigo){
+  /* Tizen antigo pode não criar KeyboardEvent sintético, ou expor keyCode=0. Este evento serve
+     apenas para monitoramento/integrações: a ação abaixo já foi aplicada diretamente no app. */
+  let ev = null;
+  try{ ev = new KeyboardEvent(tipo, {key:tecla, code:tecla, keyCode:codigo, which:codigo, bubbles:true, cancelable:true}); }catch(e){}
+  if (!ev){
+    try{ ev = document.createEvent('Event'); ev.initEvent(tipo, true, true); }catch(e){ return null; }
+  }
+  [['key', tecla], ['code', tecla], ['keyCode', codigo], ['which', codigo], ['__nfv', true], ['__nfMouse', true]].forEach(([nome, valor]) => {
+    try{ Object.defineProperty(ev, nome, {value:valor, configurable:true}); }catch(e){ try{ ev[nome] = valor; }catch(e2){} }
+  });
+  return ev;
+}
 function traduzirMouseEmTecla(tecla){
-  /* A conversão é literal: mouse → KeyboardEvent. O mesmo tratarTecla das setas físicas recebe
-     ArrowLeft/Right/Up/Down, Enter e BrowserBack, sem caminho paralelo de navegação. */
-  const dispara = tipo => document.dispatchEvent(new KeyboardEvent(tipo, {key:tecla, code:tecla, bubbles:true, cancelable:true}));
-  dispara('keydown'); dispara('keyup');
+  /*
+     Caminho principal: chama o MESMO tratador das setas diretamente. É essencial em TVs Samsung
+     antigas, onde KeyboardEvent criado por script não chega ao listener (ou chega sem keyCode).
+     Depois emitimos um evento marcado só para painel Botões/observadores, sem executar duas vezes.
+  */
+  const codigos = {ArrowLeft:37, ArrowUp:38, ArrowRight:39, ArrowDown:40, Enter:13, BrowserBack:10009};
+  const codigo = codigos[tecla] || 0;
+  const comando = {
+    key:tecla, code:tecla, keyCode:codigo, which:codigo, __nfv:true, __nfMouse:true,
+    defaultPrevented:false, preventDefault(){ this.defaultPrevented = true; }, stopPropagation(){}, stopImmediatePropagation(){}
+  };
+  let tratado = false;
+  try{ tratado = !!tratarTecla(comando); }catch(e){}
+  /* Defesa extra caso um navegador muito antigo não aceite alguma parte do evento compatível. */
+  if (!tratado){
+    try{
+      const direcoes = {ArrowLeft:'esq', ArrowUp:'cima', ArrowRight:'dir', ArrowDown:'baixo'};
+      if (direcoes[tecla]) tratado = !!(navTemporada(direcoes[tecla]) || navMover(direcoes[tecla]));
+      else if (tecla === 'Enter') tratado = !!navAtivar();
+      else if (tecla === 'BrowserBack') tratado = !!navVoltar();
+    }catch(e){}
+  }
+  ['keydown','keyup'].forEach(tipo => {
+    const ev = eventoDeComandoMouse(tipo, tecla, codigo);
+    if (ev) try{ document.dispatchEvent(ev); }catch(e){}
+  });
+  return tratado;
+}
+function bloquearMouseNativo(ev){
+  if (!ev.isTrusted || !mouseSetasPodeUsar(ev)) return;
+  /* O ponteiro continua visível, mas não pode clicar/focar a página como um mouse normal na TV. */
+  if (ev.button == null || ev.button === 0 || ev.button === 2){
+    try{ ev.preventDefault(); }catch(e){}
+    try{ ev.stopImmediatePropagation(); }catch(e){}
+  }
 }
 function moverMouseComoSetas(ev){
   if (!mouseSetasPodeUsar(ev)) return;
@@ -4323,12 +4237,11 @@ function moverMouseComoSetas(ev){
 }
 function cliqueMouseComoSetas(ev){
   if (!ev.isTrusted || !mouseSetasPodeUsar(ev)) return;
-  if (ev.button === 2){
-    ev.preventDefault(); ev.stopImmediatePropagation(); traduzirMouseEmTecla('BrowserBack'); return;
-  }
-  if (ev.button !== 0 || !navAtual()) return;
-  /* clique físico vira Enter/OK; a ação é idêntica à do controle/teclado. */
-  ev.preventDefault(); ev.stopImmediatePropagation(); traduzirMouseEmTecla('Enter');
+  const direito = ev.type === 'contextmenu' || ev.button === 2;
+  try{ ev.preventDefault(); }catch(e){}
+  try{ ev.stopImmediatePropagation(); }catch(e){}
+  /* Clique sempre vira OK (mesmo sem foco prévio); direito/voltar vira VOLTAR. Nunca cai no clique normal. */
+  traduzirMouseEmTecla(direito ? 'BrowserBack' : 'Enter');
 }
 function ligarMouseComoSetas(){
   if (ligarMouseComoSetas.ligado) return;
@@ -4336,6 +4249,8 @@ function ligarMouseComoSetas(){
   document.addEventListener('pointermove', moverMouseComoSetas, true);
   /* navegadores de TV mais antigos podem não expor PointerEvent */
   document.addEventListener('mousemove', moverMouseComoSetas, true);
+  document.addEventListener('pointerdown', bloquearMouseNativo, true);
+  document.addEventListener('mousedown', bloquearMouseNativo, true);
   document.addEventListener('click', cliqueMouseComoSetas, true);
   document.addEventListener('contextmenu', cliqueMouseComoSetas, true);
   atualizarModoMouseSetas();
@@ -4508,5 +4423,5 @@ window.NF = { ITENS, FILMES, SERIES, meta, TRAILERS, abrirModal, tocar, abrirTra
 })();
 
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a4b2265bec1f181d',t:'MTc5MjEwMjE4NA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a4b25e2fea1ef231',t:'MTc5MjEwNDQ3MQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
