@@ -1893,6 +1893,9 @@ html{scroll-behavior:smooth}
 .caixa-botoes h2{margin:5px 0 0;font-size:27px;letter-spacing:-.03em}.selo-botoes{font-size:10px;font-weight:900;letter-spacing:.14em;color:#ff5b64}.caixa-botoes header button{display:grid;place-items:center;width:43px;height:43px;border:1px solid rgba(255,255,255,.24);border-radius:50%;background:transparent;color:#fff;cursor:pointer;transition:.18s}.caixa-botoes header button:hover{background:#fff;color:#111;transform:scale(1.06)}.caixa-botoes header button svg{width:20px;height:20px}
 .intro-botoes{margin:14px 25px 16px;color:#aaa;font-size:13px;line-height:1.55}.numeros-botoes{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.09);margin:0 25px;border:1px solid rgba(255,255,255,.09);border-radius:8px;overflow:hidden}.numeros-botoes div{padding:11px 10px;background:#161616;text-align:center}.numeros-botoes b{display:block;color:#fff;font-size:22px;line-height:1.1;font-variant-numeric:tabular-nums}.numeros-botoes span{display:block;margin-top:4px;color:#888;text-transform:uppercase;letter-spacing:.08em;font-size:9px;font-weight:800}.status-botoes{margin:14px 25px 10px;padding:10px 12px;border-left:3px solid #e50914;background:rgba(229,9,20,.09);color:#ddd;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.lista-botoes{margin:0 25px;min-height:0;flex:1;overflow:auto;border:1px solid rgba(255,255,255,.11);border-radius:7px;background:#090909}.lista-botoes ol{list-style:none;margin:0;padding:0}.lista-botoes li{display:grid;grid-template-columns:64px 112px minmax(0,1fr);gap:10px;padding:8px 11px;border-bottom:1px solid rgba(255,255,255,.065);font-size:12px;line-height:1.35}.lista-botoes li:last-child{border-bottom:0}.lista-botoes time{color:#777;font-variant-numeric:tabular-nums}.lista-botoes b{color:#ff8a90;font-weight:800;text-transform:capitalize}.lista-botoes span{color:#d7d7d7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.caixa-botoes footer{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:14px 25px 21px;color:#777;font-size:11px}.caixa-botoes footer .btn-linha{padding:9px 13px;border-color:rgba(255,255,255,.26);color:#eee;font-size:12px}
 @media (max-width:600px){#painel-botoes{padding:10px}#painel-botoes .caixa-botoes{width:100%;max-height:94vh}.caixa-botoes header{padding:18px 17px 9px}.intro-botoes{margin:12px 17px 14px}.numeros-botoes{margin:0 17px}.numeros-botoes b{font-size:19px}.status-botoes{margin:12px 17px 9px}.lista-botoes{margin:0 17px}.lista-botoes li{grid-template-columns:55px 92px minmax(0,1fr);gap:7px;font-size:11px}.caixa-botoes footer{padding:12px 17px 16px;align-items:flex-end}.caixa-botoes footer span{max-width:55%}}
+/* Fora do PC, o ponteiro físico vira direcional; o anel branco mostra onde o "cursor" está. */
+body.mouse-setas,body.mouse-setas *{cursor:none!important}
+body.mouse-setas #controle-tela,body.mouse-setas #controle-tela *,body.mouse-setas #painel-botoes,body.mouse-setas #painel-botoes *{cursor:pointer!important}
 
 </style>
 </head>
@@ -3545,7 +3548,7 @@ function abrirConfig(){
           <input type="checkbox" id="cfg-controle" ${controleTelaLigado() ? 'checked' : ''} style="width:18px;height:18px;accent-color:#e50914">
           Mostrar o CONTROLE NA TELA (setas + OK + voltar, para TV)
         </label>
-        <div style="font-size:12px;color:#8c8c8c;margin-top:8px">Use quando o controle da TV estiver mexendo <b style="color:#e5e5e5">o mouse do navegador</b> em vez de andar pela interface: clique nas setas com esse mouse. No computador, as <b style="color:#e5e5e5">setas do teclado</b> já funcionam.</div>
+        <div style="font-size:12px;color:#8c8c8c;margin-top:8px">Na TV/tablet, um <b style="color:#e5e5e5">mouse/ponteiro físico já funciona como direcional</b>: mova para escolher, clique para OK e use o botão direito para VOLTAR. O CONTROLE NA TELA continua como reserva. No computador, o mouse segue normal e as <b style="color:#e5e5e5">setas do teclado</b> navegam.</div>
         <div style="font-size:12px;color:#8c8c8c;margin-top:8px">No computador o app tenta tela cheia no seu primeiro toque, clique ou rolagem. Movimento do mouse e setas do teclado não pedem mais tela cheia. A abertura começa <b style="color:#e5e5e5">sempre muda</b>; se quiser ouvi-la, use só o botão <b style="color:#e5e5e5">Ligar o som</b>. O atalho <b>ABRIR-FAMOVIE-CHEIO</b> continua recomendado para tela cheia e trailers dentro do app.</div>
           <button class="btn-linha" id="cfg-cheio-agora" style="margin-left:8px">Entrar em tela cheia agora</button></div>
       </div>
@@ -3919,10 +3922,13 @@ function tocarIntro(){
      cai na animação feita em CSS (o app nunca fica sem abertura nem travado). ---- */
   let vid = null;
   let temVideo = false;
-  try{ temVideo = !!INTRO_VIDEO && !!document.createElement('video').canPlayType('video/mp4'); }catch(e){ temVideo = false; }
+  /* TVs Tizen/webOS frequentemente dizem que aceitam MP4, mas recusam vídeo em data URI e deixam
+     uma tela preta. Nelas usamos a abertura em CSS, que é leve e garantida. */
+  const reservaTV = ehAparelhoTV();
+  try{ temVideo = !reservaTV && !!INTRO_VIDEO && !!document.createElement('video').canPlayType('video/mp4'); }catch(e){ temVideo = false; }
   if (temVideo){
     intro.innerHTML = `
-      <div class="in-video"><video id="in-vid" src="${INTRO_VIDEO}" preload="auto" playsinline disablepictureinpicture></video></div>
+      <div class="in-video"><video id="in-vid" src="${INTRO_VIDEO}" preload="auto" autoplay muted playsinline disablepictureinpicture></video></div>
       <button class="pular" id="pular-intro">Pular abertura</button>`;
     vid = $('#in-vid');
     /* ÁUDIO MANUAL, como você pediu: a abertura sempre começa MUDA.
@@ -3957,7 +3963,7 @@ function tocarIntro(){
     const x = ((i - 2.5) * 132 + (Math.random() * 36 - 18)).toFixed(0);
     return `<i style="--x:${x}px;--d:${((i % 3) * .07).toFixed(2)}s;--c:${CORES_FIO[(i * 2 + 1) % CORES_FIO.length]}"></i>`;
   }).join('');
-  if (!temVideo) intro.innerHTML = `
+  const htmlReservaIntro = `
     <div class="in-palco">
       <div class="in-feixe"></div>
       <div class="in-glow"></div>
@@ -3972,6 +3978,24 @@ function tocarIntro(){
       <div class="in-flash"></div>
     </div>
     <button class="pular" id="pular-intro">Pular abertura</button>`;
+  const montarReservaIntro = () => {
+    if (!intro.isConnected || intro.dataset.fim || !temVideo) return;
+    temVideo = false;
+    if (vid){ try{ vid.pause(); vid.removeAttribute('src'); vid.load(); }catch(e){} }
+    intro.innerHTML = htmlReservaIntro;
+  };
+  if (!temVideo) intro.innerHTML = htmlReservaIntro;
+  else if (vid){
+    /* Não deixa TV/decodificador instável prender a abertura em preto: troca pela versão CSS. */
+    const falhouVideo = () => montarReservaIntro();
+    vid.addEventListener('error', falhouVideo, {once:true});
+    vid.addEventListener('stalled', () => setTimeout(() => {
+      if (vid && (vid.readyState < 2 || (vid.paused && vid.currentTime < .08))) falhouVideo();
+    }, 450), {once:true});
+    setTimeout(() => {
+      if (vid && temVideo && (vid.readyState < 2 || (vid.paused && vid.currentTime < .08))) falhouVideo();
+    }, 1300);
+  }
   /* A reserva em CSS também fica silenciosa: áudio só é ligado pelo botão da abertura em vídeo. */
   setTimeout(() => { try{ montarPerfis(); }catch(e){} }, 1900);   /* monta os perfis escondidos (fora do momento crítico) */
   /* a tela de perfis já começa a entrar POR BAIXO, no fim do zoom: a abertura vira a tela de perfis */
@@ -3991,7 +4015,11 @@ function tocarIntro(){
   };
   $('#pular-intro').onclick = () => fim(true);
   setTimeout(fim, temVideo ? 4600 : 4050);   /* rede de segurança: se o vídeo engasgar, a abertura sai sozinha */
-  document.addEventListener('keydown', function esc(e){ if (e.key === 'Enter'){ fim(true); document.removeEventListener('keydown', esc); } });
+  document.addEventListener('keydown', function esc(e){
+    if (e.key === 'Enter' || e.key === 'OK' || e.keyCode === 13 || e.keyCode === 29443 || e.keyCode === 10009){
+      fim(true); document.removeEventListener('keydown', esc);
+    }
+  });
 }
 let sessaoIniciada = false;
 
@@ -4251,6 +4279,63 @@ function ligarNavegacaoSetas(){
   [modal, telaPerfis, player, trailer, telaBusca].forEach(alvo => { try{ obs.observe(alvo, {attributes:true, attributeFilter:['class']}); }catch(e){} });
 }
 
+/* ---------------- MOUSE COMO SETAS (TV, tablet e outros dispositivos não-PC) ----------------
+   No computador o cursor continua normal. Fora dele, um mouse/ponteiro físico move o foco como
+   um direcional: arraste para uma direção e o anel branco anda; clique = OK; botão direito = VOLTAR. */
+const mouseSetas = {ligado:false, x:null, y:null, ax:0, ay:0};
+function mouseSetasAtivo(){ return !!(ehMobile || ehAparelhoTV()); }
+function atualizarModoMouseSetas(){
+  const ligado = mouseSetasAtivo();
+  mouseSetas.ligado = ligado;
+  mouseSetas.x = mouseSetas.y = null; mouseSetas.ax = mouseSetas.ay = 0;
+  document.body.classList.toggle('mouse-setas', ligado);
+}
+function mouseSetasIgnorar(alvo){
+  if (!alvo || !alvo.closest) return false;
+  return !!alvo.closest('#intro,#controle-tela,#painel-botoes,input,textarea,select');
+}
+function mouseSetasPodeUsar(ev){
+  if (!mouseSetas.ligado || (intro && !intro.classList.contains('escondido'))) return false;
+  if (ev && ev.pointerType === 'touch') return false;  /* toque continua sendo toque */
+  return !mouseSetasIgnorar(ev && ev.target);
+}
+function moverMouseComoSetas(ev){
+  if (!mouseSetasPodeUsar(ev)) return;
+  const x = Number(ev.clientX), y = Number(ev.clientY);
+  if (!Number.isFinite(x) || !Number.isFinite(y)) return;
+  if (mouseSetas.x === null){ mouseSetas.x = x; mouseSetas.y = y; return; }
+  mouseSetas.ax += x - mouseSetas.x; mouseSetas.ay += y - mouseSetas.y;
+  mouseSetas.x = x; mouseSetas.y = y;
+  const limiar = Math.max(30, Math.round(Math.min(innerWidth, innerHeight) * .045));
+  if (Math.max(Math.abs(mouseSetas.ax), Math.abs(mouseSetas.ay)) < limiar) return;
+  let dir;
+  if (Math.abs(mouseSetas.ax) >= Math.abs(mouseSetas.ay)) dir = mouseSetas.ax > 0 ? 'dir' : 'esq';
+  else dir = mouseSetas.ay > 0 ? 'baixo' : 'cima';
+  mouseSetas.ax = mouseSetas.ay = 0;
+  navMover(dir);
+}
+function cliqueMouseComoSetas(ev){
+  if (!ev.isTrusted || !mouseSetasPodeUsar(ev)) return;
+  if (ev.button === 2){
+    ev.preventDefault(); ev.stopImmediatePropagation(); navVoltar(); return;
+  }
+  if (ev.button !== 0) return;
+  const atual = navAtual();
+  if (!atual) return;
+  /* clique físico vira o OK do controle; o .click() programático que ele gera passa normalmente. */
+  ev.preventDefault(); ev.stopImmediatePropagation(); navAtivar();
+}
+function ligarMouseComoSetas(){
+  if (ligarMouseComoSetas.ligado) return;
+  ligarMouseComoSetas.ligado = true;
+  document.addEventListener('pointermove', moverMouseComoSetas, true);
+  /* navegadores de TV mais antigos podem não expor PointerEvent */
+  document.addEventListener('mousemove', moverMouseComoSetas, true);
+  document.addEventListener('click', cliqueMouseComoSetas, true);
+  document.addEventListener('contextmenu', cliqueMouseComoSetas, true);
+  atualizarModoMouseSetas();
+}
+
 /* ---------------- CONTROLE NA TELA (para TV: quando o controle da TV vira o "mouse" do navegador) ---------------- */
 function ehAparelhoTV(){
   if (window.__NF_TV) return true;
@@ -4328,6 +4413,7 @@ function definirDispositivo(movel){
   ehMobile = !!movel;
   document.body.classList.toggle('dispositivo-movel', ehMobile);
   document.body.classList.toggle('dispositivo-desktop', !ehMobile);
+  if (typeof atualizarModoMouseSetas === 'function') atualizarModoMouseSetas();
 }
 let _redimT = null;
 window.addEventListener('resize', () => { clearTimeout(_redimT); _redimT = setTimeout(detectarDispositivo, 220); if (telaBusca.classList.contains('on')) medirTopoBusca(); });
@@ -4372,6 +4458,7 @@ function boot(){
   tocarIntro();              /* a abertura começa na hora, sem esperar a home */
   ligarTelaCheiaAutomatica();
   ligarNavegacaoSetas();   /* setas do controle da TV e do teclado movem a SELEÇÃO, item por item */
+  ligarMouseComoSetas();   /* fora do PC, mouse/ponteiro físico vira direcional + OK */
   aplicarControleTela();   /* na TV (ou dentro de outra página) aparece o CONTROLE NA TELA para clicar com o mouse */
   /* se a TV estiver mandando o mouse do navegador em vez das teclas, avisa do controle na tela (1x) */
   setTimeout(() => {
@@ -4416,5 +4503,5 @@ window.NF = { ITENS, FILMES, SERIES, meta, TRAILERS, abrirModal, tocar, abrirTra
 })();
 
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a4b1b79dfa3c0cec',t:'MTc5MjA5NzY0OA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a4b1f707fcc68dd8',t:'MTc5MjEwMDI0NQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
