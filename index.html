@@ -32,6 +32,8 @@ body{
 body.travado{overflow:hidden}
 button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
 a{color:inherit;text-decoration:none}
+/* Toque/cursor da TV: ação imediata em perfis, cartões e botões; sem esconder o cursor. */
+button,a,[role="button"],.perfil,.card,.bol,.acao,.ep,.ic,.linha,.ver-tudo{touch-action:manipulation}
 img{display:block}
 ::-webkit-scrollbar{width:10px;height:10px}
 ::-webkit-scrollbar-thumb{background:#4d4d4d;border-radius:5px}
@@ -3727,6 +3729,44 @@ function tocarIntro(){
 }
 let sessaoIniciada = false;
 
+/* ---------------- CLIQUE/TOQUE NA TV (sem setas, sem controle visual) ----------------
+   Alguns navegadores de TV disparam pointerup/mouseup mas deixam de gerar o click final em cards
+   e perfis. Fazemos a ponte somente para elementos clicáveis: não há conversão de movimento em
+   seta, captura de teclado, controle na tela nem cursor escondido. */
+function ehAparelhoTV(){
+  try{ if (window.tizen || window.webapis) return true; }catch(e){}
+  return /smart-?tv|tizen|web0s|webos|netcast|hbbtv|bravia|viera|ce-html|googletv|aft[bmst]|crkey|silk|\bTV\b/i.test(navigator.userAgent || '');
+}
+function ligarCliqueTV(){
+  if (ligarCliqueTV.ligado || !ehAparelhoTV()) return;
+  ligarCliqueTV.ligado = true;
+  const seletor = 'button,a,[role="button"],.perfil,.card,.bol,.acao,.ep,.ic,.linha,.ver-tudo';
+  let ultimo = null, ultimoEm = 0;
+  const ativar = ev => {
+    if (!ev.isTrusted) return;
+    const agora = Date.now();
+    const alvo = ev.target && ev.target.closest ? ev.target.closest(seletor) : null;
+    if (!alvo || alvo.disabled || alvo.closest('.escondido')) return;
+    /* PointerEvent + mouseup/touchend podem ser a mesma ação em TVs diferentes. */
+    if (alvo === ultimo && agora - ultimoEm < 320) return;
+    ultimo = alvo; ultimoEm = agora;
+    try{ ev.preventDefault(); ev.stopImmediatePropagation(); }catch(e){}
+    try{ alvo.click(); }catch(e){}
+  };
+  /* Tizen recente costuma entregar PointerEvent; modelos antigos entregam somente mouseup/touchend. */
+  document.addEventListener('pointerup', ativar, true);
+  document.addEventListener('mouseup', ativar, true);
+  document.addEventListener('touchend', ativar, {capture:true, passive:false});
+  /* Não deixa o click nativo posterior repetir uma abertura/fechamento já atendido acima. */
+  document.addEventListener('click', ev => {
+    if (!ev.isTrusted || !ultimo || Date.now() - ultimoEm > 520) return;
+    const alvo = ev.target && ev.target.closest ? ev.target.closest(seletor) : null;
+    if (alvo && (alvo === ultimo || ultimo.contains(alvo) || alvo.contains(ultimo))){
+      try{ ev.preventDefault(); ev.stopImmediatePropagation(); }catch(e){}
+    }
+  }, true);
+}
+
 /* ---------------- TOAST ---------------- */
 function toast(msg){
   let t = $('#toast');
@@ -3798,6 +3838,7 @@ function boot(){
      sem abertura: monta agora mesmo */
   if (!cfg.intro) renderizarAppDepois(0);
   tocarIntro();              /* a abertura começa na hora, sem esperar a home */
+  ligarCliqueTV();           /* garante clique/toque real em perfis, cards e botões da TV — sem setas */
   ligarTelaCheiaAutomatica();
   /* dica única: quem abre o arquivo direto (sem o atalho) fica sabendo do atalho de som + tela cheia */
   setTimeout(() => {
