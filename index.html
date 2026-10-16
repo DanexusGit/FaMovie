@@ -1735,6 +1735,129 @@ html{scroll-behavior:smooth}
 .intro-botoes{margin:14px 25px 16px;color:#aaa;font-size:13px;line-height:1.55}.numeros-botoes{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.09);margin:0 25px;border:1px solid rgba(255,255,255,.09);border-radius:8px;overflow:hidden}.numeros-botoes div{padding:11px 10px;background:#161616;text-align:center}.numeros-botoes b{display:block;color:#fff;font-size:22px;line-height:1.1;font-variant-numeric:tabular-nums}.numeros-botoes span{display:block;margin-top:4px;color:#888;text-transform:uppercase;letter-spacing:.08em;font-size:9px;font-weight:800}.status-botoes{margin:14px 25px 10px;padding:10px 12px;border-left:3px solid #e50914;background:rgba(229,9,20,.09);color:#ddd;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.lista-botoes{margin:0 25px;min-height:0;flex:1;overflow:auto;border:1px solid rgba(255,255,255,.11);border-radius:7px;background:#090909}.lista-botoes ol{list-style:none;margin:0;padding:0}.lista-botoes li{display:grid;grid-template-columns:64px 112px minmax(0,1fr);gap:10px;padding:8px 11px;border-bottom:1px solid rgba(255,255,255,.065);font-size:12px;line-height:1.35}.lista-botoes li:last-child{border-bottom:0}.lista-botoes time{color:#777;font-variant-numeric:tabular-nums}.lista-botoes b{color:#ff8a90;font-weight:800;text-transform:capitalize}.lista-botoes span{color:#d7d7d7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.caixa-botoes footer{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:14px 25px 21px;color:#777;font-size:11px}.caixa-botoes footer .btn-linha{padding:9px 13px;border-color:rgba(255,255,255,.26);color:#eee;font-size:12px}
 @media (max-width:600px){#painel-botoes{padding:10px}#painel-botoes .caixa-botoes{width:100%;max-height:94vh}.caixa-botoes header{padding:18px 17px 9px}.intro-botoes{margin:12px 17px 14px}.numeros-botoes{margin:0 17px}.numeros-botoes b{font-size:19px}.status-botoes{margin:12px 17px 9px}.lista-botoes{margin:0 17px}.lista-botoes li{grid-template-columns:55px 92px minmax(0,1fr);gap:7px;font-size:11px}.caixa-botoes footer{padding:12px 17px 16px;align-items:flex-end}.caixa-botoes footer span{max-width:55%}}
 /* Fora do PC, o movimento do mouse é traduzido em setas; o cursor continua VISÍVEL. */
+/* v48 — experiência personalizada, catálogo e reprodução */
+body.tema-azul{--fundo:#0b1424;--fundo2:#101d32;--vermelho:#3b82f6;background:#07111f}
+body.tema-roxo{--fundo:#181020;--fundo2:#251633;--vermelho:#b15cff;background:#100a17}
+body.tema-claro{--fundo:#f5f5f5;--fundo2:#fff;--texto:#161616;--cinza:#616161;--cinza2:#858585;background:#eee}
+body.tema-claro #lateral,body.tema-claro .topo-busca,body.tema-claro #tela-busca,body.tema-claro .fileira,body.tema-claro #conteudo{color:#161616}
+body.tema-claro .card,body.tema-claro .ordem,body.tema-claro .chip{background:#fff;color:#161616}
+body.tema-claro .card .info,body.tema-claro #lateral{background:#fff}
+body.modo-cinema #lateral,body.modo-cinema #hero,body.modo-cinema #conteudo,body.modo-cinema footer{filter:brightness(.32) saturate(.65);transition:filter .35s ease}
+
+/* carousel de destaques */
+#hero{overflow:hidden}
+.hero-carrossel{position:absolute;right:4.2vw;bottom:26px;z-index:4;display:flex;align-items:center;gap:10px;padding:7px 8px;border-radius:999px;background:rgba(0,0,0,.35);backdrop-filter:blur(8px)}
+.hero-carrossel button{display:grid;place-items:center;width:31px;height:31px;border-radius:50%;background:rgba(255,255,255,.12);transition:transform .2s,background .2s}.hero-carrossel button:hover{background:#fff;color:#000;transform:scale(1.08)}
+.hero-carrossel button svg{width:18px;height:18px}.hero-carrossel span{display:flex;gap:5px}.hero-carrossel i{display:block;width:6px;height:6px;border-radius:50%;background:#8c8c8c;transition:.25s}.hero-carrossel i.on{width:20px;border-radius:8px;background:#fff}
+
+/* busca por voz, filtros e ajustes */
+#tela-busca .topo-busca .voz{right:56px;font-size:18px;line-height:1}.voz.ouvindo{color:#ff4b54!important;animation:pulsarVoz .8s ease-in-out infinite}@keyframes pulsarVoz{50%{transform:scale(1.25);opacity:.45}}
+.cfg-experiencia{padding:4px 0 19px}.cfg-experiencia>label{display:block;margin-bottom:9px;font-size:12px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:#b5b5b5}.tema-escolhas{display:flex;gap:9px;flex-wrap:wrap}.tema-escolhas button{border:1px solid #555;border-radius:4px;padding:9px 13px;font-size:13px;background:#202020}.tema-escolhas button.on{border-color:#fff;background:#fff;color:#111;font-weight:800}.tema-escolhas button[data-tema="azul"]{box-shadow:inset 0 -3px #3b82f6}.tema-escolhas button[data-tema="roxo"]{box-shadow:inset 0 -3px #b15cff}.tema-escolhas button[data-tema="claro"]{box-shadow:inset 0 -3px #ddd}
+.generos-perfil{display:flex;flex-wrap:wrap;gap:7px}.generos-perfil button{padding:7px 9px;border:1px solid #555;border-radius:16px;font-size:12px;color:#bbb}.generos-perfil button.on{border-color:var(--vermelho);background:color-mix(in srgb,var(--vermelho) 22%,transparent);color:#fff}.ed-seguranca select{width:100%;margin-top:4px;background:#222;color:#fff;border:1px solid #555;border-radius:4px;padding:10px}
+.ep-visto{margin-top:8px;padding:6px 9px;border:1px solid #555;border-radius:3px;font-size:11px;color:#ddd;transition:.2s}.ep-visto:hover{background:#fff;color:#111}
+.proximo-ep{position:absolute;right:28px;bottom:23px;z-index:8;display:flex;flex-direction:column;gap:4px;text-align:left;border-left:3px solid var(--vermelho);border-radius:4px;background:rgba(20,20,20,.86);padding:11px 16px;box-shadow:0 8px 30px rgba(0,0,0,.55);transition:.2s}.proximo-ep:hover{transform:translateY(-2px);background:#272727}.proximo-ep small{font-size:9px;letter-spacing:.1em;color:#bbb}.proximo-ep b{font-size:13px}
+
+/* pequenos polimentos: interação e acesso móvel */
+.card,.card .info,.btn,.acao,.perfil,.chip,.ordem button{transition:transform .22s cubic-bezier(.2,.75,.25,1),box-shadow .22s,background .22s,border-color .22s}
+.card:hover{box-shadow:0 12px 36px rgba(0,0,0,.52)}
+@media (max-width:700px){
+  .hero-carrossel{right:12px;bottom:14px}.hero-carrossel button{width:34px;height:34px}.hero-carrossel i{width:5px;height:5px}.hero-carrossel i.on{width:14px}
+  #tela-busca .topo-busca .voz{right:50px}.cfg-experiencia{padding-bottom:14px}.tema-escolhas button{padding:9px 10px;font-size:12px}
+  .ed-seguranca select{min-height:43px}.generos-perfil button{min-height:36px}.proximo-ep{left:18px;right:18px;bottom:16px;padding:10px 13px}.proximo-ep b{font-size:12px}
+  #modal .acoes-lista{padding-bottom:12px}.ep-visto{min-height:34px}
+}
+/* ações complementares da ficha: a trilha clássica permanece compacta */
+#modal .acoes-extras{display:flex;gap:17px;flex-wrap:wrap;margin-top:12px}
+#modal .acoes-extras .acao{font-size:14px;min-height:42px}
+#modal .acoes-extras .circulo{width:40px;height:40px;flex-basis:40px}
+@media(max-width:700px){#modal .acoes-extras{gap:10px}#modal .acoes-extras .acao{font-size:13px}}
+
+/* ================= v49 — controles acessíveis, temas refinados e movimento leve ================= */
+/* Grade: todos os filtros permanecem visíveis e clicáveis — sem uma faixa escondida para arrastar. */
+#tela-busca .linha-grade{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:16px;margin-top:4px}
+#tela-busca .ordem{justify-content:flex-end;flex-wrap:wrap;row-gap:8px}
+.filtros-caixa{margin:17px 0 4px;padding:14px 0 13px;border-top:1px solid rgba(255,255,255,.10);border-bottom:1px solid rgba(255,255,255,.07)}
+.filtros-cab{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:11px}.filtros-cab>div{display:flex;align-items:baseline;gap:9px}.filtros-cab b{font-size:14px}.filtros-cab span{font-size:12px;color:#898989}.filtros-cab button{font-size:12px;color:#bbb;border-bottom:1px solid transparent;padding:3px 0}.filtros-cab button:hover{color:#fff;border-color:currentColor}
+#tela-busca #filtros{position:static;display:flex;flex-wrap:wrap;overflow:visible;gap:8px;background:none;padding:0;margin:0;scrollbar-width:auto}
+#tela-busca #filtros::-webkit-scrollbar{display:initial}.chip{min-height:38px;padding:8px 15px;border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.025);font-size:13px}.chip:hover{background:rgba(255,255,255,.10);transform:translateY(-1px)}.chip.on{box-shadow:0 5px 16px rgba(255,255,255,.12)}
+
+/* Ambientes coerentes: toda a estrutura acompanha a paleta, sem um "modo claro" quebrando o contraste. */
+body{background:var(--fundo)}
+body.tema-azul #tela-busca,body.tema-roxo #tela-busca,body.tema-aurora #tela-busca{background:linear-gradient(180deg,var(--fundo2),var(--fundo) 26%,var(--fundo))}
+body.tema-azul #lateral,body.tema-roxo #lateral,body.tema-aurora #lateral{background:color-mix(in srgb,var(--fundo) 92%,#000);border-right-color:rgba(255,255,255,.12)}
+body.tema-azul #hero .veuB,body.tema-roxo #hero .veuB,body.tema-aurora #hero .veuB{background:linear-gradient(180deg,transparent,rgba(0,0,0,.35) 45%,var(--fundo) 100%)}
+body.tema-azul .card,body.tema-roxo .card,body.tema-aurora .card{background:var(--fundo2)}
+body.tema-azul .dropdown,body.tema-roxo .dropdown,body.tema-aurora .dropdown,body.tema-azul .painel-sino,body.tema-roxo .painel-sino,body.tema-aurora .painel-sino{background:var(--fundo2)}
+body.tema-azul .ordem button.on,body.tema-roxo .ordem button.on,body.tema-aurora .ordem button.on,body.tema-azul .chip.on,body.tema-roxo .chip.on,body.tema-aurora .chip.on{background:var(--vermelho);color:#061016;border-color:var(--vermelho)}
+
+/* Seletor de temas: cartões de amostra, não botões genéricos. */
+.cfg-experiencia{margin-top:4px;padding:21px 0 22px;border-top:1px solid rgba(255,255,255,.10);border-bottom:1px solid rgba(255,255,255,.10)}
+.cfg-bloco-titulo{margin-bottom:12px}.cfg-bloco-titulo label{margin:0!important}.cfg-bloco-titulo span{display:block;margin-top:4px;color:#858585;font-size:12px}
+.tema-escolhas{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}.tema-escolhas .tema-card{position:relative;min-height:104px;padding:8px;overflow:hidden;text-align:left;border:1px solid rgba(255,255,255,.16);border-radius:9px;background:#111;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}.tema-escolhas .tema-card i{display:block;height:48px;border-radius:5px;margin-bottom:8px;background:radial-gradient(circle at 78% 25%,var(--tema-c) 0 7%,transparent 8%),linear-gradient(135deg,var(--tema-a),var(--tema-b))}.tema-escolhas .tema-card b,.tema-escolhas .tema-card small{display:block}.tema-escolhas .tema-card b{font-size:12px}.tema-escolhas .tema-card small{margin-top:3px;color:#999;font-size:10px;white-space:nowrap}.tema-escolhas .tema-card:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.56)}.tema-escolhas .tema-card.on{border-color:var(--vermelho);box-shadow:0 0 0 1px var(--vermelho),0 10px 25px rgba(0,0,0,.25)}.tema-escolhas .tema-card.on::after{content:'✓';position:absolute;right:12px;top:12px;width:18px;height:18px;display:grid;place-items:center;border-radius:50%;background:var(--vermelho);color:#07110c;font-size:12px;font-weight:900}
+.acento-personalizado{display:flex;align-items:center;gap:12px;margin-top:16px;padding:11px 12px;border:1px solid rgba(255,255,255,.1);border-radius:8px;background:rgba(255,255,255,.035)}.acento-personalizado>div{margin-right:auto}.acento-personalizado label{margin:0!important}.acento-personalizado span{display:block;margin-top:3px;color:#858585;font-size:11px}.acento-personalizado input{width:42px;height:34px;padding:2px;border:0;border-radius:5px;background:transparent;cursor:pointer}.acento-personalizado output{min-width:66px;color:#bbb;font-size:12px;font-variant-numeric:tabular-nums}
+
+/* Movimento: transforma/opacity apenas, sem zoom exagerado que provoca travamento e cortes. */
+.card,.card.poster,.btn,.bol,.acao,.perfil,.chip,.ordem button,.tema-escolhas .tema-card{will-change:auto;transition-timing-function:cubic-bezier(.22,.75,.25,1)}
+@media (hover:hover) and (pointer:fine){.card:hover,.card.poster:hover{transform:translateY(-5px) scale(1.035);box-shadow:0 16px 38px rgba(0,0,0,.44)}.card:hover~.card{transform:none}.card:hover{will-change:transform}.fileira:hover .seta{opacity:.92}}
+#hero .fundo{animation:heroEntrada .55s ease-out both}@keyframes heroEntrada{from{opacity:.5;transform:scale(1.075)}to{opacity:1;transform:scale(1.04)}}
+
+@media (max-width:900px){#tela-busca .linha-grade{grid-template-columns:1fr;gap:9px}#tela-busca .ordem{justify-content:flex-start}.tema-escolhas{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:680px){.filtros-caixa{margin-top:13px;padding-top:12px}.filtros-cab span{display:none}.filtros-cab b{font-size:13px}#tela-busca #filtros{gap:7px}.chip{min-height:36px;padding:7px 12px;font-size:12px}.ordem{gap:7px}.ordem span{flex-basis:100%;margin-bottom:0}.ordem button{padding:8px 12px;font-size:12px}.tema-escolhas .tema-card{min-height:96px}.tema-escolhas .tema-card small{font-size:9.5px}.acento-personalizado{gap:8px}.acento-personalizado output{font-size:11px}}
+
+/* ================= v50 — interface ampliada + painel de personalização ================= */
+/* Escala global: aumenta texto, capas, espaços e áreas de toque sem transformar o layout em uma imagem. */
+body{zoom:var(--ui-zoom,1.15)}
+
+/* Configurações agora são exclusivamente para a experiência de uso. */
+#config{padding:38px 20px 62px;background:rgba(0,0,0,.86)}
+#config .painel-config{width:min(94vw,790px);padding:30px 34px 27px;border:1px solid rgba(255,255,255,.13);border-radius:15px;background:linear-gradient(145deg,#1a1a1a,#0c0c0c 72%);box-shadow:0 30px 90px rgba(0,0,0,.7)}
+.cab-config{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:5px}.selo-config{display:block;color:var(--vermelho);font-size:10px;letter-spacing:.14em;font-weight:900}.cab-config h2{margin:4px 0 0!important;font-size:clamp(27px,3vw,34px)!important;letter-spacing:-.035em}.cab-config button{display:grid;place-items:center;width:43px;height:43px;border:1px solid rgba(255,255,255,.22);border-radius:50%;color:#fff}.cab-config button:hover{background:#fff;color:#111}.cab-config button svg{width:20px;height:20px}
+#config .painel-config p.sub{max-width:65ch;margin:0 0 25px;color:#a9a9a9;line-height:1.55}.cfg-secao{padding:21px 0;border-top:1px solid rgba(255,255,255,.1)}.cfg-secao-cab{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;margin-bottom:13px}.cfg-secao-cab h3{margin:0;font-size:16px}.cfg-secao-cab p{margin:4px 0 0!important;color:#858585!important;font-size:12px!important}.cfg-secao-cab output{padding:6px 10px;border-radius:16px;background:var(--vermelho);color:#07110c;font-weight:900;font-size:12px}
+.cfg-tamanho input[type=range]{display:block;width:100%;accent-color:var(--vermelho);cursor:pointer}.escala-marcadores{display:flex;justify-content:space-between;margin-top:6px;color:#777;font-size:10px;text-transform:uppercase;letter-spacing:.05em}
+#config .painel-config .tema-escolhas{margin:0}.cfg-preferencias{display:grid;grid-template-columns:1fr 1fr;gap:0 22px}.cfg-preferencias .cfg-secao-cab{grid-column:1/-1}.cfg-opcao{position:relative;display:flex!important;align-items:center;gap:14px;min-height:67px;margin:0!important;padding:11px 0;border-top:1px solid rgba(255,255,255,.07);cursor:pointer;text-transform:none!important;letter-spacing:0!important}.cfg-opcao span{display:block;min-width:0;padding-right:49px}.cfg-opcao b,.cfg-opcao small{display:block}.cfg-opcao b{font-size:13px;color:#eee}.cfg-opcao small{margin-top:4px;font-size:11px;line-height:1.32;color:#858585}.cfg-opcao input{position:absolute;opacity:0;pointer-events:none}.cfg-opcao i{position:absolute;right:1px;top:50%;width:39px;height:23px;transform:translateY(-50%);border-radius:20px;background:#3d3d3d;transition:.18s}.cfg-opcao i::after{content:'';position:absolute;top:3px;left:3px;width:17px;height:17px;border-radius:50%;background:#c7c7c7;transition:.18s}.cfg-opcao input:checked+i{background:var(--vermelho)}.cfg-opcao input:checked+i::after{left:19px;background:#07110c}.cfg-cheio-agora{grid-column:1/-1;justify-self:start;margin-top:14px;padding:10px 14px!important;font-size:12px!important}.dica-config{display:flex;align-items:flex-start;gap:12px;margin-top:2px;border-radius:9px;background:rgba(255,255,255,.035);padding:14px!important}.dica-config b{white-space:nowrap;color:var(--vermelho);font-size:12px}.dica-config span{font-size:12px;line-height:1.5;color:#aaa}.dica-config em{font-style:normal;color:#eee}.cfg-rodape{margin-top:22px!important}.cfg-rodape .btn-cheio{padding:12px 19px!important}.versao-app{margin-top:17px!important}
+
+/* Capa visual do perfil, escolhida no editor. */
+.perfil .avatar-caixa.tem-capa{overflow:hidden;border-radius:8px;background-position:center;background-size:cover;box-shadow:0 10px 25px rgba(0,0,0,.45)}.perfil .avatar-caixa.tem-capa .veu-capa-perfil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.48));z-index:1}.perfil .avatar-caixa.tem-capa img.avatar{position:absolute;z-index:2;left:15%;bottom:10%;width:70%;height:70%;border:2px solid rgba(255,255,255,.9);box-shadow:0 6px 20px rgba(0,0,0,.45)}.perfil .avatar-caixa.tem-capa .lapis{z-index:3}.ed-capa-campo label span{color:#777;font-size:10px;font-weight:500;text-transform:none;letter-spacing:0}.ed-capa-linha{display:flex;align-items:center;gap:12px;margin-top:7px}.ed-capa-prev{width:126px;height:70px;flex:0 0 126px;border-radius:6px;background:linear-gradient(135deg,#252525,#111);border:1px dashed #555;background-position:center;background-size:cover}.ed-capa-prev.tem-capa{border-style:solid;border-color:rgba(255,255,255,.3)}.ed-capa-linha>div:last-child{display:flex;flex-wrap:wrap;align-items:center;gap:8px}.ed-capa-linha .btn-upload{margin:0}.ed-capa-linha .btn-linha{padding:8px 10px;font-size:11px}.ed-capa-linha small{flex-basis:100%;font-size:10px;color:#888}
+
+/* Preferência de menos movimento: remove apenas ornamentos, sem travar interações. */
+body.movimento-reduzido *,body.movimento-reduzido *::before,body.movimento-reduzido *::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}
+@media(max-width:760px){body{zoom:1.06}.cfg-preferencias{grid-template-columns:1fr}.cfg-opcao{min-height:62px}.dica-config{display:block}.dica-config b{display:block;margin-bottom:5px}#config .painel-config{padding:24px 18px}.ed-capa-linha{align-items:flex-start}.ed-capa-prev{width:110px;height:62px;flex-basis:110px}}
+
+/* ================= v51 — maior, mas com ritmo compacto ================= */
+/* As peças crescem pela escala global; as lacunas entre elas diminuem para a home não ficar vazia. */
+body{zoom:var(--ui-zoom,1.25)}
+.fileira{margin-bottom:18px;contain-intrinsic-size:auto 270px}.fileira h2{margin-bottom:7px}.trilho{padding:11px 4% 28px;gap:10px}.trilho.posters{padding:13px 4% 31px;gap:12px}.fileira .seta{top:30px;bottom:29px}.fileira h2 .ver-tudo{opacity:.88}
+#conteudo{padding-bottom:34px}
+
+/* Ficha: mantém texto e botões grandes, mas concentra as ações principais dentro da primeira tela. */
+#modal .topo{min-height:min(74vh,720px);padding:clamp(34px,5.2vh,58px) var(--ficha-lado) clamp(22px,3.1vh,36px)}
+#modal .topo .acoes{gap:clamp(6px,1vh,10px)}
+#modal .titulo-ficha .logo-filme{max-height:clamp(64px,11vh,112px)}
+#modal .topo .meta{gap:9px;margin:0;font-size:13px}
+#modal .topo .sinopse{margin:0;max-width:56ch;font-size:clamp(13px,1vw,15px);line-height:1.46}
+#modal .linhas-info{gap:2px;font-size:12.5px;line-height:1.38}
+#modal .acoes-lista{gap:8px;margin-top:5px}
+#modal .acao{min-height:40px;font-size:15px;gap:13px}
+#modal .acao .circulo{width:38px;height:38px;flex-basis:38px}
+#modal .acao .circulo svg{width:18px;height:18px}
+#modal .acoes-extras{gap:13px;margin-top:5px}
+#modal .acoes-extras .acao{min-height:34px;font-size:13px;gap:10px}
+#modal .acoes-extras .circulo{width:32px;height:32px;flex-basis:32px}
+#modal .acoes-extras .circulo svg{width:15px;height:15px}
+
+/* Painel de escala atualizado para o novo teto. */
+.escala-marcadores span:last-child{color:var(--vermelho)}
+@media(max-width:900px){body{zoom:1.12}.fileira{margin-bottom:14px}.trilho,.trilho.posters{padding-top:9px;padding-bottom:24px}#modal .topo{min-height:0;padding:calc(48vw + 16px) 5% 20px}#modal .topo .acoes{gap:7px}#modal .topo .sinopse{line-height:1.43}#modal .acoes-lista{gap:8px}#modal .acao{min-height:39px}.fileira h2 .ver-tudo{opacity:1}}
+
+/* ================= v52 — próximo episódio junto da saída do player ================= */
+/* O controle saiu da base do vídeo para nunca cobrir a barra/opções do iframe do Drive. */
+#player .controles-player{position:fixed;top:18px;left:18px;z-index:5012;display:flex;align-items:center;gap:10px;pointer-events:auto}
+#player .controles-player .voltar-flutuante{position:relative;top:auto;left:auto;z-index:auto;flex:0 0 auto}
+#player .controles-player .proximo-ep{position:relative;top:auto;right:auto;bottom:auto;left:auto;z-index:auto;display:flex;align-items:center;gap:9px;min-height:58px;padding:8px 15px 8px 10px;border:1px solid rgba(255,255,255,.42);border-left:3px solid var(--vermelho);border-radius:29px;background:rgba(8,8,8,.88);box-shadow:0 8px 24px rgba(0,0,0,.58);text-align:left;transition:transform .18s ease,background .18s ease,border-color .18s ease}
+#player .controles-player .proximo-ep:hover{transform:translateY(-2px);background:#202020;border-color:#fff;border-left-color:var(--vermelho)}
+#player .proximo-ep .proximo-icone{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--vermelho);color:#080808}.proximo-ep .proximo-icone svg{width:18px;height:18px;fill:currentColor}.proximo-ep>span:last-child{display:flex;flex-direction:column;gap:1px;line-height:1.05}.proximo-ep small{color:#bbb;font-size:9px;letter-spacing:.1em}.proximo-ep b{font-size:13px;color:#fff}
+#player .dica-assistindo{top:88px;left:18px;max-width:min(440px,70vw);font-size:14px}
+@media(max-width:700px){#player .controles-player{top:12px;left:12px;gap:8px;max-width:calc(100vw - 24px)}#player .controles-player .voltar-flutuante{width:54px;height:54px}#player .controles-player .voltar-flutuante svg{width:27px;height:27px}#player .controles-player .proximo-ep{min-height:54px;min-width:0;padding:7px 11px 7px 8px}.proximo-ep .proximo-icone{width:28px;height:28px;flex:0 0 28px}.proximo-ep b{font-size:12px}.proximo-ep small{font-size:8px}#player .dica-assistindo{top:76px;left:13px;font-size:12px;max-width:80vw}}
 
 </style>
 </head>
@@ -1761,13 +1884,17 @@ window.TRAILERS_TMDB = {"f:1rZOIStS_vLQB5CUIKWhLsgkEo5jpCUyl":{"k":"hLVjIhPYq7s"
 
 /* ---------------- ESTADO / ARMAZENAMENTO ---------------- */
 const LS = {
-  cfg:'nfc_cfg', meta:'nfc_meta', lista:'nfc_lista_p', prog:'nfc_prog_p',
+  cfg:'nfc_cfg', meta:'nfc_meta', lista:'nfc_lista_p', depois:'nfc_depois_p', historico:'nfc_historico_p', prog:'nfc_prog_p',
   perfis:'nfc_perfis_v2', ativo:'nfc_ativo_v2', eps:'nfc_eps'
 };
 const CHAVE_EMBUTIDA = "42a3df2170818adc11a19fb28608dc82";
 /* abertura oficial: mantenha abertura.mp4 na mesma pasta hospedada que FAMOVIE.html (GitHub Pages). */
 const INTRO_VIDEO = 'abertura.mp4';
-const CFG_PADRAO = { marca:'FaMovie', tmdb:CHAVE_EMBUTIDA || '', player:'video', intro:true, som:true };
+const CFG_PADRAO = {
+  marca:'FaMovie', tmdb:CHAVE_EMBUTIDA || '', player:'video', intro:true, som:true,
+  tema:'escuro', cinema:true, telaCheia:true, escala:1.25, escalaRevisao:2, movimento:true,
+  carrossel:true, proximoAuto:true
+};
 const FACES = [
   { id:'feliz',      nome:'Sorriso'     },
   { id:'gargalhada', nome:'Gargalhada'  },
@@ -1857,18 +1984,52 @@ let meta, epsMeta;
     ? (salvar(LS.eps, EPS_EMB), Object.assign({}, EPS_EMB))
     : Object.assign({}, EPS_EMB, salvosE);
 }
-let lista = [];                          // minha lista (por perfil)
+let lista = [];                          // favoritos / Minha lista (por perfil)
+let depois = [];                         // Assistir depois (por perfil)
+let historico = [];                      // últimos títulos abertos (por perfil)
 let prog  = {};                          // progresso (por perfil)
-let perfis = carregar(LS.perfis, PERFIS_PADRAO.map((p,i) => Object.assign({id:i}, p)));
+let perfis = carregar(LS.perfis, PERFIS_PADRAO.map((p,i) => Object.assign({id:i, idadeMax: p.infantil ? '12' : '18', generosFav:[]}, p)));
 let perfilAtivo = carregar(LS.ativo, 0);
 if (!cfg.tmdb && CHAVE_EMBUTIDA) cfg.tmdb = CHAVE_EMBUTIDA;
 if (!cfg.marca || cfg.marca === 'NETFLIX') cfg.marca = 'FaMovie';   // migra de versões antigas
+const TEMAS = {
+  escuro:{nome:'Cinema', acento:'#e50914', fundo:'#090909', superficie:'#171717'},
+  azul:{nome:'Oceano', acento:'#39bdf8', fundo:'#07131f', superficie:'#101f31'},
+  roxo:{nome:'Violeta', acento:'#b78cff', fundo:'#130d1c', superficie:'#241735'},
+  aurora:{nome:'Aurora', acento:'#4dd487', fundo:'#091811', superficie:'#11261a'}
+};
+if (!cfg.tema || !TEMAS[cfg.tema]) cfg.tema = cfg.tema === 'claro' ? 'aurora' : 'escuro';
+if (!cfg.acento) cfg.acento = TEMAS[cfg.tema].acento;
+if (cfg.cinema == null) cfg.cinema = true;
+/* v51: a interface passa a abrir maior; a pessoa continua livre para reduzir no painel. */
+if (cfg.escalaRevisao !== 2){ cfg.escala = 1.25; cfg.escalaRevisao = 2; }
+if (!Number.isFinite(+cfg.escala)) cfg.escala = 1.25;
+cfg.escala = Math.max(1, Math.min(1.45, +cfg.escala));
+if (cfg.movimento == null) cfg.movimento = true;
+if (cfg.carrossel == null) cfg.carrossel = true;
+if (cfg.proximoAuto == null) cfg.proximoAuto = true;
+function aplicarTema(){ 
+  const p = TEMAS[cfg.tema] || TEMAS.escuro;
+  const acento = /^#[0-9a-f]{6}$/i.test(cfg.acento || '') ? cfg.acento : p.acento;
+  document.body.classList.remove('tema-azul','tema-roxo','tema-claro','tema-aurora');
+  if (cfg.tema !== 'escuro') document.body.classList.add('tema-' + cfg.tema);
+  document.documentElement.style.setProperty('--vermelho', acento);
+  document.documentElement.style.setProperty('--vermelho-esc', escurecer(acento, .72));
+  document.documentElement.style.setProperty('--fundo', p.fundo);
+  document.documentElement.style.setProperty('--fundo2', p.superficie);
+  document.documentElement.style.setProperty('--ui-zoom', String(cfg.escala || 1.25));
+  document.body.classList.toggle('movimento-reduzido', cfg.movimento === false);
+}
 
 function carregarEstadoPerfil(){
   lista = carregar(LS.lista + perfilAtivo, []);
-  prog  = carregar(LS.prog  + perfilAtivo, {});
+  depois = carregar(LS.depois + perfilAtivo, []);
+  historico = carregar(LS.historico + perfilAtivo, []);
+  prog  = carregar(LS.prog + perfilAtivo, {});
 }
 function salvarLista(){ salvar(LS.lista + perfilAtivo, lista); }
+function salvarDepois(){ salvar(LS.depois + perfilAtivo, depois); }
+function salvarHistorico(){ salvar(LS.historico + perfilAtivo, historico); }
 function salvarProg(){ salvar(LS.prog + perfilAtivo, prog); }
 function perfilAtual(){ return perfis[perfilAtivo] || perfis[0] || PERFIS_PADRAO[0]; }
 function perfilInfantil(){ return !!perfilAtual().infantil; }
@@ -1924,7 +2085,10 @@ ITENS.forEach(it => {
 /* catálogo infantil (perfil do Miguel) */
 const KIDS_RE = /zootopia|toy story|shrek|carros|cars\b|trolls|minions|malvado|drag(a|ã)o|paddington|tadeo|gumball|phineas|jorel|esponja|mario|elementos|rei le(a|ã)o|lion|aranhaverso|\bverso\b|gato de botas|gato e botas|encanto|moana|divertida|caras malvados|big hero|dolittle|alice|leo\b|fam[ií]lia do futuro|narnia|pixels|spider|ultimate|incr[ií]veis|seu lado|togo\b|^up\b|up:|cabra bom de bola|como treinar/i;
 function ehInfantil(it){ return KIDS_RE.test(it.titulo + ' ' + (it.busca || '')); }
-function itens(){  return perfilInfantil() ? ITENS.filter(ehInfantil) : ITENS; }
+function idadeNumero(v){ return v === 'L' || v == null ? 0 : (+v || 18); }
+function limitePerfil(){ const p = perfilAtual(); return idadeNumero(p && p.idadeMax != null ? p.idadeMax : (p && p.infantil ? '12' : '18')); }
+function permitidoNoPerfil(it){ return idadeNumero(idadeDe(it)) <= limitePerfil() && (!perfilInfantil() || ehInfantil(it)); }
+function itens(){ return ITENS.filter(permitidoNoPerfil); }
 function filmes(){ return itens().filter(i => i.tipo === 'filme'); }
 function series(){ return itens().filter(i => i.tipo === 'serie'); }
 
@@ -2151,6 +2315,74 @@ function progressoDe(item){
   if (!melhor) return null;
   return {pct: Math.min(98, Math.round(100 * melhor.t / melhor.d)), ...melhor};
 }
+function registrarHistorico(item, ep){
+  if (!item) return;
+  historico = historico.filter(x => x.chave !== item.chave);
+  historico.unshift({chave:item.chave, at:Date.now(), ep:ep && ep.n || null, temp:ep && ep.temp || null});
+  historico = historico.slice(0, 80); salvarHistorico();
+}
+function atualizarColecoesNaTela(){
+  /* A lista precisa aparecer imediatamente, sem a pessoa ter de trocar de perfil ou atualizar a página. */
+  requestAnimationFrame(() => {
+    if (telaBusca && telaBusca.classList.contains('on')) { if (filtroAtual) repintarGrade(); }
+    else if (appRenderizada) renderTudo();
+  });
+}
+function alternarDepois(item){
+  const i = depois.indexOf(item.chave);
+  if (i >= 0) depois.splice(i, 1); else depois.unshift(item.chave);
+  salvarDepois(); atualizarColecoesNaTela(); return i < 0;
+}
+function limparHistorico(){ historico = []; salvarHistorico(); renderTudo(); toast('Histórico limpo neste perfil'); }
+function marcarVisto(item, ep){
+  const alvo = ep || primeiroEp(item); if (!alvo || !alvo.id) return;
+  prog[alvo.id] = {t:100, d:100, item:item.chave, ep:alvo.n, temp:alvo.temp, at:Date.now(), visto:true};
+  salvarProg(); registrarHistorico(item, alvo); toast('Marcado como visto');
+  if (itemModal === item) abrirModal(item, {temporada:alvo.temp}); else renderTudo();
+}
+function duracaoEstimada(item, ep){
+  const m = meta[item.chave] || {};
+  if (item.tipo === 'filme') return Math.max(1200, (+m.duracao || 90) * 60);
+  const infos = epsMeta[(m.tmdbId || '') + ':' + (ep && ep.temp || 1)] || [];
+  const info = infos.find(x => x.e === (ep && ep.n));
+  return Math.max(600, +(info && info.d || 22) * 60);
+}
+function atualizarProgressoPlayer(finalizar){
+  if (!P || !P.ep || !P.ep.id || !P.inicio) return;
+  const p = prog[P.ep.id]; if (!p) return;
+  const agora = Date.now(), delta = Math.max(0, Math.round((agora - P.inicio) / 1000));
+  if (!delta && !finalizar) return;
+  p.t = Math.min(p.d * .98, Math.max(p.t || 0, (P.base || 0) + delta));
+  p.at = agora; P.inicio = agora; P.base = p.t;
+  salvarProg();
+  /* O iframe do Drive não expõe evento de término por segurança; ao alcançar a duração conhecida/estimada,
+     o app agenda o próximo episódio. O botão de próximo continua disponível para avanço imediato. */
+  if (!finalizar && cfg.proximoAuto !== false && P.prox && !P.autoAgendado && p.t >= p.d * .975){
+    const sessao = P; P.autoAgendado = true; toast('Próximo episódio iniciará em instantes');
+    setTimeout(() => { if (P !== sessao || !player.classList.contains('on')) return; prog[sessao.ep.id].t = prog[sessao.ep.id].d; salvarProg(); tocar(sessao.item, sessao.prox); }, 6000);
+  }
+}
+function proximoEpisodio(item, ep){
+  if (!item || item.tipo !== 'serie' || !ep) return null;
+  const ts = item.temporadas || []; const t = ts.find(x => x.n === ep.temp) || ts[0];
+  const i = t && t.eps.findIndex(x => x.id === ep.id);
+  if (t && i >= 0 && t.eps[i+1]) return Object.assign({temp:t.n, nome:'Episódio ' + t.eps[i+1].e}, t.eps[i+1]);
+  const nt = t && ts.find(x => x.n === t.n + 1);
+  return nt && nt.eps[0] ? Object.assign({temp:nt.n, nome:'Episódio ' + nt.eps[0].e}, nt.eps[0]) : null;
+}
+function recomendadosParaVoce(qtd){
+  const pesos = {};
+  historico.concat(lista.map(chave => ({chave}))).forEach(x => {
+    const it = POR_CHAVE.get(x.chave); if (!it) return;
+    generosDe(it, 10).forEach(g => pesos[g] = (pesos[g] || 0) + 3);
+  });
+  (perfilAtual().generosFav || []).forEach(g => pesos[g] = (pesos[g] || 0) + 5);
+  return itens().filter(i => !historico.slice(0, 12).some(x => x.chave === i.chave))
+    .sort((a,b) => {
+      const pa = generosDe(a,10).reduce((n,g)=>n+(pesos[g]||0),0), pb = generosDe(b,10).reduce((n,g)=>n+(pesos[g]||0),0);
+      return pb-pa || relevancia(b)-relevancia(a);
+    }).slice(0, qtd || 16);
+}
 
 /* ---------------- ELEMENTOS BASE ---------------- */
 const app = document.body;
@@ -2319,6 +2551,8 @@ function montarLateral(){
           <div class="cab-perfis">Trocar de perfil</div>
           ${perfis.map((p,i)=>`<a href="#" class="${i===perfilAtivo?'ativo':''}" data-perfil="${i}"><img class="avatar" style="width:28px;height:28px;border-radius:3px" src="${srcAvatar(p, 56)}" alt="">${esc(p.nome)}${p.infantil?' <span style="font-size:9px;background:#46d369;color:#000;border-radius:2px;padding:2px 5px;font-weight:800">INFANTIL</span>':''}</a>`).join('')}
           <a href="#" class="trocar" id="trocar-perfil">Gerenciar perfis</a>
+          <a href="#" id="abre-depois">Assistir depois${depois.length ? ` <span style="opacity:.6">(${depois.length})</span>` : ''}</a>
+          <a href="#" id="abre-historico">Histórico${historico.length ? ` <span style="opacity:.6">(${historico.length})</span>` : ''}</a>
           ${ehDaniel ? '<a href="#" class="atalho-botoes" id="abre-botoes" title="Área de teste local">Botões</a>' : ''}
           <a href="#" id="ver-intro">Ver abertura novamente</a>
         </div>
@@ -2346,6 +2580,8 @@ function montarLateral(){
   });
   $('#abre-config').onclick = e => { e.preventDefault(); abrirConfig(); };
   $('#trocar-perfil').onclick = e => { e.preventDefault(); abrirTelaPerfis(); };
+  $('#abre-depois').onclick = e => { e.preventDefault(); irPara('depois'); };
+  $('#abre-historico').onclick = e => { e.preventDefault(); irPara('historico'); };
   const abreBotoes = $('#abre-botoes'); if (abreBotoes) abreBotoes.onclick = e => { e.preventDefault(); abrirPainelBotoes(); };
   $('#ver-intro').onclick = e => { e.preventDefault(); tocarIntro(); };
   $('#menu-perfil').querySelectorAll('[data-perfil]').forEach(a => a.onclick = e => {
@@ -2622,6 +2858,12 @@ function montarFileiras(){
   const continuar = P.map(i => ({i, p:progressoDe(i)})).filter(x => x.p && x.p.pct > 2 && x.p.pct < 96)
                       .sort((a,b) => b.p.at - a.p.at).map(x => x.i);
   if (continuar.length) rows.push({t:`Continuar assistindo como ${perfilAtual().nome}`, itens:continuar.slice(0,12)});
+  const paraDepois = depois.map(k => POR_CHAVE.get(k)).filter(i => i && permitidoNoPerfil(i));
+  if (paraDepois.length) rows.push({t:'Assistir depois', itens:paraDepois.slice(0,16)});
+  const recentes = historico.map(x => POR_CHAVE.get(x.chave)).filter(i => i && permitidoNoPerfil(i));
+  if (recentes.length) rows.push({t:'Assistidos recentemente', itens:recentes.slice(0,16)});
+  const rec = recomendadosParaVoce(16);
+  if (rec.length) rows.push({t:`Feito para ${perfilAtual().nome}`, itens:rec});
 
   const top = P.slice().sort((a,b) => relevancia(b) - relevancia(a)).slice(0,10);
   rows.push({t:'Top 10 no Brasil hoje', itens:top, top:true});
@@ -2691,12 +2933,14 @@ function montarFileira(r){
 }
 
 /* ---------------- HERO ---------------- */
-let heroAtual = null;
+let heroAtual = null, heroIndice = 0, heroTimer = null;
 function montarHero(){
   const universo = itens();
   const novos = universo.filter(i => (meta[i.chave] && meta[i.chave].backdrop));
-  const pool = novos.length > 3 ? novos : universo;
-  const h = pool[hash('hero' + perfilAtivo + new Date().toDateString()) % pool.length];
+  const pool = (novos.length > 3 ? novos : universo).slice().sort((a,b) => relevancia(b)-relevancia(a));
+  if (!pool.length) return;
+  const baseHero = hash('hero' + perfilAtivo + new Date().toDateString()) % pool.length;
+  const h = pool[(baseHero + heroIndice + pool.length) % pool.length];
   heroAtual = h;
   const m = meta[h.chave];
   const logo = logotipoDe(h);
@@ -2729,6 +2973,11 @@ function montarHero(){
     <div class="lado">
       <span class="ep">${h.tipo === 'serie' ? 'Nova temporada' : 'Disponível agora'}</span>
       <span class="classif idade ${classeIdade(idadeDe(h))}" title="Classificação indicativa">${idadeDe(h)}</span>
+    </div>
+    <div class="hero-carrossel" aria-label="Destaques">
+      <button id="hero-anterior" aria-label="Destaque anterior">${SVG.chevronE}</button>
+      <span>${pool.slice(0, Math.min(6,pool.length)).map((_,i) => `<i class="${((baseHero + heroIndice) % pool.length) === i ? 'on' : ''}"></i>`).join('')}</span>
+      <button id="hero-proximo" aria-label="Próximo destaque">${SVG.chevron}</button>
     </div>`;
   const lgHero = $('#hero .logo-titulo');
   if (lgHero) lgHero.onerror = () => { const h1 = el('h1'); h1.textContent = h.titulo; lgHero.replaceWith(h1); };
@@ -2737,6 +2986,11 @@ function montarHero(){
   $('#hero-info').onclick = () => abrirModal(h);
   $('#hero-lista').onclick = e => { alternarLista(h); e.currentTarget.innerHTML = lista.includes(h.chave) ? SVG.check : SVG.mais; };
   $('#hero-like').onclick = e => { e.currentTarget.style.background = '#fff'; e.currentTarget.querySelector('svg').style.fill = '#000'; };
+  const moverHero = passo => { heroIndice = (heroIndice + passo + pool.length) % pool.length; montarHero(); };
+  $('#hero-anterior').onclick = () => moverHero(-1);
+  $('#hero-proximo').onclick = () => moverHero(1);
+  clearTimeout(heroTimer);
+  if (cfg.carrossel !== false) heroTimer = setTimeout(() => { if (!player.classList.contains('on') && !modal.classList.contains('escondido')) return; moverHero(1); }, 9000);
   $('#hero .fundo').style.backgroundImage = `url('${fundoDe(h)}')`;
 }
 
@@ -2787,10 +3041,25 @@ function irPara(qual){
   if (qual === 'filmes') return abrirGrade({tipo:'filme', titulo:'Filmes', ordenar:true});
   if (qual === 'lista'){
     const itens = lista.map(k => POR_CHAVE.get(k)).filter(Boolean);
-    return abrirGrade({titulo:'Minha lista', itens, vazio:'Sua lista está vazia. Toque em <b>+</b> em qualquer título para salvar aqui.'});
+    return abrirGrade({titulo:'Favoritos', itens, vazio:'Você ainda não favoritou nenhum título.'});
   }
-  if (qual === 'top') return abrirGrade({titulo:'Bombando agora', itens:itens().slice().sort((a,b)=>relevancia(b)-relevancia(a)).slice(0,30)});
+  if (qual === 'depois'){
+    const salvos = depois.map(k => POR_CHAVE.get(k)).filter(i => i && permitidoNoPerfil(i));
+    return abrirGrade({titulo:'Assistir depois', itens:salvos, vazio:'Nenhum título salvo para assistir depois. Use o botão + na ficha de qualquer título.'});
+  }
+  if (qual === 'historico') return abrirHistorico();
+  if (qual === 'top') return abrirGrade({titulo:'Em alta no Brasil · Ranking', itens:itens().slice().sort((a,b)=>relevancia(b)-relevancia(a)).slice(0,30), ranking:true});
   if (qual === 'todos') return abrirGrade({titulo:'Explorar catálogo completo', ordenar:true});
+}
+function abrirHistorico(){
+  const vistos = historico.map(x => POR_CHAVE.get(x.chave)).filter(i => i && permitidoNoPerfil(i));
+  abrirGrade({titulo:'Histórico', itens:vistos, vazio:'Seu histórico deste perfil está vazio.'});
+  const corpo = $('#busca-corpo');
+  if (corpo && !$('#limpar-historico', corpo)){
+    const b = el('button', 'btn-linha'); b.id = 'limpar-historico'; b.textContent = 'Limpar histórico';
+    b.onclick = () => { if (confirm('Limpar o histórico deste perfil?')) { limparHistorico(); abrirHistorico(); } };
+    corpo.prepend(b);
+  }
 }
 
 /* ---------------- GRADE / BUSCA ---------------- */
@@ -2807,6 +3076,7 @@ function abrirTelaBusca(){
       <div class="topo-busca">
         <span class="icone">${SVG.busca2}</span>
         <input id="q" placeholder="Buscar títulos, gêneros, pessoas" autocomplete="off">
+        <button id="voz-busca" class="limpa voz" title="Buscar por voz" aria-label="Buscar por voz">🎙</button>
         <button id="limpa-busca" class="limpa" title="Limpar">✕</button>
       </div>
       <div id="busca-corpo"></div>`;
@@ -2814,6 +3084,16 @@ function abrirTelaBusca(){
     q.addEventListener('input', () => { if (q.value.trim().length) buscar(q.value); else sugestoes(); });
     q.addEventListener('keydown', e => { if (e.key === 'Escape'){ fecharBusca(); } });
     $('#limpa-busca', telaBusca).addEventListener('click', () => { q.value = ''; q.focus(); sugestoes(); });
+    $('#voz-busca', telaBusca).addEventListener('click', () => {
+      const Reconhecimento = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!Reconhecimento){ toast('A busca por voz não é suportada neste navegador.'); return; }
+      const r = new Reconhecimento(); r.lang = 'pt-BR'; r.interimResults = false; r.maxAlternatives = 3;
+      const bt = $('#voz-busca', telaBusca); bt.classList.add('ouvindo'); bt.textContent = '●';
+      r.onresult = e => { const texto = e.results[0][0].transcript; q.value = texto; buscar(texto); toast('Buscando: ' + texto); };
+      r.onerror = () => toast('Não foi possível ouvir. Verifique a permissão do microfone.');
+      r.onend = () => { bt.classList.remove('ouvindo'); bt.textContent = '🎙'; };
+      try{ r.start(); }catch(e){}
+    });
   }
   if (!telaBusca.classList.contains('on')){
     document.body.classList.add('pagina-aberta');   /* a home sai de cena: é uma aba, não um overlay */
@@ -2858,10 +3138,17 @@ function repintarGrade(){
   if (chip && chip.g) arr = arr.filter(i => temGenero(i, chip.g));
   else if (chip && chip.k === 'filme') arr = arr.filter(i => i.tipo === 'filme');
   else if (chip && chip.k === 'serie') arr = arr.filter(i => i.tipo === 'serie');
+  else if (chip && chip.k === 'recente') arr = arr.filter(i => +anoDe(i) >= 2020);
+  else if (chip && chip.k === 'alta') arr = arr.filter(i => relevancia(i) >= 80);
+  else if (chip && chip.k === 'favoritos') arr = arr.filter(i => lista.includes(i.chave));
+  else if (chip && chip.k === 'depois') arr = arr.filter(i => depois.includes(i.chave));
   else if (chip && chip.k && chip.k !== 'todos') arr = arr.filter(i => casa(i, PADROES[chip.k] || /$^/));
   if (modoOrdem === 'az') arr = ordenarAZ(arr);
+  else if (modoOrdem === 'recente') arr.sort((a,b) => (+anoDe(b)||0)-(+anoDe(a)||0) || relevancia(b)-relevancia(a));
+  else if (modoOrdem === 'nota') arr.sort((a,b) => relevancia(b)-relevancia(a) || (+anoDe(b)||0)-(+anoDe(a)||0));
+  else if (modoOrdem === 'duracao') arr.sort((a,b) => (meta[b.chave]&&meta[b.chave].duracao||0)-(meta[a.chave]&&meta[a.chave].duracao||0));
   else if (opts.ordenar || (chip && chip.g)) arr = ordenarCatalogo(arr);
-  pintarGrade(arr, opts.vazio);
+  pintarGrade(arr, opts.vazio, opts.ranking);
 }
 function abrirGrade(opts){
   const viz = opts.itens || (opts.tipo ? (opts.tipo === 'serie' ? series() : filmes()) : itens());
@@ -2869,7 +3156,8 @@ function abrirGrade(opts){
   const fixos = [
     {k:'todos', t:'Tudo'}, {k:'filme', t:'Filmes'}, {k:'serie', t:'Séries'},
     {k:'marvel', t:'Marvel'}, {k:'dc', t:'DC'}, {k:'sw', t:'Star Wars'},
-    {k:'animacao', t:'Infantil'}, {k:'fe', t:'Fé'}
+    {k:'animacao', t:'Infantil'}, {k:'fe', t:'Fé'}, {k:'recente',t:'2020+'},
+    {k:'alta',t:'Em alta'}, {k:'favoritos',t:'Favoritos'}, {k:'depois',t:'Ver depois'}
   ];
   const abreviar = { 'Ficção científica':'Ficção' };
   const chips = fixos.concat(
@@ -2883,12 +3171,18 @@ function abrirGrade(opts){
       <div class="ordem" id="ordem"><span>Ordenar:</span>
         <button data-o="franquia" class="${modoOrdem === 'franquia' ? 'on' : ''}">Franquias</button>
         <button data-o="az" class="${modoOrdem === 'az' ? 'on' : ''}">A–Z</button>
+        <button data-o="recente" class="${modoOrdem === 'recente' ? 'on' : ''}">Mais novos</button>
+        <button data-o="nota" class="${modoOrdem === 'nota' ? 'on' : ''}">Melhor nota</button>
+        <button data-o="duracao" class="${modoOrdem === 'duracao' ? 'on' : ''}">Duração</button>
       </div>
     </div>
-    <div id="filtros">${chips.map(c=>{
-      const on = c.k && c.k === chipInicial.k;
-      return `<button class="chip${on ? ' on' : ''}" ${c.k?`data-f="${c.k}"`:''} ${c.g?`data-g="${esc(c.g)}"`:''}>${esc(c.t)}</button>`;
-    }).join('')}</div>
+    <section class="filtros-caixa" aria-label="Filtros do catálogo">
+      <div class="filtros-cab"><div><b>Filtros</b><span>Refine os títulos exibidos</span></div><button id="limpar-filtros" type="button">Limpar seleção</button></div>
+      <div id="filtros">${chips.map(c=>{
+        const on = c.k && c.k === chipInicial.k;
+        return `<button class="chip${on ? ' on' : ''}" ${c.k?`data-f="${c.k}"`:''} ${c.g?`data-g="${esc(c.g)}"`:''}>${esc(c.t)}</button>`;
+      }).join('')}</div>
+    </section>
     <div class="grade" id="grade"></div>`;
   filtroAtual = { base: viz, opts, chip: chipInicial };
   $$('.chip', corpo).forEach(ch => ch.onclick = () => {
@@ -2896,6 +3190,11 @@ function abrirGrade(opts){
     filtroAtual.chip = { k: ch.dataset.f || null, g: ch.dataset.g || null };
     repintarGrade();
   });
+  $('#limpar-filtros', corpo).onclick = () => {
+    filtroAtual.chip = {k:'todos'};
+    $$('.chip', corpo).forEach(x => x.classList.toggle('on', x.dataset.f === 'todos'));
+    repintarGrade();
+  };
   $$('#ordem button', corpo).forEach(b => b.onclick = () => {
     modoOrdem = b.dataset.o;
     $$('#ordem button', corpo).forEach(x => x.classList.toggle('on', x === b));
@@ -2904,21 +3203,35 @@ function abrirGrade(opts){
   repintarGrade();
   abrirTelaBusca();
 }
-function pintarGrade(itens, vazioTxt){
+function pintarGrade(itens, vazioTxt, ranking){
   const g = $('#grade'); if (!g) return;
   g.innerHTML = '';
   if (!itens.length){
     g.innerHTML = `<div style="grid-column:1/-1;text-align:center;color:#b3b3b3;padding:60px 0;font-size:16px;line-height:1.8">${vazioTxt || 'Nada encontrado por aqui. Tente outro termo.'}</div>`;
     return;
   }
-  itens.forEach(i => g.appendChild(cardItem(i, {poster:true})));
+  itens.forEach((i, pos) => g.appendChild(cardItem(i, {poster:true, badge:ranking ? '#' + (pos + 1) + ' EM ALTA' : null})));
+}
+function distanciaBusca(a, b){
+  if (a === b) return 0; if (!a || !b) return Math.max(a.length,b.length);
+  if (Math.abs(a.length-b.length) > 2) return 3;
+  let ant = Array.from({length:b.length+1}, (_,i)=>i);
+  for(let i=1;i<=a.length;i++){ const cur=[i]; for(let j=1;j<=b.length;j++) cur[j]=Math.min(cur[j-1]+1,ant[j]+1,ant[j-1]+(a[i-1]===b[j-1]?0:1)); ant=cur; }
+  return ant[b.length];
+}
+function pontuarBusca(item, termo){
+  const t = sem(termo).trim(), texto = sem([item.titulo, item.busca, (meta[item.chave]||{}).tituloOriginal].filter(Boolean).join(' '));
+  if (texto.includes(t)) return 1000 - texto.indexOf(t);
+  const qs = t.split(/\s+/).filter(x=>x.length>1), palavras = texto.split(/[^a-z0-9]+/).filter(Boolean);
+  let pontos = 0;
+  qs.forEach(q => { if (palavras.some(p => p.startsWith(q))) pontos += 22; else if (palavras.some(p => distanciaBusca(q,p) <= (q.length > 5 ? 2 : 1))) pontos += 12; });
+  return pontos >= Math.max(12, qs.length*10) ? pontos : 0;
 }
 function buscar(termo){
   if (!termo || !termo.trim()){ sugestoes(); return; }
-  const t = sem(termo);
-  const achados = itens().filter(i => sem(i.busca).includes(t) || sem(i.titulo).includes(t));
+  const achados = itens().map(i => ({i, n:pontuarBusca(i,termo)})).filter(x => x.n > 0).sort((a,b) => b.n-a.n || relevancia(b.i)-relevancia(a.i)).map(x=>x.i);
   abrirGrade({titulo:`Resultados para "${termo}"`, itens:achados, isBusca:true,
-    vazio:`Nenhum título encontrado para <b>${esc(termo)}</b>.<br>Tente buscar por "vingadores", "gumball" ou "jurassic".`});
+    vazio:`Nenhum título encontrado para <b>${esc(termo)}</b>.<br>Você pode tentar outro nome, uma parte do título ou um gênero.`});
 }
 function fecharBusca(){
   telaBusca.classList.remove('on');
@@ -2957,6 +3270,7 @@ function abrirModal(item, opts){
     ? 'Todos os episódios desta série estão disponíveis na sua biblioteca, dublados em português.'
     : 'Este filme está disponível na sua biblioteca pessoal em alta definição.'));
   const naLista = lista.includes(item.chave);
+  const noDepois = depois.includes(item.chave);
   const rotuloPlay = p ? 'Continuar ' + (item.tipo === 'serie' && p.ep ? `T${p.temp || 1} E${p.ep}` : 'assistindo')
                        : (item.tipo === 'serie' ? 'Assistir T1 E1' : 'Assistir');
   /* ficha com o layout da Netflix: fundo do título de ponta a ponta, texto à esquerda,
@@ -2983,7 +3297,8 @@ function abrirModal(item, opts){
         <div class="linhas-info">
           <div><span class="rot">Elenco: </span>${elencoTxt}</div>
           <div><span class="rot">Gêneros: </span>${generosTxt}</div>
-          <div><span class="rot">Este título é: </span>${item.tipo === 'serie' ? 'Série' : 'Filme'}</div>
+          ${m && m.tituloOriginal && sem(m.tituloOriginal) !== sem(item.titulo) ? `<div><span class="rot">Título original: </span>${esc(m.tituloOriginal)}</div>` : ''}
+          <div><span class="rot">Duração: </span>${esc(duracaoFmt(item) || (item.tipo === 'serie' ? item.eps + ' episódios' : 'não informada'))} · <span class="rot">Este título é: </span>${item.tipo === 'serie' ? 'Série' : 'Filme'}</div>
         </div>
         <div class="acoes-lista">
           <button class="acao primaria" id="m-play"><span class="circulo">${SVG.play}</span><span class="rotulo">${rotuloPlay}</span></button>
@@ -2991,6 +3306,10 @@ function abrirModal(item, opts){
           <button class="acao" id="m-ver-mais"><span class="circulo">${SVG.ep}</span><span class="rotulo">${item.tipo === 'serie' ? 'Mais episódios' : 'Títulos semelhantes'}</span></button>
           <button class="acao${naLista ? ' marcada' : ''}" id="m-mais"><span class="circulo" id="m-mais-ic">${naLista ? SVG.menos : SVG.mais}</span><span class="rotulo" id="m-mais-txt">${naLista ? 'Remover da Minha lista' : 'Adicionar à Minha lista'}</span></button>
           <button class="acao" id="m-like"><span class="circulo" id="m-like-ic">${SVG.estrela}</span><span class="rotulo" id="m-like-txt">Avaliar este título</span></button>
+        </div>
+        <div class="acoes-extras">
+          <button class="acao${noDepois ? ' marcada' : ''}" id="m-depois"><span class="circulo" id="m-depois-ic">${noDepois ? SVG.check : SVG.mais}</span><span class="rotulo" id="m-depois-txt">${noDepois ? 'Remover de assistir depois' : 'Assistir depois'}</span></button>
+          <button class="acao" id="m-visto"><span class="circulo">${SVG.check}</span><span class="rotulo">Marcar como visto</span></button>
         </div>
       </div>
     </div>
@@ -3051,8 +3370,16 @@ function abrirModal(item, opts){
     $('#m-mais-ic').innerHTML = dentro ? SVG.menos : SVG.mais;
     $('#m-mais-txt').textContent = dentro ? 'Remover da Minha lista' : 'Adicionar à Minha lista';
     $('#m-mais').classList.toggle('marcada', dentro);
-    toast(dentro ? 'Adicionado à Minha lista' : 'Removido da Minha lista');
+    toast(dentro ? 'Adicionado aos favoritos' : 'Removido dos favoritos');
   };
+  $('#m-depois').onclick = () => {
+    const dentro = alternarDepois(item);
+    $('#m-depois-ic').innerHTML = dentro ? SVG.check : SVG.mais;
+    $('#m-depois-txt').textContent = dentro ? 'Remover de assistir depois' : 'Assistir depois';
+    $('#m-depois').classList.toggle('marcada', dentro);
+    toast(dentro ? 'Salvo para assistir depois' : 'Removido de assistir depois');
+  };
+  $('#m-visto').onclick = () => marcarVisto(item, primeiroEp(item));
   $('#m-like').onclick = () => {
     const btn = $('#m-like');
     const avaliado = btn.classList.toggle('marcada');
@@ -3094,6 +3421,7 @@ function pintarEps(item){
       <div class="txt">
         <div class="t1"><span>Episódio ${e.e}</span><span class="dur">${pct ? 'visto ' + pct + '%' : 'HD'}</span></div>
         <p>Assistir Episódio ${e.e} — Temporada ${t.n} · arquivo ${esc((e.id||'').slice(0,6))}…</p>
+        <button class="ep-visto" data-visto="${esc(e.id)}">${pct >= 96 ? '✓ Visto' : 'Marcar como visto'}</button>
       </div></div>`;
   }).join('');
   const metaT = epsMeta[(meta[item.chave]||{}).tmdbId + ':' + tempSel];
@@ -3112,6 +3440,10 @@ function pintarEps(item){
   cont.querySelectorAll('.ep').forEach(elEp => elEp.onclick = () => {
     const id = elEp.dataset.id, n = +elEp.dataset.ep;
     tocar(item, {n, id, temp:t.n, nome:'Episódio ' + n});
+  });
+  cont.querySelectorAll('.ep-visto').forEach(bt => bt.onclick = ev => {
+    ev.stopPropagation(); const id = bt.dataset.visto, n = +(bt.closest('.ep').dataset.ep);
+    marcarVisto(item, {id, n, temp:t.n, nome:'Episódio ' + n});
   });
   ligarTrilhoEps();
 }
@@ -3213,18 +3545,27 @@ function tocar(item, ep){
   if (!ep) ep = primeiroEp(item);
   if (!ep || !ep.id){ toast('Este título não tem arquivo para reproduzir.'); return; }
   fecharModal(); fecharBusca();
+  const proxEp = proximoEpisodio(item, ep);
   player.classList.add('on');
   document.body.classList.add('travado'); document.body.classList.add('assistindo');
+  if (cfg.cinema !== false) document.body.classList.add('modo-cinema');
+  registrarHistorico(item, ep);
   player.innerHTML = `
     <div class="quadro-cheio">
       <iframe id="p-frame" src="https://drive.google.com/file/d/${esc(ep.id)}/preview" allow="autoplay; fullscreen; encrypted-media" allowfullscreen></iframe>
     </div>
-    <button class="voltar-flutuante" id="p-voltar" title="Voltar (Esc)" aria-label="Voltar">${SVG.voltar}</button>
+    <div class="controles-player" aria-label="Controles do FaMovie">
+      <button class="voltar-flutuante" id="p-voltar" title="Sair do vídeo (Esc)" aria-label="Sair do vídeo">${SVG.voltar}</button>
+      ${proxEp ? `<button class="proximo-ep" id="p-proximo" title="Próximo episódio: T${proxEp.temp}:E${proxEp.e}" aria-label="Assistir próximo episódio, temporada ${proxEp.temp}, episódio ${proxEp.e}"><span class="proximo-icone">${SVG.chevron}</span><span><small>PRÓXIMO EP.</small><b>T${proxEp.temp}:E${proxEp.e}</b></span></button>` : ''}
+    </div>
     <div class="dica-assistindo">${esc(item.titulo)}${item.tipo === 'serie' && ep.n ? ` · T${ep.temp || 1}:E${ep.n}` : ''}</div>`;
-  prog[ep.id] = {t: 5, d: 100, item: item.chave, ep: ep.n, temp: ep.temp, at: Date.now()};
+  const anterior = prog[ep.id] || {};
+  prog[ep.id] = {t: anterior.visto ? 0 : (+anterior.t || 0), d: duracaoEstimada(item, ep), item: item.chave, ep: ep.n, temp: ep.temp, at: Date.now()};
   salvarProg();
-  P = {item, ep};
+  P = {item, ep, prox:proxEp, inicio:Date.now(), base:prog[ep.id].t, timer:null};
+  P.timer = setInterval(atualizarProgressoPlayer, 15000);
   $('#p-voltar').onclick = fecharPlayer;
+  const btProx = $('#p-proximo'); if (btProx) btProx.onclick = () => { marcarVisto(item, ep); tocar(item, proxEp); };
   tentarTelaCheia();          // o clique em Assistir é um gesto do usuário: entra em tela cheia de verdade
   player.ondblclick = tentarTelaCheia;
   document.onkeydown = e => {
@@ -3302,12 +3643,14 @@ function fecharPlayer(){
   document.onkeydown = null;
   /* Sair de um episódio não deve jogar a pessoa na home: volta para a ficha da própria série
      e preserva a temporada que ela estava vendo. Para filmes, o fluxo continua normal (home). */
+  atualizarProgressoPlayer(true);
+  if (P && P.timer) clearInterval(P.timer);
   const retornoSerie = P && P.item && P.item.tipo === 'serie' ? P.item : null;
   const temporadaRetorno = P && P.ep ? P.ep.temp : null;
   const voltarCheio = _cheioAntesDoPlayer && cfg.telaCheia !== false && !ehMobile;
   try{ if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen(); }catch(e){}
   player.classList.remove('on'); player.innerHTML = '';
-  document.body.classList.remove('travado'); document.body.classList.remove('assistindo');
+  document.body.classList.remove('travado'); document.body.classList.remove('assistindo'); document.body.classList.remove('modo-cinema');
   P = null;
   renderTudo();
   if (retornoSerie){
@@ -3323,78 +3666,70 @@ function fecharPlayer(){
 /* ---------------- CONFIG (TMDB) ---------------- */
 function abrirConfig(){
   config.classList.add('on');
-  config.innerHTML = `<div class="painel">
-    <h2>Capas, logos e fundos — TMDB</h2>
-    <p class="sub">Cole sua chave de API do The Movie Database (v3 ou v4). Com ela, o app baixa automaticamente
-       <b>pôster</b>, <b>imagem de fundo</b>, <b>logotipo do título</b>, sinopse, ano, nota e gêneros de todos os
-       ${ITENS.length} títulos da sua biblioteca.</p>
-    <label>Chave de API do TMDB</label>
-    <input type="password" id="cfg-tmdb" placeholder="ex.: 8a1f2c9d4e... ou eyJhbGciOi..." value="${esc(cfg.tmdb)}">
-    <div class="ajuda">Não tem chave? Crie grátis em
-      <a href="https://www.themoviedb.org/settings/api" target="_blank" rel="noopener">themoviedb.org/settings/api</a>
-      → "Solicitar uma chave de API" → copie a <b>Chave de API (v3)</b>. Ela fica salva só no seu navegador.</div>
-    <div class="linha2">
-      <div>
-        <label>Nome do app (logo)</label>
-        <input type="text" id="cfg-marca" value="${esc(cfg.marca)}">
-        <div style="font-size:12px;color:#8c8c8c;margin-top:10px">Reprodução: player oficial do Google Drive — nada para configurar.</div>
-        <label style="margin-top:22px;display:flex;align-items:center;gap:10px;text-transform:none;letter-spacing:0;font-size:14px;color:#e5e5e5">
-          <input type="checkbox" id="cfg-cheio" ${cfg.telaCheia !== false ? 'checked' : ''} style="width:18px;height:18px;accent-color:#e50914">
-          Entrar em tela cheia automaticamente (site e vídeo)
-        </label>
-        <div style="font-size:12px;color:#8c8c8c;margin-top:8px">No computador o app tenta tela cheia no seu primeiro toque, clique ou rolagem. Movimento do mouse e setas do teclado não pedem mais tela cheia. A abertura tenta tocar <b style="color:#e5e5e5">com som automaticamente</b>; se o navegador bloquear autoplay com áudio, o botão manual aparece. O atalho <b>ABRIR-FAMOVIE-CHEIO</b> continua recomendado para tela cheia e trailers dentro do app.</div>
-          <button class="btn-linha" id="cfg-cheio-agora" style="margin-left:8px">Entrar em tela cheia agora</button></div>
+  const escalaPct = Math.round((cfg.escala || 1.25) * 100);
+  config.innerHTML = `<div class="painel painel-config">
+    <div class="cab-config"><div><span class="selo-config">SEU ESPAÇO</span><h2>Personalizar FaMovie</h2></div><button id="cfg-fechar-x" aria-label="Fechar configurações">${SVG.fechar}</button></div>
+    <p class="sub">Ajuste o tamanho, o visual e o comportamento da sua experiência. As capas e os dados da biblioteca já ficam prontos no app — não há configurações técnicas aqui.</p>
+
+    <section class="cfg-secao cfg-tamanho">
+      <div class="cfg-secao-cab"><div><h3>Tamanho da interface</h3><p>Textos, botões, capas e controles.</p></div><output id="cfg-escala-out">${escalaPct}%</output></div>
+      <input type="range" id="cfg-escala" min="100" max="145" step="5" value="${escalaPct}" aria-label="Tamanho da interface">
+      <div class="escala-marcadores"><span>Normal</span><span>Maior</span><span>Extra grande</span></div>
+    </section>
+
+    <section class="cfg-secao">
+      <div class="cfg-secao-cab"><div><h3>Ambiente visual</h3><p>Escolha uma base e ajuste a cor de destaque.</p></div></div>
+      <div class="tema-escolhas" id="cfg-tema">
+        ${Object.entries(TEMAS).map(([id,t]) => `<button data-tema="${id}" class="tema-card${cfg.tema === id ? ' on' : ''}" aria-pressed="${cfg.tema === id}"><i style="--tema-a:${t.fundo};--tema-b:${t.superficie};--tema-c:${t.acento}"></i><b>${t.nome}</b><small>${id === 'escuro' ? 'Preto + vermelho' : id === 'azul' ? 'Azul profundo' : id === 'roxo' ? 'Roxo cinematográfico' : 'Verde discreto'}</small></button>`).join('')}
       </div>
-    </div>
-    <div class="rodape">
-      <button class="btn-cheio" id="cfg-salvar">Salvar e sincronizar capas</button>
-      <button class="btn-linha" id="cfg-fechar">Fechar</button>
-      <button class="btn-linha" id="cfg-limpar">Limpar metadados</button>
-    </div>
-    <div class="pg"><i id="cfg-pg"></i></div>
-    <div class="status" id="cfg-status"></div>
-    <div class="versao-app">FaMovie <b>v43</b> · trailers internos + monitor secreto Botões (Daniel)</div>
-    <div class="stat">
-      <div><b>${ITENS.length}</b><span>títulos</span></div>
-      <div><b>${FILMES.length}</b><span>filmes</span></div>
-      <div><b>${SERIES.length}</b><span>séries</span></div>
-      <div><b>${TOTAL_VIDEOS}</b><span>vídeos no Drive</span></div>
-      <div><b id="cfg-sinc">${Object.keys(meta).length}</b><span>com metadados</span></div>
-    </div>
+      <div class="acento-personalizado"><div><label for="cfg-acento">Cor de destaque</label><span>Botões, foco, progresso e seleção</span></div><input id="cfg-acento" type="color" value="${esc(cfg.acento)}" aria-label="Cor de destaque personalizada"><output id="cfg-acento-hex">${esc(cfg.acento).toUpperCase()}</output></div>
+    </section>
+
+    <section class="cfg-secao cfg-preferencias">
+      <div class="cfg-secao-cab"><div><h3>Preferências</h3><p>Você pode mudar tudo novamente quando quiser.</p></div></div>
+      <label class="cfg-opcao"><span><b>Animações suaves</b><small>Movimento leve ao trocar cards e telas.</small></span><input type="checkbox" id="cfg-movimento" ${cfg.movimento !== false ? 'checked' : ''}><i></i></label>
+      <label class="cfg-opcao"><span><b>Carrossel automático</b><small>Alterna os destaques da página inicial.</small></span><input type="checkbox" id="cfg-carrossel" ${cfg.carrossel !== false ? 'checked' : ''}><i></i></label>
+      <label class="cfg-opcao"><span><b>Modo cinema</b><small>Escurece a interface enquanto você assiste.</small></span><input type="checkbox" id="cfg-cinema" ${cfg.cinema !== false ? 'checked' : ''}><i></i></label>
+      <label class="cfg-opcao"><span><b>Próximo episódio automático</b><small>Avança quando a sessão chega ao fim estimado.</small></span><input type="checkbox" id="cfg-proximo-auto" ${cfg.proximoAuto !== false ? 'checked' : ''}><i></i></label>
+      <label class="cfg-opcao"><span><b>Tela cheia ao assistir</b><small>Tenta usar tela cheia depois de um toque ou clique.</small></span><input type="checkbox" id="cfg-cheio" ${cfg.telaCheia !== false ? 'checked' : ''}><i></i></label>
+      <button class="btn-linha cfg-cheio-agora" id="cfg-cheio-agora">Entrar em tela cheia agora</button>
+    </section>
+
+    <section class="cfg-secao dica-config"><b>Perfil com capa própria</b><span>Abra <em>Gerenciar perfis</em> e toque no lápis do perfil para escolher uma imagem de fundo, além do avatar.</span></section>
+    <div class="rodape cfg-rodape"><button class="btn-cheio" id="cfg-salvar">Salvar preferências</button><button class="btn-linha" id="cfg-restaurar">Restaurar visual padrão</button><button class="btn-linha" id="cfg-fechar">Fechar</button></div>
+    <div class="versao-app">FaMovie <b>v52</b> · controles do player refinados</div>
   </div>`;
+
+  const coletar = () => {
+    cfg.escala = +$('#cfg-escala').value / 100;
+    cfg.movimento = $('#cfg-movimento').checked;
+    cfg.carrossel = $('#cfg-carrossel').checked;
+    cfg.cinema = $('#cfg-cinema').checked;
+    cfg.proximoAuto = $('#cfg-proximo-auto').checked;
+    cfg.telaCheia = $('#cfg-cheio').checked;
+  };
+  const salvarPreferencias = () => { coletar(); salvar(LS.cfg, cfg); aplicarTema(); };
+  const fechar = () => { salvarPreferencias(); config.classList.remove('on'); };
+
+  $('#cfg-fechar-x').onclick = fechar;
+  $('#cfg-fechar').onclick = fechar;
+  config.onclick = e => { if (e.target === config) fechar(); };
   $('#cfg-cheio-agora').onclick = () => entrarTelaCheia();
-  $('#cfg-cheio').onchange = e => { cfg.telaCheia = e.target.checked; salvar(LS.cfg, cfg); if (e.target.checked) entrarTelaCheia(); };
-  $('#cfg-fechar').onclick = () => { cfg.telaCheia = $('#cfg-cheio').checked; salvar(LS.cfg, cfg); config.classList.remove('on'); };
-  config.onclick = e => { if (e.target === config) config.classList.remove('on'); };
-  $('#cfg-limpar').onclick = () => {
-    if (!confirm('Apagar todos os metadados/capas baixadas do TMDB?')) return;
-    meta = {}; epsMeta = {}; salvar(LS.meta, meta); salvar(LS.eps, epsMeta);
-    $('#cfg-sinc').textContent = '0'; renderTudo(); $('#cfg-status').textContent = 'Metadados apagados.';
+  $('#cfg-escala').oninput = e => { cfg.escala = +e.target.value / 100; $('#cfg-escala-out').textContent = e.target.value + '%'; aplicarTema(); };
+  $$('#cfg-tema button').forEach(b => b.onclick = () => {
+    cfg.tema = b.dataset.tema; cfg.acento = TEMAS[cfg.tema].acento; aplicarTema();
+    $$('#cfg-tema button').forEach(x => { x.classList.toggle('on', x === b); x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+    $('#cfg-acento').value = cfg.acento; $('#cfg-acento-hex').textContent = cfg.acento.toUpperCase(); salvar(LS.cfg, cfg);
+  });
+  $('#cfg-acento').oninput = e => { cfg.acento = e.target.value; aplicarTema(); $('#cfg-acento-hex').textContent = cfg.acento.toUpperCase(); salvar(LS.cfg, cfg); };
+  ['cfg-movimento','cfg-carrossel','cfg-cinema','cfg-proximo-auto','cfg-cheio'].forEach(id => {
+    $('#' + id).onchange = () => { salvarPreferencias(); if (id === 'cfg-carrossel') montarHero(); };
+  });
+  $('#cfg-restaurar').onclick = () => {
+    Object.assign(cfg, {tema:'escuro', acento:TEMAS.escuro.acento, escala:1.25, escalaRevisao:2, movimento:true, carrossel:true, cinema:true, proximoAuto:true, telaCheia:true});
+    salvar(LS.cfg, cfg); aplicarTema(); abrirConfig(); toast('Visual padrão restaurado');
   };
-  $('#cfg-salvar').onclick = async () => {
-    cfg.tmdb = $('#cfg-tmdb').value.trim();
-    cfg.marca = $('#cfg-marca').value.trim() || 'FaMovie';
-    salvar(LS.cfg, cfg);
-    montarLateral();
-    if (!temTMDB()){ $('#cfg-status').innerHTML = '<b style="color:#e50914">Cole uma chave válida</b> para baixar as capas.'; return; }
-    $('#cfg-status').innerHTML = 'Testando a chave…';
-    try{
-      await tmdb('/configuration', {});
-    }catch(e){
-      $('#cfg-status').innerHTML = '<b style="color:#e50914">Chave inválida ou sem conexão.</b> Confira em themoviedb.org → Configurações → API.';
-      return;
-    }
-    $('#cfg-status').innerHTML = 'Sincronizando capas, logos e fundos…';
-    const r = await sincronizarTudo((feitos, total, item) => {
-      $('#cfg-pg').style.width = Math.round(100*feitos/total) + '%';
-      $('#cfg-status').innerHTML = `Baixando capas <b>${feitos}/${total}</b> — ${esc(item ? item.titulo : '')}`;
-    });
-    $('#cfg-pg').style.width = '100%';
-    $('#cfg-sinc').textContent = Object.keys(meta).length;
-    $('#cfg-status').innerHTML = `Pronto! <b>${Object.keys(meta).length}</b> títulos com capas do TMDB.
-      ${r.erro? `<span style="color:#f5c518">${r.erro} não encontrados automaticamente.</span>` : ''}`;
-    renderTudo();
-  };
+  $('#cfg-salvar').onclick = () => { salvarPreferencias(); montarLateral(); renderTudo(); config.classList.remove('on'); toast('Preferências salvas'); };
 }
 
 /* ---------------- PERFIS ---------------- */
@@ -3455,7 +3790,8 @@ function montarPerfis(){
     <div class="perfis-grade">
       ${perfis.map((p,i) => `
         <div class="perfil" tabindex="0" role="button" data-p="${i}" style="animation-delay:${(0.56 + i * .075).toFixed(2)}s">
-          <div class="avatar-caixa">
+          <div class="avatar-caixa${p.capa ? ' tem-capa' : ''}" ${p.capa ? `style="background-image:url('${p.capa}')"` : ''}>
+            <span class="veu-capa-perfil"></span>
             ${blocoAvatar(p, 264)}
             <button class="lapis" data-edit="${i}" title="Personalizar perfil" aria-label="Personalizar perfil"><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg></button>
           </div>
@@ -3491,7 +3827,7 @@ function montarPerfis(){
 
 /* ================= EDITOR DE PERFIL (customização total) ================= */
 function abrirEditor(idx){
-  const padrao = { nome:'', cor:CORES[perfis.length % CORES.length], face:'feliz', clas:'sorriso', tipo:'clas', infantil:false, foto:null };
+  const padrao = { nome:'', cor:CORES[perfis.length % CORES.length], face:'feliz', clas:'sorriso', tipo:'clas', infantil:false, foto:null, capa:null, idadeMax:'18', generosFav:[] };
   const base = idx === null ? padrao : Object.assign({}, padrao, perfis[idx]);
   if (base.tipo === 'dice') base.tipo = 'clas';    /* perfil antigo: volta para o sorriso */
   if (!base.tipo || base.tipo === 'foto') base.tipo = base.foto ? 'foto' : 'clas';
@@ -3520,13 +3856,22 @@ function abrirEditor(idx){
               ${base.foto ? `<button class="ed-aba${base.tipo === 'foto' ? ' on' : ''}" data-tipo="foto">Sua foto</button>` : ''}
             </div>
           </div>
+          <div class="ed-campo ed-capa-campo">
+            <label>Capa do perfil <span>opcional</span></label>
+            <div class="ed-capa-linha"><div id="ed-capa-prev" class="ed-capa-prev${base.capa ? ' tem-capa' : ''}" ${base.capa ? `style="background-image:url('${base.capa}')"` : ''}></div><div><input type="file" id="ed-capa" accept="image/*" class="escondido-input"><label class="btn-upload" for="ed-capa">Escolher imagem</label>${base.capa ? '<button type="button" class="btn-linha" id="ed-capa-remover">Remover capa</button>' : ''}<small>A imagem fica só neste navegador.</small></div></div>
+          </div>
           <div id="ed-painel"></div>
           <label class="switch">
             <input type="checkbox" id="ed-infantil" ${base.infantil ? 'checked' : ''}>
             <span class="slider"></span>
             <b>Perfil infantil</b>
-            <span class="dica-infantil">Mostra só desenhos e animações no catálogo.</span>
+            <span class="dica-infantil">Mostra só desenhos e animações e aplica classificação mais restrita.</span>
           </label>
+          <div class="ed-campo ed-seguranca">
+            <label>Classificação máxima permitida</label>
+            <select id="ed-idade"><option value="L">Livre</option><option value="10">10 anos</option><option value="12">12 anos</option><option value="14">14 anos</option><option value="16">16 anos</option><option value="18">18 anos</option></select>
+          </div>
+          <div class="ed-campo"><label>Preferências para recomendações</label><div class="generos-perfil" id="ed-generos">${['Ação','Animação','Aventura','Comédia','Drama','Família','Ficção científica','Terror'].map(g => `<button type="button" data-genero="${g}" class="${(base.generosFav||[]).includes(g)?'on':''}">${g}</button>`).join('')}</div></div>
         </div>
       </div>
       <div class="ed-rodape">
@@ -3623,7 +3968,23 @@ function abrirEditor(idx){
     pintarPainel(); pintarPreview();
   });
   $('#ed-nome').oninput = e => { editando.nome = e.target.value; };
-  $('#ed-infantil').onchange = e => { editando.infantil = e.target.checked; };
+  $('#ed-idade').value = editando.idadeMax || (editando.infantil ? '12' : '18');
+  $('#ed-idade').onchange = e => { editando.idadeMax = e.target.value; };
+  $$('#ed-generos button', caixa).forEach(b => b.onclick = () => { const g = b.dataset.genero; const a = editando.generosFav || (editando.generosFav=[]); const i = a.indexOf(g); if(i>=0)a.splice(i,1);else a.push(g); b.classList.toggle('on', i<0); });
+  const atualizarCapaPreview = () => { const c = $('#ed-capa-prev'); if (!c) return; c.classList.toggle('tem-capa', !!editando.capa); c.style.backgroundImage = editando.capa ? `url('${editando.capa}')` : ''; };
+  $('#ed-capa').onchange = e => {
+    const arq = e.target.files && e.target.files[0]; if (!arq) return;
+    const leitor = new FileReader(); leitor.onload = ev => { const img = new Image(); img.onload = () => {
+      const c = document.createElement('canvas'); c.width = 640; c.height = 360; const ctx = c.getContext('2d');
+      const proporcao = 16 / 9; let sw = img.width, sh = img.height, sx = 0, sy = 0;
+      if (sw / sh > proporcao){ sw = sh * proporcao; sx = (img.width - sw) / 2; } else { sh = sw / proporcao; sy = (img.height - sh) / 2; }
+      ctx.drawImage(img, sx, sy, sw, sh, 0, 0, 640, 360);
+      try { editando.capa = c.toDataURL('image/jpeg', .72); } catch(_e){ editando.capa = ev.target.result; }
+      atualizarCapaPreview();
+    }; img.onerror = () => { editando.capa = ev.target.result; atualizarCapaPreview(); }; img.src = ev.target.result; }; leitor.readAsDataURL(arq);
+  };
+  const remCapa = $('#ed-capa-remover'); if (remCapa) remCapa.onclick = () => { editando.capa = null; atualizarCapaPreview(); remCapa.remove(); };
+  $('#ed-infantil').onchange = e => { editando.infantil = e.target.checked; if (e.target.checked && idadeNumero(editando.idadeMax || '18') > 12){ editando.idadeMax='12'; $('#ed-idade').value='12'; } };
   $('#ed-cancelar').onclick = () => caixa.remove();
   caixa.onclick = e => { if (e.target === caixa) caixa.remove(); };
   if ($('#ed-excluir')) $('#ed-excluir').onclick = () => {
@@ -3639,7 +4000,9 @@ function abrirEditor(idx){
     const nome = (editando.nome || '').trim() || 'Perfil';
     const dados = {
       nome, cor:editando.cor, face:editando.face, clas:editando.clas,
-      tipo:editando.tipo, infantil:!!editando.infantil,
+      tipo:editando.tipo, infantil:!!editando.infantil, idadeMax: editando.idadeMax || (editando.infantil ? '12' : '18'),
+      generosFav:(editando.generosFav || []).slice(),
+      capa: editando.capa || null,
       foto: editando.tipo === 'foto' ? editando.foto : null
     };
     if (editando.idx === null){
@@ -3814,6 +4177,7 @@ function ligarOcultacaoDoApp(){
   atualizar();
 }
 function boot(){
+  aplicarTema();
   detectarDispositivo();
   const hero = el('div'); hero.id = 'hero';
   const cont = el('div'); cont.id = 'conteudo';
@@ -3874,5 +4238,5 @@ window.NF = { ITENS, FILMES, SERIES, meta, TRAILERS, abrirModal, tocar, abrirTra
 })();
 
 </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a4ba46c40df681d6',t:'MTc5MjE4NzM5Nw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
