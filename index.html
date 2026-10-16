@@ -1859,6 +1859,20 @@ body{zoom:var(--ui-zoom,1.25)}
 #player .dica-assistindo{top:88px;left:18px;max-width:min(440px,70vw);font-size:14px}
 @media(max-width:700px){#player .controles-player{top:12px;left:12px;gap:8px;max-width:calc(100vw - 24px)}#player .controles-player .voltar-flutuante{width:54px;height:54px}#player .controles-player .voltar-flutuante svg{width:27px;height:27px}#player .controles-player .proximo-ep{min-height:54px;min-width:0;padding:7px 11px 7px 8px}.proximo-ep .proximo-icone{width:28px;height:28px;flex:0 0 28px}.proximo-ep b{font-size:12px}.proximo-ep small{font-size:8px}#player .dica-assistindo{top:76px;left:13px;font-size:12px;max-width:80vw}}
 
+/* ================= v53 — player próprio FaMovie ================= */
+#player .player-proprio{background:#000;overflow:hidden}#player .player-proprio video{position:absolute;inset:0;width:100%;height:100%;display:block;background:#000;object-fit:contain}#player .quadro-cheio iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
+.player-carregando{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:radial-gradient(circle,rgba(21,21,21,.72),rgba(0,0,0,.18) 50%,transparent 72%);font-size:13px;color:#ddd;pointer-events:none;transition:opacity .24s}.player-carregando.oculto{opacity:0}.player-carregando i{width:31px;height:31px;border:3px solid rgba(255,255,255,.23);border-top-color:var(--vermelho);border-radius:50%;animation:girarPlayer .75s linear infinite}@keyframes girarPlayer{to{transform:rotate(360deg)}}
+.barra-player-propria{position:fixed;z-index:5011;left:0;right:0;bottom:0;display:flex;flex-direction:column;gap:9px;padding:38px 4% max(18px,env(safe-area-inset-bottom));background:linear-gradient(0deg,rgba(0,0,0,.88),rgba(0,0,0,.56) 58%,transparent);transition:opacity .2s}.barra-player-propria input[type=range]{accent-color:var(--vermelho);cursor:pointer}.barra-player-propria #p-seek{width:100%;height:5px;margin:0}.barra-player-acoes{display:flex;align-items:center;gap:16px}.barra-player-acoes button{display:grid;place-items:center;width:33px;height:33px;border-radius:50%;color:#fff;transition:transform .18s,background .18s}.barra-player-acoes button:hover{transform:scale(1.1);background:rgba(255,255,255,.15)}.barra-player-acoes button svg{width:23px;height:23px;fill:currentColor}.icone-pausa{font-size:16px;letter-spacing:2px;line-height:1}.barra-player-acoes #p-tempo{min-width:104px;font-size:13px;color:#eee;font-variant-numeric:tabular-nums}.separador-player{width:1px;height:22px;background:rgba(255,255,255,.28)}.barra-player-acoes #p-volume{width:95px;height:4px}.barra-player-acoes #p-tela{margin-left:auto}
+.status-player{position:fixed;z-index:5013;left:18px;bottom:22px;max-width:min(460px,60vw);padding:7px 10px;border-radius:4px;background:rgba(0,0,0,.64);color:#d6d6d6;font-size:12px;pointer-events:none}.status-player:empty{display:none}#player.reserva-drive .barra-player-propria{display:none}#player.reserva-drive .status-player{bottom:18px}.reserva-drive .player-carregando{display:none}
+#player .controles-player{z-index:5014}
+@media(max-width:700px){.barra-player-propria{gap:7px;padding:26px 14px max(13px,env(safe-area-inset-bottom))}.barra-player-acoes{gap:9px}.barra-player-acoes button{width:31px;height:31px}.barra-player-acoes #p-tempo{min-width:83px;font-size:11px}.barra-player-acoes #p-volume,.separador-player{display:none}.status-player{left:12px;bottom:13px;max-width:75vw;font-size:11px}}
+
+/* ================= v54 — início por gesto e erro próprio, sem preview do Drive ================= */
+.player-iniciar{position:absolute;z-index:4;left:50%;top:50%;display:flex;flex-direction:column;align-items:center;gap:7px;min-width:142px;padding:15px 21px;transform:translate(-50%,-50%);border:1px solid rgba(255,255,255,.72);border-radius:9px;background:rgba(0,0,0,.74);box-shadow:0 12px 36px rgba(0,0,0,.56);color:#fff;transition:opacity .2s,transform .2s,background .2s}.player-iniciar:hover{background:var(--vermelho);border-color:var(--vermelho);transform:translate(-50%,-52%) scale(1.04)}.player-iniciar.oculto{opacity:0;pointer-events:none}.player-iniciar span{display:grid;place-items:center;width:41px;height:41px;border-radius:50%;background:var(--vermelho)}.player-iniciar:hover span{background:#080808}.player-iniciar svg{width:23px;height:23px;fill:#fff}.player-iniciar b{font-size:14px}.player-iniciar small{font-size:10px;color:#ccc}.player-iniciar:hover small{color:#fff}
+.player-erro-direto{position:absolute;inset:0;z-index:6;display:grid;place-items:center;padding:24px;background:rgba(0,0,0,.72)}.player-erro-direto>div{width:min(470px,92vw);display:flex;flex-direction:column;align-items:center;gap:14px;padding:26px;border:1px solid rgba(255,255,255,.22);border-radius:10px;background:#151515;text-align:center;box-shadow:0 22px 55px rgba(0,0,0,.65)}.player-erro-direto b{font-size:18px}.player-erro-direto span{font-size:13px;line-height:1.55;color:#b7b7b7}.player-erro-direto button{padding:11px 18px;border-radius:4px;background:var(--vermelho);color:#fff;font-size:13px;font-weight:800}.player-erro-direto button:hover{filter:brightness(1.12)}
+#player .player-erro-direto~.player-carregando{display:none}
+@media(max-width:700px){.player-iniciar{min-width:126px;padding:13px 17px}.player-erro-direto>div{padding:22px 17px}.player-erro-direto b{font-size:16px}}
+
 </style>
 </head>
 <body tabindex="-1">
@@ -2348,7 +2362,8 @@ function duracaoEstimada(item, ep){
   return Math.max(600, +(info && info.d || 22) * 60);
 }
 function atualizarProgressoPlayer(finalizar){
-  if (!P || !P.ep || !P.ep.id || !P.inicio) return;
+  /* No player próprio o progresso vem do timeupdate real do vídeo. */
+  if (!P || P.modo !== 'estimado' || !P.ep || !P.ep.id || !P.inicio) return;
   const p = prog[P.ep.id]; if (!p) return;
   const agora = Date.now(), delta = Math.max(0, Math.round((agora - P.inicio) / 1000));
   if (!delta && !finalizar) return;
@@ -3538,45 +3553,153 @@ function fecharTrailer(){
   if (voltarCheio) setTimeout(() => { if (!document.fullscreenElement) entrarTelaCheia(); }, 120);
 }
 
-/* ---------------- ASSISTIR (player do Google Drive, com a barra sempre visível) ---------------- */
+/* ---------------- ASSISTIR — player próprio com fonte pública do Drive ----------------
+   A reprodução usa exclusivamente o arquivo público em um elemento <video>, com controles do FaMovie.
+   Há três rotas diretas de arquivo e uma tela própria de tentativa novamente caso todas falhem. */
 let P = null;
+function fontesDiretasDrive(id){
+  const arquivo = encodeURIComponent(id);
+  /* Pelo servidor local FaMovie, esta rota remove o Content-Disposition do Drive e preserva Range.
+     É a rota prioritária do player próprio; não há iframe/preview como reserva. */
+  const fontes = [];
+  if (location.protocol === 'http:') fontes.push({url:`/_famovie_media?id=${arquivo}`, cors:false, proxyLocal:true});
+  fontes.push(
+    {url:`https://drive.usercontent.google.com/download?id=${arquivo}&export=download&confirm=t`, cors:true},
+    {url:`https://drive.google.com/uc?export=download&id=${arquivo}&confirm=t`, cors:true},
+    {url:`https://drive.google.com/uc?id=${arquivo}&export=download`, cors:false}
+  );
+  return fontes;
+}
+function tempoPlayer(seg){
+  if (!Number.isFinite(seg) || seg < 0) return '0:00';
+  const h = Math.floor(seg / 3600), m = Math.floor((seg % 3600) / 60), s = Math.floor(seg % 60);
+  return h ? `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}` : `${m}:${String(s).padStart(2,'0')}`;
+}
+function atualizarBarraPlayer(video){
+  if (!P || P.video !== video) return;
+  const total = Number.isFinite(video.duration) ? video.duration : 0;
+  const atual = Number.isFinite(video.currentTime) ? video.currentTime : 0;
+  const seek = $('#p-seek', player), tempo = $('#p-tempo', player), bt = $('#p-play', player), carregando = $('#p-carregando', player);
+  if (seek){ seek.max = total || 1; seek.value = atual; seek.disabled = !total; }
+  if (tempo) tempo.textContent = `${tempoPlayer(atual)} / ${total ? tempoPlayer(total) : '—:—'}`;
+  if (bt){ bt.innerHTML = video.paused ? SVG.play : '<span class="icone-pausa">❚❚</span>'; bt.setAttribute('aria-label', video.paused ? 'Reproduzir' : 'Pausar'); }
+  if (carregando) carregando.classList.toggle('oculto', video.readyState >= 3 && !video.seeking);
+}
+function salvarProgressoVideo(video, finalizou){
+  if (!P || P.video !== video || !P.ep || !P.ep.id) return;
+  const duracao = Number.isFinite(video.duration) && video.duration > 1 ? video.duration : duracaoEstimada(P.item, P.ep);
+  const atual = finalizou ? duracao : Math.max(0, Number(video.currentTime) || 0);
+  prog[P.ep.id] = {t:atual, d:duracao, item:P.item.chave, ep:P.ep.n, temp:P.ep.temp, at:Date.now(), visto:!!finalizou};
+  salvarProg();
+}
+function avancarProximoPlayer(sessao){
+  if (!sessao || P !== sessao || !sessao.prox || cfg.proximoAuto === false || sessao.autoAgendado) return;
+  sessao.autoAgendado = true;
+  const aviso = $('#p-status', player); if (aviso) aviso.textContent = 'Próximo episódio em 4 segundos…';
+  setTimeout(() => { if (P !== sessao || !player.classList.contains('on')) return; tocar(sessao.item, sessao.prox); }, 4000);
+}
+function mostrarErroPlayerDireto(sessao){
+  if (!sessao || P !== sessao || sessao.modo === 'erro') return;
+  sessao.modo = 'erro'; if (sessao.cancelarVerificacao) sessao.cancelarVerificacao();
+  const quadro = $('.quadro-cheio', player), barra = $('#p-barra', player);
+  if (barra) barra.hidden = true;
+  if (!quadro) return;
+  const detalhe = location.protocol !== 'http:'
+    ? 'Para o player próprio funcionar com arquivos do Drive, abra o FaMovie pelo atalho ou servidor local (SERVIR-FAMOVIE).'
+    : 'O servidor não conseguiu abrir este MP4 público. Tente novamente; se continuar, confira se o arquivo segue compartilhado por link.';
+  const antigo = $('#p-erro-direto', quadro); if (antigo) antigo.remove();
+  quadro.insertAdjacentHTML('beforeend', `<div class="player-erro-direto" id="p-erro-direto"><div><b>Não foi possível abrir este arquivo diretamente</b><span>${detalhe}</span><button id="p-tentar-direto">Tentar novamente</button></div></div>`);
+  const aviso = $('#p-status', player); if (aviso) aviso.textContent = 'A reprodução direta não respondeu para este arquivo.';
+  const tentar = $('#p-tentar-direto', player); if (tentar) tentar.onclick = () => tocar(sessao.item, sessao.ep);
+}
+function configurarPlayerDireto(video, sessao, inicio){
+  if (!video || !sessao || P !== sessao) return;
+  const fontes = fontesDiretasDrive(sessao.ep.id); let indice = 0, pronto = false, watchdog = null;
+  const aviso = $('#p-status', player);
+  const tentarPlay = () => {
+    const r = video.play();
+    if (r && r.catch) r.catch(() => { if (aviso) aviso.textContent = 'Toque no botão central para iniciar o vídeo com som.'; });
+  };
+  const carregar = () => {
+    clearTimeout(watchdog); pronto = false;
+    if (indice >= fontes.length){ mostrarErroPlayerDireto(sessao); return; }
+    const fonte = fontes[indice];
+    if (fonte.cors) video.setAttribute('crossorigin', 'anonymous'); else video.removeAttribute('crossorigin');
+    if (aviso) aviso.textContent = indice ? 'Tentando uma rota alternativa do arquivo…' : 'Preparando reprodução…';
+    video.src = fonte.url; video.load();
+    /* A tentativa acontece ainda dentro do gesto Assistir, o que libera áudio em mais navegadores. */
+    tentarPlay();
+    watchdog = setTimeout(() => { if (P === sessao && !pronto){ indice++; carregar(); } }, 12000);
+  };
+  video.addEventListener('loadedmetadata', () => {
+    if (P !== sessao) return;
+    pronto = true; clearTimeout(watchdog);
+    if (inicio > 2 && inicio < video.duration - 3) { try{ video.currentTime = inicio; }catch(_e){} }
+    atualizarBarraPlayer(video); tentarPlay();
+  });
+  video.addEventListener('canplay', () => { if (P === sessao){ if (aviso) aviso.textContent = ''; atualizarBarraPlayer(video); } });
+  video.addEventListener('timeupdate', () => { atualizarBarraPlayer(video); salvarProgressoVideo(video, false); });
+  video.addEventListener('durationchange', () => atualizarBarraPlayer(video));
+  video.addEventListener('waiting', () => { const c = $('#p-carregando', player); if(c) c.classList.remove('oculto'); });
+  video.addEventListener('playing', () => { const iniciar = $('#p-iniciar', player); if (iniciar) iniciar.classList.add('oculto'); atualizarBarraPlayer(video); });
+  video.addEventListener('pause', () => { atualizarBarraPlayer(video); salvarProgressoVideo(video, false); });
+  video.addEventListener('ended', () => { salvarProgressoVideo(video, true); avancarProximoPlayer(sessao); });
+  video.addEventListener('error', () => { if (P !== sessao) return; indice++; carregar(); });
+  sessao.cancelarVerificacao = () => clearTimeout(watchdog);
+  carregar();
+
+  const play = $('#p-play', player), seek = $('#p-seek', player), vol = $('#p-volume', player), mute = $('#p-mudo', player), tela = $('#p-tela', player), iniciar = $('#p-iniciar', player);
+  if (iniciar) iniciar.onclick = tentarPlay;
+  if (play) play.onclick = () => { if (video.paused) tentarPlay(); else video.pause(); };
+  if (seek){ seek.oninput = () => { const t = +seek.value; const tempo = $('#p-tempo', player); if (tempo) tempo.textContent = `${tempoPlayer(t)} / ${tempoPlayer(video.duration)}`; }; seek.onchange = () => { try{ video.currentTime = +seek.value; }catch(_e){} }; }
+  if (vol){ vol.value = Math.round(video.volume * 100); vol.oninput = () => { video.volume = +vol.value / 100; video.muted = video.volume === 0; atualizarBarraPlayer(video); }; }
+  if (mute) mute.onclick = () => { video.muted = !video.muted; mute.innerHTML = video.muted ? SVG.mudo : SVG.volume; };
+  if (tela) tela.onclick = tentarTelaCheia;
+}
 function tocar(item, ep){
   if (trailer.classList.contains('on')) fecharTrailer();
   if (!ep) ep = primeiroEp(item);
   if (!ep || !ep.id){ toast('Este título não tem arquivo para reproduzir.'); return; }
   fecharModal(); fecharBusca();
   const proxEp = proximoEpisodio(item, ep);
-  player.classList.add('on');
+  const anterior = prog[ep.id] || {};
+  const inicio = anterior.visto ? 0 : (+anterior.t || 0);
+  player.classList.add('on'); player.classList.remove('reserva-drive');
   document.body.classList.add('travado'); document.body.classList.add('assistindo');
   if (cfg.cinema !== false) document.body.classList.add('modo-cinema');
   registrarHistorico(item, ep);
   player.innerHTML = `
-    <div class="quadro-cheio">
-      <iframe id="p-frame" src="https://drive.google.com/file/d/${esc(ep.id)}/preview" allow="autoplay; fullscreen; encrypted-media" allowfullscreen></iframe>
+    <div class="quadro-cheio player-proprio">
+      <video id="p-video" preload="metadata" playsinline poster="${fundoDe(item)}" aria-label="${esc(item.titulo)}"></video>
+      <button class="player-iniciar" id="p-iniciar" aria-label="Reproduzir vídeo"><span>${SVG.play}</span><b>Reproduzir</b><small>Toque para iniciar</small></button>
+      <div class="player-carregando" id="p-carregando"><i></i><span>Conectando ao arquivo…</span></div>
     </div>
     <div class="controles-player" aria-label="Controles do FaMovie">
       <button class="voltar-flutuante" id="p-voltar" title="Sair do vídeo (Esc)" aria-label="Sair do vídeo">${SVG.voltar}</button>
       ${proxEp ? `<button class="proximo-ep" id="p-proximo" title="Próximo episódio: T${proxEp.temp}:E${proxEp.e}" aria-label="Assistir próximo episódio, temporada ${proxEp.temp}, episódio ${proxEp.e}"><span class="proximo-icone">${SVG.chevron}</span><span><small>PRÓXIMO EP.</small><b>T${proxEp.temp}:E${proxEp.e}</b></span></button>` : ''}
     </div>
-    <div class="dica-assistindo">${esc(item.titulo)}${item.tipo === 'serie' && ep.n ? ` · T${ep.temp || 1}:E${ep.n}` : ''}</div>`;
-  const anterior = prog[ep.id] || {};
-  prog[ep.id] = {t: anterior.visto ? 0 : (+anterior.t || 0), d: duracaoEstimada(item, ep), item: item.chave, ep: ep.n, temp: ep.temp, at: Date.now()};
-  salvarProg();
-  P = {item, ep, prox:proxEp, inicio:Date.now(), base:prog[ep.id].t, timer:null};
-  P.timer = setInterval(atualizarProgressoPlayer, 15000);
+    <div class="barra-player-propria" id="p-barra">
+      <input id="p-seek" type="range" min="0" max="1" value="0" step="0.1" aria-label="Progresso do vídeo" disabled>
+      <div class="barra-player-acoes"><button id="p-play" aria-label="Reproduzir">${SVG.play}</button><span id="p-tempo">0:00 / —:—</span><span class="separador-player"></span><button id="p-mudo" aria-label="Som">${SVG.volume}</button><input id="p-volume" type="range" min="0" max="100" value="100" aria-label="Volume"><button id="p-tela" aria-label="Tela cheia">${SVG.tela}</button></div>
+    </div>
+    <div class="dica-assistindo">${esc(item.titulo)}${item.tipo === 'serie' && ep.n ? ` · T${ep.temp || 1}:E${ep.n}` : ''}</div>
+    <div class="status-player" id="p-status" aria-live="polite"></div>`;
+  prog[ep.id] = {t:inicio, d:duracaoEstimada(item, ep), item:item.chave, ep:ep.n, temp:ep.temp, at:Date.now()}; salvarProg();
+  P = {item, ep, prox:proxEp, modo:'direto', inicio:Date.now(), base:inicio, timer:null, video:$('#p-video', player), autoAgendado:false};
   $('#p-voltar').onclick = fecharPlayer;
-  const btProx = $('#p-proximo'); if (btProx) btProx.onclick = () => { marcarVisto(item, ep); tocar(item, proxEp); };
-  tentarTelaCheia();          // o clique em Assistir é um gesto do usuário: entra em tela cheia de verdade
+  const btProx = $('#p-proximo'); if (btProx) btProx.onclick = () => { if (P && P.video) salvarProgressoVideo(P.video, false); tocar(item, proxEp); };
+  configurarPlayerDireto(P.video, P, inicio);
+  tentarTelaCheia();
   player.ondblclick = tentarTelaCheia;
   document.onkeydown = e => {
     if (!player.classList.contains('on')) return;
-    if (e.key === 'f' || e.key === 'F'){ tentarTelaCheia(); return; }   /* F = tela cheia */
+    if (e.key === 'f' || e.key === 'F'){ tentarTelaCheia(); return; }
     if (e.key === 'Escape'){
       if (document.fullscreenElement && document.exitFullscreen){ try{ document.exitFullscreen(); }catch(_e){} return; }
       fecharPlayer();
     }
   };
-  window.scrollTo({top: 0});
+  window.scrollTo({top:0});
 }
 /* ---------------- TELA CHEIA ----------------
    O navegador só deixa entrar em tela cheia a partir de um clique/toque do usuário.
@@ -3643,6 +3766,8 @@ function fecharPlayer(){
   document.onkeydown = null;
   /* Sair de um episódio não deve jogar a pessoa na home: volta para a ficha da própria série
      e preserva a temporada que ela estava vendo. Para filmes, o fluxo continua normal (home). */
+  if (P && P.video){ salvarProgressoVideo(P.video, false); try{ P.video.pause(); }catch(_e){} }
+  if (P && P.cancelarVerificacao) P.cancelarVerificacao();
   atualizarProgressoPlayer(true);
   if (P && P.timer) clearInterval(P.timer);
   const retornoSerie = P && P.item && P.item.tipo === 'serie' ? P.item : null;
@@ -3697,7 +3822,7 @@ function abrirConfig(){
 
     <section class="cfg-secao dica-config"><b>Perfil com capa própria</b><span>Abra <em>Gerenciar perfis</em> e toque no lápis do perfil para escolher uma imagem de fundo, além do avatar.</span></section>
     <div class="rodape cfg-rodape"><button class="btn-cheio" id="cfg-salvar">Salvar preferências</button><button class="btn-linha" id="cfg-restaurar">Restaurar visual padrão</button><button class="btn-linha" id="cfg-fechar">Fechar</button></div>
-    <div class="versao-app">FaMovie <b>v52</b> · controles do player refinados</div>
+    <div class="versao-app">FaMovie <b>v54</b> · player próprio direto</div>
   </div>`;
 
   const coletar = () => {
@@ -4238,5 +4363,5 @@ window.NF = { ITENS, FILMES, SERIES, meta, TRAILERS, abrirModal, tocar, abrirTra
 })();
 
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a4ba46c40df681d6',t:'MTc5MjE4NzM5Nw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a4ba71e1bd68572a',t:'MTc5MjE4OTE2Mw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
