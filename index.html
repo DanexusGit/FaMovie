@@ -1604,61 +1604,8 @@ body.dispositivo-movel #modal .caixa{min-height:100dvh}
 #modal .meta .idade.dezesseis,#modal .meta-ep .idade.dezesseis{background:#e50914;color:#fff}
 #modal .meta .idade.dezoito,#modal .meta-ep .idade.dezoito{background:#000;color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.5)}
 
-/* ================= v38: SELEÇÃO por setas (controle de TV / teclado) =================
-   O item selecionado ganha anel branco; nos cartões o efeito é o mesmo do hover
-   (cresce e mostra o painel), então dá para navegar o app inteiro sem "mouse". */
-.foco-tv{outline:3px solid #fff!important;outline-offset:2px;border-radius:8px}
-.card.foco-tv,.card-sem.foco-tv,.ep.foco-tv,.perfil.foco-tv{
-  outline:3px solid #fff!important;outline-offset:3px;
-  transform:scale(1.06);z-index:90;box-shadow:0 16px 40px rgba(0,0,0,.85)
-}
-.card.foco-tv .info{opacity:1;transition:opacity .22s .08s}
-.card.foco-tv .capa img{transform:scale(1.05)}
-.card.top.foco-tv{transform:scale(1.05) translateY(-3px)}
-#lateral .ic.foco-tv{color:#fff;background:rgba(255,255,255,.14)}
-#lateral .logo-mini.foco-tv,#lateral #menu-perfil.foco-tv{background:rgba(255,255,255,.12)}
-.btn.foco-tv,.btn-info.foco-tv,.btn-gerenciar.foco-tv,.chip.foco-tv,.ver-tudo.foco-tv{outline:3px solid #fff!important;outline-offset:3px}
-#modal .acao.foco-tv .circulo{border-color:#fff;background:#fff;color:#000}
-#modal .acao.foco-tv .circulo svg{fill:#000}
-#modal .acao.foco-tv .rotulo{color:#fff;font-weight:700}
-#modal .acao.primaria.foco-tv .circulo{background:#e50914;border-color:#fff}
-#modal .acao.primaria.foco-tv .circulo svg{fill:#fff}
-#modal .fechar.foco-tv{background:#fff;color:#000;transform:scale(1.08)}
-#modal .card-sem.foco-tv .tx{background:rgba(255,255,255,.09)}
-#modal .seta-eps.foco-tv,#modal .seta-eps.foco-tv:hover{background:#e50914;border-color:#fff}
-#perfis .perfil.foco-tv img.avatar,#perfis .perfil.foco-tv .avatar{border-color:#fff}
-#perfis .perfil.foco-tv span{color:#fff}
-.selecionado-por-seta{scroll-margin:90px}
-
-/* ================= v39: as CATEGORIAS não acompanham a rolagem do catálogo =================
-   (elas ficavam grudadas no topo e cortavam os cartões por baixo; agora rolam junto com a lista) */
+/* Categorias seguem a rolagem natural da página; não é navegação por setas. */
 #tela-busca #filtros{position:static;top:auto;z-index:auto;background:none;padding:0 0 4px;margin:16px 0 10px}
-/* nas fileiras as setinhas de rolagem são coisa de mouse: com o controle quem rola é a própria seleção */
-.fileira .seta,#modal .seta-eps{pointer-events:auto}
-
-/* ================= v40: CONTROLE NA TELA (TV) =================
-   Para quando o controle da TV está mexendo o mouse do navegador em vez de andar pela interface. */
-#controle-tela{position:fixed;right:18px;bottom:18px;z-index:900;padding:10px 10px 8px;border-radius:14px;
-  background:rgba(10,10,10,.86);border:1px solid rgba(255,255,255,.16);box-shadow:0 14px 40px rgba(0,0,0,.6);
-  display:flex;flex-direction:column;align-items:center;gap:8px;user-select:none;font-family:inherit}
-#controle-tela.sumiu{display:none}
-#controle-tela .nome{font-size:9.5px;letter-spacing:.14em;color:#9a9a9a;font-weight:800}
-#controle-tela .pads{display:grid;grid-template-columns:repeat(3,46px);grid-template-rows:46px 46px 46px 32px;gap:6px}
-#controle-tela .ctl{border:0;border-radius:10px;background:rgba(255,255,255,.13);color:#fff;font-size:16px;
-  font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;transition:background .15s,transform .12s}
-#controle-tela .ctl:hover{background:rgba(255,255,255,.3);transform:scale(1.04)}
-#controle-tela .ctl:active{transform:scale(.94)}
-#controle-tela .cima{grid-column:2;grid-row:1}
-#controle-tela .esq{grid-column:1;grid-row:2}
-#controle-tela .ok{grid-column:2;grid-row:2;background:#e50914;font-size:13px}
-#controle-tela .ok:hover{background:#ff1a26}
-#controle-tela .dir{grid-column:3;grid-row:2}
-#controle-tela .baixo{grid-column:2;grid-row:3}
-#controle-tela .voltar{grid-column:1/4;grid-row:4;font-size:11.5px;letter-spacing:.08em;background:rgba(255,255,255,.18)}
-#controle-tela .fechar-ctl{position:absolute;top:-10px;left:-10px;width:26px;height:26px;border-radius:50%;border:0;
-  background:#e50914;color:#fff;font-weight:800;cursor:pointer;font-size:12px;line-height:1}
-body.dispositivo-movel #controle-tela{right:12px;bottom:12px;transform:scale(.9);transform-origin:bottom right}
-body:focus{outline:none}
 
 /* ================= v41: TRAILERS OFICIAIS (TMDB → YouTube) =================
    A ficha oferece "Ver trailer" só quando o TMDB possui uma referência incorporável. O trailer
@@ -1667,7 +1614,7 @@ body:focus{outline:none}
 .acao.trailer{position:relative}
 .acao.trailer .circulo{background:rgba(255,255,255,.09)}
 .acao.trailer .trailer-origem{font-size:9.5px;letter-spacing:.11em;color:#8c8c8c;font-weight:800;margin-left:1px}
-.acao.trailer:hover .trailer-origem,.acao.trailer.foco-tv .trailer-origem{color:#d8d8d8}
+.acao.trailer:hover .trailer-origem{color:#d8d8d8}
 
 #trailer{
   position:fixed;inset:0;width:100vw;height:100vh;height:100dvh;background:#000;z-index:5200;
@@ -1715,8 +1662,6 @@ body:focus{outline:none}
 @keyframes girarTrailer{to{transform:rotate(360deg)}}
 #trailer:fullscreen,#trailer:-webkit-full-screen{width:100vw;height:100vh;background:#000}
 #trailer:fullscreen iframe,#trailer:-webkit-full-screen iframe{width:100%;height:100%}
-#trailer .voltar-flutuante.foco-tv{background:#fff;border-color:#fff;transform:scale(1.08)}
-#trailer .voltar-flutuante.foco-tv svg{fill:#000}
 @media (max-width:900px){
   #trailer .trailer-titulo{left:88px;top:31px;max-width:58vw}
   #trailer .trailer-titulo span{display:none}
@@ -1792,45 +1737,7 @@ html{scroll-behavior:smooth}
 </style>
 </head>
 <body tabindex="-1">
-<script>
-/* ================== v40: O CONTROLE DA TV PRECISA CHEGAR NO APP ==================
-   Nas TVs o navegador só entrega as setas para a página quando ela "responde" a elas;
-   senão ele assume o comando e mostra o mouse/cursor dele. Este trecho roda ANTES de
-   tudo, segura as teclas das setas/OK/VOLTAR, avisa o app e (na TV) cancela o padrão. */
-(function(){
-  var MAPA = {37:1,38:1,39:1,40:1,13:1,10009:1,461:1,4:1,5:1,29443:1,29460:1,29461:1};
-  var ua = navigator.userAgent || "";
-  window.__NF_TV = /smart-?tv|tizen|web0s|webos|netcast|hbbtv|bravia|viera|ce-html|googletv|aft[bmst]|crkey|silk|\bTV\b/i.test(ua);
-  try{ window.__NF_TV = window.__NF_TV || !!window.tizen; }catch(e){}
-  try{ window.__NF_QUADRO = (window.self !== window.top); }catch(e){ window.__NF_QUADRO = true; }
-  window.__NF_TECLAS_VISTAS = 0;
-  function tratar(ev){
-    var kc = ev.keyCode || ev.which || 0;
-    if (!MAPA[kc] || ev.__nfv) return;
-    ev.__nfv = 1;
-    window.__NF_TECLAS_VISTAS++;
-    var tratou = false;
-    try{ if (typeof window.__NF_NAV === "function") tratou = !!window.__NF_NAV(ev); }catch(e){}
-    /* na TV a tecla é da interface: o navegador não pode usar a seta para o mouse dele */
-    if (window.__NF_TV || tratou){ try{ ev.preventDefault(); }catch(e){} }
-  }
-  window.__NF_TRATAR = tratar;
-  window.addEventListener("keydown", tratar, true);
-  window.addEventListener("keyup", function(ev){ if (MAPA[ev.keyCode || ev.which]) { window.__NF_TECLAS_VISTAS++; if (window.__NF_TV){ try{ ev.preventDefault(); }catch(e){} } } }, true);
-  /* Tizen/Samsung: pede o registro das teclas do controle (algumas TVs não entregam por padrão) */
-  function registrar(){
-    var nomes = ["KEY_LEFT","KEY_RIGHT","KEY_UP","KEY_DOWN","KEY_ENTER","KEY_RETURN","KEY_BACK","KEY_EXIT","KEY_PLAY","KEY_PAUSE","KEY_STOP"];
-    [window.tizen, window.webapis && window.webapis, window.webapis].forEach(function(api){
-      try{ if (api && api.tvinputdevice && api.tvinputdevice.registerKey) nomes.forEach(function(n){ try{ api.tvinputdevice.registerKey(n); }catch(e){} }); }catch(e){}
-    });
-    try{ if (window.tizen && window.tizen.tvinputdevice && window.tizen.tvinputdevice.registerKeyBatch) window.tizen.tvinputdevice.registerKeyBatch(["LEFT","RIGHT","UP","DOWN","ENTER","RETURN"]); }catch(e){}
-  }
-  registrar();
-  document.addEventListener("DOMContentLoaded", function(){ registrar(); try{ document.body.focus(); }catch(e){} });
-  window.addEventListener("load", registrar);
-  setTimeout(registrar, 800); setTimeout(registrar, 2500);
-})();
-</script>
+
 <script>
 // BANCO DE DADOS — gerado automaticamente do Google Drive (pasta 'Filmes e Séries')
 window.BIBLIOTECA = {"filmes":[{"id":"14Epft1JrP2-cr018CH8OFmSJ4XsJhf64","t":"Madagascar","f":"Madagascar.redetoons.mp4","y":null,"sz":181,"tmdb":"Madagascar"},{"id":"1rZOIStS_vLQB5CUIKWhLsgkEo5jpCUyl","t":"Madagascar 2","f":"Madagascar.2.redetoons.mp4","y":null,"sz":180,"tmdb":"Madagascar 2","alt":"Madagascar: Escape 2 Africa"},{"id":"14DHVg3gGMW10t56Txv16nrWHHKz5JQfw","t":"Madagascar 3: Os Procurados","f":"Madagascar.3.Os.Procurados.redetoons.mp4","y":null,"sz":179,"tmdb":"Madagascar 3: Os Procurados","alt":"Madagascar 3: Europe's Most Wanted"},{"id":"1XahEAzvS48TfocTNKAe7gPjEfs-yYbX3","t":"A Era do Gelo","f":"A.Era.do.Gelo.redetoons.mp4","y":null,"sz":178,"tmdb":"A Era do Gelo","alt":"Ice Age"},{"id":"1bvNMIQ0254adW9-uKLOFyTVp_LOZYssU","t":"A Era do Gelo 2","f":"A.Era.do.Gelo.2.redetoons.mp4","y":null,"sz":177,"tmdb":"A Era do Gelo 2","alt":"Ice Age: The Meltdown"},{"id":"1pNe5UeMEJpvC1IPG2MA7oA2HqhqwZuuk","t":"A Era do Gelo 3","f":"A.Era.do.Gelo.3.redetoons.mp4","y":null,"sz":176,"tmdb":"A Era do Gelo 3","alt":"Ice Age: Dawn of the Dinosaurs"},{"id":"1-BKj1WcOsvs5w6J6BJSlGQIFbwwPvqVX","t":"A Era do Gelo 4","f":"A.Era.do.Gelo.4.redetoons.mp4","y":null,"sz":175,"tmdb":"A Era do Gelo 4","alt":"Ice Age: Continental Drift"},{"id":"11elPdfi_TsM7uSnn_UzWkKQVlWr4O-nm","t":"A Era do Gelo: O Big Bang","f":"A.Era.do.Gelo.O.Big.Bang.redetoons.mp4","y":null,"sz":174,"tmdb":"A Era do Gelo: O Big Bang","alt":"Ice Age: Collision Course"},{"id":"1ip2cl7YXIF0eDtOf9P3ea6pNmImFYI-a","t":"Zootopia 2","f":"zootopia 2.mp4","y":null,"sz":173,"tmdb":"Zootopia 2"},{"id":"1tFq8hFm_JbDgrRJNKVIzTst0sPRbpes5","t":"Zootopia","f":"zootopia 1.mp4","y":null,"sz":172,"tmdb":"Zootopia"},{"id":"1xOrOURVJuf2MGkCntMYY2VejfThOdKgr","t":"Operação Big Hero","f":"Operacao.Big.Hero.redetoons.mp4","y":null,"sz":171,"tmdb":"Operação Big Hero","alt":"Big Hero 6"},{"id":"199A6gfQrSCILvKENZCx8peizBCTsszVK","t":"Dolittle","f":"Dolittle.redetoons.mp4","y":null,"sz":170,"tmdb":"Dolittle"},{"id":"1OqoZh1Gt6FO2PPDD5rsNjHSDsSzIGUGp","t":"O Poderoso Chefinho 2: Negócios da Família","f":"O.Poderoso.Chefinho.2.Negocios.da.Familia.redetoons.mp4","y":null,"sz":169,"tmdb":"O Poderoso Chefinho 2: Negócios da Família","alt":"The Boss Baby: Family Business"},{"id":"1Ynjdm-lGIXu1LcA-YFb6Q21miPqe5l9q","t":"O Poderoso Chefinho","f":"O.Poderoso.Chefinho.redetoons.mp4","y":null,"sz":168,"tmdb":"O Poderoso Chefinho","alt":"The Boss Baby"},{"id":"11nbGICJCxeUho4l6b1gOoZpE-QH57iD8","t":"Big Pai, Big Filho 2","f":"Big.Pai,.Big.Filho.2.redetoons.mp4","y":null,"sz":167,"tmdb":"Big Pai, Big Filho 2","alt":"Big Daddy 2"},{"id":"1ccv6bYyj0DWnOmS2fwmT3lqOAeRg5jm1","t":"Big Pai, Big Filho","f":"Big.Pai,.Big.Filho.redetoons.mp4","y":null,"sz":166,"tmdb":"Big Pai, Big Filho","alt":"Big Daddy"},{"id":"1JS73RCCcZ16_T_9FSWzItSv7mxqj1FEi","t":"Sempre ao Seu Lado","f":"Sempre.ao.Seu.Lado.redetoons.mp4","y":null,"sz":165,"tmdb":"Sempre ao Seu Lado","alt":"Hachi: A Dog's Tale"},{"id":"1BQUJvwV3N1IL-3PKdim3kJpTyMdavhJo","t":"Togo","f":"Togo.redetoons.mp4","y":null,"sz":164,"tmdb":"Togo"},{"id":"1Qxj7FNO9xedR5UvZYnlN0Wieu-9E8q2I","t":"Você Acredita?","f":"Voce.Acredita.redetoons.mp4","y":null,"sz":163,"tmdb":"Você Acredita?","alt":"Do You Believe?"},{"id":"1Oh-UWy_Vw3ZpaLWOI7RqxZ8NxG1QwjZZ","t":"Bob Esponja: O Incrível Resgate","f":"Bob.Esponja.O.Incrivel.Resgate.redetoons.mp4","y":null,"sz":162,"tmdb":"Bob Esponja: O Incrível Resgate","alt":"The SpongeBob Movie: Sponge on the Run"},{"id":"1z7Ou58-hhBUFFlfgyCQ9tAvveYNWOIfr","t":"Bob Esponja: Um Herói Fora D'Água","f":"Bob.Esponja.Um.Heroi.Fora.D_Agua.redetoons.mp4","y":null,"sz":161,"tmdb":"Bob Esponja: Um Herói Fora D'Água","alt":"The SpongeBob SquarePants Movie"},{"id":"1x7pBavvGGFsVK0rJs9acsC5gaGF7TeWf","t":"Bob Esponja: O Filme","f":"Bob.Esponja.O.Filme.redetoons.mp4","y":null,"sz":160,"tmdb":"Bob Esponja: O Filme","alt":"The SpongeBob SquarePants Movie"},{"id":"1clRxkpS94cteiiDxPA1uA64OW6NAqtzz","t":"Os Incríveis 2","f":"Os.Incriveis.2.redetoons.mp4","y":null,"sz":159,"tmdb":"Os Incríveis 2","alt":"Incredibles 2"},{"id":"1r0sxOZ4oodPrU2sjkyJ_PA7OTBvFPB0Z","t":"Batman","f":"Batman.redetoons.mp4","y":null,"sz":158,"tmdb":"Batman"},{"id":"1DPoy3m83gCQHrqVln6osj-JG0LSphSBa","t":"Batman Begins","f":"Batman.Begins.redetoons.mp4","y":null,"sz":157,"tmdb":"Batman Begins"},{"id":"11rcTGK1xoPbuWfgvSUW9HS8z_AwmFZEk","t":"Uma Aventura LEGO","f":"Uma.Aventura.Lego.redetoons.mp4","y":null,"sz":156,"tmdb":"Uma Aventura LEGO","alt":"The Lego Movie"},{"id":"1Dw65RHzO2lyr_2OMCaKLHSSqePliJzB0","t":"Os Incríveis","f":"Os.Incriveis.redetoons.mp4","y":null,"sz":155,"tmdb":"Os Incríveis","alt":"The Incredibles"},{"id":"1cYcCp6Ypn-1BBWjxssSuEv2anb0fFU0q","t":"Batman vs Superman: A Origem da Justiça","f":"Batman.vs.Superman.A.Origem.da.Justica.redetoons.mp4","y":null,"sz":154,"tmdb":"Batman vs Superman: A Origem da Justiça","alt":"Batman v Superman: Dawn of Justice"},{"id":"1UNlaKl6TgUeje2DNlc3uKbrroIWDhOJJ","t":"Up: Altas Aventuras","f":"Up.Altas.Aventuras.redetoons.mp4","y":null,"sz":153,"tmdb":"Up: Altas Aventuras","alt":"Up"},{"id":"1k6jfiMxmIac5qBdupctLsowjD4SdyYFx","t":"O Bicho Vai Pegar 3","f":"O.Bicho.Vai.Pegar.3.redetoons.mp4","y":null,"sz":152,"tmdb":"O Bicho Vai Pegar 3","alt":"Grown Ups 2"},{"id":"1w8pIoNyXGvlPM8bQnFA44anw5HhSeo6j","t":"O Bicho Vai Pegar 2","f":"O.Bicho.Vai.Pegar.2.redetoons.mp4","y":null,"sz":151,"tmdb":"O Bicho Vai Pegar 2","alt":"Grown Ups 2"},{"id":"16Mbheg59NlYNDFZyrkOUi3dmumCcyeEP","t":"O Bicho Vai Pegar","f":"O.Bicho.Vai.Pegar.redetoons.mp4","y":null,"sz":150,"tmdb":"O Bicho Vai Pegar","alt":"Grown Ups"},{"id":"1WlgVT8HLM70hvIh2M5BT6Li6v8PN_CaM","t":"Liga da Justiça","f":"Liga.da.Justica.redetoons.mp4","y":null,"sz":149,"tmdb":"Liga da Justiça","alt":"Justice League"},{"id":"1yMV4Nq0awPMXSBaM9t6HXRviRdhvLgIK","t":"Batman: O Cavaleiro das Trevas","f":"Batman.O.Cavaleiro.das.Trevas.redetoons.mp4","y":null,"sz":148,"tmdb":"Batman: O Cavaleiro das Trevas","alt":"The Dark Knight"},{"id":"1V0WQz0rkGbizchuWGx3b5yhQA2o-2IIS","t":"LEGO Batman: O Filme","f":"Lego.Batman.O.Filme.redetoons.mp4","y":null,"sz":147,"tmdb":"LEGO Batman: O Filme","alt":"The Lego Batman Movie"},{"id":"1LgecjfYbiuLTIHyHZRHoyRDsZGzbqLgY","t":"Uma Aventura LEGO 2","f":"Uma.Aventura.LEGO.2.redetoons.mp4","y":null,"sz":146,"tmdb":"Uma Aventura LEGO 2","alt":"The Lego Movie 2"},{"id":"1BaK9CZAYXr7R_L3NMIzXFtayqDFlKfPE","t":"Shang-Chi e a Lenda dos Dez Anéis","f":"Shang-Chi.e.a.Lenda.dos.Dez.Aneis.redetoons.mp4","y":null,"sz":145,"tmdb":"Shang-Chi e a Lenda dos Dez Anéis","alt":"Shang-Chi and the Legend of the Ten Rings"},{"id":"1Ttc-2mN4WGigF-H00CrKVfVBUDiY9VwW","t":"Viúva Negra","f":"Viuva.Negra.redetoons.mp4","y":null,"sz":144,"tmdb":"Viúva Negra","alt":"Black Widow"},{"id":"1Wed6dRVOX-P7qFhKZECpjQc9xgWpOd5j","t":"Doutor Estranho no Multiverso da Loucura","f":"Doutor.Estranho.no.Multiverso.da.Loucura.redetoons.mp4","y":null,"sz":143,"tmdb":"Doutor Estranho no Multiverso da Loucura","alt":"Doctor Strange in the Multiverse of Madness"},{"id":"1-OUD8c33ljb43Ll-qZSfxwB5NXIs1u6h","t":"Pantera Negra: Wakanda para Sempre","f":"Pantera.Negra.Wakanda.para.Sempre.redetoons.mp4","y":null,"sz":142,"tmdb":"Pantera Negra: Wakanda para Sempre","alt":"Black Panther: Wakanda Forever"},{"id":"1y4YZJ9d502xYG71O7nMZrYsI6y-NYbsA","t":"Pantera Negra","f":"Pantera.Negra.redetoons.mp4","y":null,"sz":141,"tmdb":"Pantera Negra","alt":"Black Panther"},{"id":"1d-iXX_ZtPd-sBic4ujlYW5gTeNPhuQmN","t":"Doutor Estranho","f":"Doutor.Estranho.redetoons.mp4","y":null,"sz":140,"tmdb":"Doutor Estranho","alt":"Doctor Strange"},{"id":"1xx2eYiQWOD_AUbFlWSd11czSdW4scbN8","t":"X-Men: Fênix Negra","f":"X-Men.Fenix.Negra.redetoons.mp4","y":null,"sz":139,"tmdb":"X-Men: Fênix Negra","alt":"Dark Phoenix"},{"id":"1uXNeQeD0Rl5kQnQfJJZlsp9fv2lkbshZ","t":"X-Men: Apocalipse","f":"X-Men.Apocalipse.redetoons.mp4","y":null,"sz":138,"tmdb":"X-Men: Apocalipse","alt":"X-Men: Apocalypse"},{"id":"1IoINiYoi0qH_yTfe8blkzR82vfuPJbIN","t":"Deadpool & Wolverine","f":"Deadpool.&.Wolverine.redetoons.mp4","y":null,"sz":137,"tmdb":"Deadpool & Wolverine"},{"id":"17x781slAzhGCkptF0eZRp6OLMI9Cq1zh","t":"Deadpool 2","f":"Deadpool.2.redetoons.mp4","y":null,"sz":136,"tmdb":"Deadpool 2"},{"id":"1wXH_nbcT8WmauUbFfnBkdRd_a_KsWx31","t":"Deadpool","f":"Deadpool.redetoons.mp4","y":null,"sz":135,"tmdb":"Deadpool"},{"id":"1_oLQvzAqKR1kW9922aN7UcchWLPluz1w","t":"Homem-Formiga e a Vespa: Quantumania","f":"Homem-Formiga.e.a.Vespa.Quantumania.redetoons.mp4","y":null,"sz":134,"tmdb":"Homem-Formiga e a Vespa: Quantumania","alt":"Ant-Man and the Wasp: Quantumania"},{"id":"1I1DO_raJTzdLsWY7tDARPLLkoMtAnj9y","t":"Homem-Formiga","f":"Homem-Formiga.redetoons.mp4","y":null,"sz":133,"tmdb":"Homem-Formiga","alt":"Ant-Man"},{"id":"1j1jgjXczjCcEixp3i8uLwGulvZ8qvw3o","t":"Capitão América: Guerra Civil","f":"Capitao.America.Guerra.Civil.redetoons.mp4","y":null,"sz":132,"tmdb":"Capitão América: Guerra Civil","alt":"Captain America: Civil War"},{"id":"1USv-28DBhdbONMSf9HwZWyFjE56wK3dK","t":"X-Men: Primeira Classe","f":"X-Men.Primeira.Classe.redetoons.mp4","y":null,"sz":131,"tmdb":"X-Men: Primeira Classe","alt":"X-Men: First Class"},{"id":"1j2IugxSU9cZfv8qmrRYi3Ox-lSPtj2rA","t":"Capitão América: Admirável Mundo Novo","f":"Capitao.America.Admiravel.Mundo.Novo.redetoons.mp4","y":null,"sz":130,"tmdb":"Capitão América: Admirável Mundo Novo","alt":"Captain America: Brave New World"},{"id":"12znrHJPjV30UM4sozb9NytxOksCyvw3h","t":"Thor: Ragnarok","f":"Thor.Ragnarok.redetoons.mp4","y":null,"sz":129,"tmdb":"Thor: Ragnarok"},{"id":"1HSvkolLhG05Yqj9nTDwsYVlSIFLb1uTI","t":"Homem-Formiga e a Vespa","f":"Homem-Formiga.e.a.Vespa.redetoons.mp4","y":null,"sz":128,"tmdb":"Homem-Formiga e a Vespa","alt":"Ant-Man and the Wasp"},{"id":"1x1EUrSmsPKicOqD4QZeJNu5hUqM-NN7I","t":"O Espetacular Homem-Aranha 2: A Ameaça de Electro","f":"O.Espetacular.Homem-Aranha.2.A.Ameaca.de.Electro.redetoons.mp4","y":null,"sz":127,"tmdb":"O Espetacular Homem-Aranha 2: A Ameaça de Electro","alt":"The Amazing Spider-Man 2"},{"id":"1f8qztFLxOyclkCMpcliO3ZKySaOCf3ID","t":"X-Men: Dias de um Futuro Esquecido","f":"X-Men.Dias.de.um.Futuro.Esquecido.redetoons.mp4","y":null,"sz":126,"tmdb":"X-Men: Dias de um Futuro Esquecido","alt":"X-Men: Days of Future Past"},{"id":"1dk4um6FubEMrwiIbhQ0HeZH4qWDno9zo","t":"Thor: Amor e Trovão","f":"Thor.Amor.e.Trovao.redetoons.mp4","y":null,"sz":125,"tmdb":"Thor: Amor e Trovão","alt":"Thor: Love and Thunder"},{"id":"1oeg0bwhHQayIZbJ1C6PIoOuMbAMCxEiN","t":"Wolverine: Imortal","f":"Wolverine.Imortal.redetoons.mp4","y":null,"sz":124,"tmdb":"Wolverine: Imortal","alt":"The Wolverine"},{"id":"1gRlVt_nMXxuVthYEa1Kfhyrs_ue0X5dR","t":"O Espetacular Homem-Aranha","f":"O.Espetacular.Homem-Aranha.redetoons.mp4","y":null,"sz":123,"tmdb":"O Espetacular Homem-Aranha","alt":"The Amazing Spider-Man"},{"id":"1mCbHvnVT9G7S-48rLDhLSZBBaKiVxnf3","t":"Motoqueiro Fantasma: Espírito de Vingança","f":"Motoqueiro.Fantasma.Espirito.de.Vinganca.redetoons.mp4","y":null,"sz":122,"tmdb":"Motoqueiro Fantasma: Espírito de Vingança","alt":"Ghost Rider: Spirit of Vengeance"},{"id":"1Hx7xDTP7h0chhcUjuUYgPMar63ugC4Fm","t":"Thor: O Mundo Sombrio","f":"Thor.O.Mundo.Sombrio.redetoons.mp4","y":null,"sz":121,"tmdb":"Thor: O Mundo Sombrio","alt":"Thor: The Dark World"},{"id":"11yIlgxIjUKl9D2avWJaX5Xap-k_T1btv","t":"Thor","f":"Thor.redetoons.mp4","y":null,"sz":120,"tmdb":"Thor"},{"id":"1Sz0L8pABV479fHMrurpjY-1lox3rnVgj","t":"Capitão América: O Soldado Invernal","f":"Capitao.America.O.Soldado.Invernal.redetoons.mp4","y":null,"sz":119,"tmdb":"Capitão América: O Soldado Invernal","alt":"Captain America: The Winter Soldier"},{"id":"1di4RGt00bAnULvyYkqKLVstjHK08a1iQ","t":"Capitão América: O Primeiro Vingador","f":"Capitao.America.O.Primeiro.Vingador.redetoons.mp4","y":null,"sz":118,"tmdb":"Capitão América: O Primeiro Vingador","alt":"Captain America: The First Avenger"},{"id":"19hcIkjqn9DYkoX0WlUWE1wggj60kNhwI","t":"X-Men Origens: Wolverine","f":"X-Men.Origens.Wolverine.redetoons.mp4","y":null,"sz":117,"tmdb":"X-Men Origens: Wolverine","alt":"X-Men Origins: Wolverine"},{"id":"13ToiqkAyCAFxHMK3qGZfjf-zxjNuPGjT","t":"Quarteto Fantástico","f":"Quarteto.Fantastico (2005).redetoons.mp4","y":2005,"sz":116,"tmdb":"Quarteto Fantástico","alt":"Fantastic Four"},{"id":"1mA045CPVv6uxXdUYycbA9NsbGcuEg3MZ","t":"Quarteto Fantástico (1994)","f":"Quarteto.Fantastico (1994).redetoons.mp4","y":1994,"sz":115,"tmdb":"Quarteto Fantástico (1994)","alt":"The Fantastic Four"},{"id":"1YYlwvn86hPCq_D4yG6NcT7Jp1k3eLays","t":"Quarteto Fantástico: Primeiros Passos","f":"Quarteto.Fantastico.Primeiros.Passos.redetoons.mp4","y":null,"sz":114,"tmdb":"Quarteto Fantástico: Primeiros Passos","alt":"The Fantastic Four: First Steps"},{"id":"14MwzeZq8xbywT5Zoqo1WpG4cdzWMoRaT","t":"Motoqueiro Fantasma","f":"Motoqueiro.Fantasma.redetoons.mp4","y":null,"sz":113,"tmdb":"Motoqueiro Fantasma","alt":"Ghost Rider"},{"id":"1_ntN5iN1sOVU5Ak1Bcox1XYeAIHbs9Xo","t":"X-Men: O Confronto Final","f":"X-Men.O.Confronto.Final.redetoons.mp4","y":null,"sz":112,"tmdb":"X-Men: O Confronto Final","alt":"X-Men: The Last Stand"},{"id":"1VieICtjlDPeycLkQT7A4F34U0B1zr1hc","t":"O Quarteto Fantástico","f":"O.Quarteto.Fantastico.redetoons.mp4","y":null,"sz":111,"tmdb":"O Quarteto Fantástico","alt":"Fantastic Four"},{"id":"1exY9zshWGAUpxlJSfTjW7X1VQFl_aFPB","t":"Quarteto Fantástico e o Surfista Prateado","f":"Quarteto.Fantastico.e.o.Surfista.Prateado.redetoons.mp4","y":null,"sz":110,"tmdb":"Quarteto Fantástico e o Surfista Prateado","alt":"Fantastic Four: Rise of the Silver Surfer"},{"id":"1P21SAXqvf1UA0Bt7TyYYSTZap6G85vBe","t":"O Justiceiro","f":"O.Justiceiro.redetoons.mp4","y":null,"sz":109,"tmdb":"O Justiceiro","alt":"The Punisher"},{"id":"1d7OnhzKWHNleC9O3VyOlGhmcZe0cF7sF","t":"X-Men 2","f":"X-Men.2.redetoons.mp4","y":null,"sz":108,"tmdb":"X-Men 2"},{"id":"13WAI5rhXYkTtc70rSLqjBQ6aRuBlvHdR","t":"Demolidor: O Homem Sem Medo","f":"Demolidor.O.Homem.Sem.Medo.redetoons.mp4","y":null,"sz":107,"tmdb":"Demolidor: O Homem Sem Medo","alt":"Daredevil"},{"id":"1icTRVayc1KRtumowarnPUwibEYkQtlsi","t":"As Aventuras de Tadeo 2: O Segredo do Rei Midas","f":"As.Aventuras.de.Tadeo.2.O.Segredo.do.Rei.Midas.redetoons.mp4","y":null,"sz":106,"tmdb":"As Aventuras de Tadeo 2: O Segredo do Rei Midas","alt":"Tad the Lost Explorer and the Secret of King Midas"},{"id":"1X_46gDjP8zRlRuBH9SoqalKN7kJFqigQ","t":"X-Men: O Filme","f":"X-Men.O.Filme.redetoons.mp4","y":null,"sz":105,"tmdb":"X-Men: O Filme","alt":"X-Men"},{"id":"1iXJxQqhThN_ODlFtRWK7ACCjJaf3bazr","t":"Paddington: Uma Aventura na Floresta","f":"Paddington.Uma.Aventura.na.Floresta.redetoons.mp4","y":null,"sz":104,"tmdb":"Paddington: Uma Aventura na Floresta","alt":"Paddington in Peru"},{"id":"1aJwQnScF__keMN7rzaV1E2YoQDDuakLI","t":"As Aventuras de Tadeo e a Tábua de Esmeralda","f":"As.Aventuras.de.Tadeo.e.a.Tabua.de.Esmeralda.redetoons.mp4","y":null,"sz":103,"tmdb":"As Aventuras de Tadeo e a Tábua de Esmeralda","alt":"Tad, the Lost Explorer"},{"id":"1GqvREhHQRKmFzioBDX0w6BB8k2K3T2s7","t":"Deus Não Está Morto: O Próximo Capítulo","f":"Deus.Nao.Esta.Morto.O.Proximo.Capitulo.redetoons.mp4","y":null,"sz":102,"tmdb":"Deus Não Está Morto: O Próximo Capítulo","alt":"God's Not Dead: We the People"},{"id":"1mzInXOn-g2tKu9xsdjkjug4ccEEvrWn9","t":"As Aventuras de Paddington","f":"As.Aventuras.de.Paddington.redetoons.mp4","y":null,"sz":101,"tmdb":"As Aventuras de Paddington","alt":"Paddington"},{"id":"11aCixqDRpTozvSDRLKGfAW1rZ9Nf8UgS","t":"As Aventuras de Paddington 2","f":"As.Aventuras.de.Paddington.2.redetoons.mp4","y":null,"sz":100,"tmdb":"As Aventuras de Paddington 2","alt":"Paddington 2"},{"id":"1h-X5PDOKD8WjHRP1BBEzNYJ_Gy5B7lrW","t":"Deus Não Está Morto: Uma Luz na Escuridão","f":"Deus.Nao.Esta.Morto.Uma.Luz.na.Escuridao.redetoons.mp4","y":null,"sz":99,"tmdb":"Deus Não Está Morto: Uma Luz na Escuridão","alt":"God's Not Dead: A Light in Darkness"},{"id":"1jB88KccnQviYiJ6MVxR0z2SN7EeYY2SN","t":"Deus Não Está Morto","f":"Deus.Nao.Esta.Morto.redetoons.mp4","y":null,"sz":98,"tmdb":"Deus Não Está Morto","alt":"God's Not Dead"},{"id":"155eQ64L8F-ZS1mavdT23UCBKX6t26joc","t":"Click","f":"Click.redetoons.mp4","y":null,"sz":97,"tmdb":"Click"},{"id":"1JaJRlvh6fG_OXNIaEkH1dA7qDKaSKY9J","t":"Deus Não Está Morto 2","f":"Deus.Nao.Esta.Morto.2.redetoons.mp4","y":null,"sz":96,"tmdb":"Deus Não Está Morto 2","alt":"God's Not Dead 2"},{"id":"1O_57rt-ni3FKjLsFT-tE6oDbLahZuQet","t":"O Caminho para a Eternidade","f":"O.Caminho.para.a.Eternidade.redetoons.mp4","y":null,"sz":95,"tmdb":"O Caminho para a Eternidade","alt":"The Way"},{"id":"1NkMMLxBCCynnbcY0Gyq5YakwmqL2K-1h","t":"Todo Poderoso","f":"Todo.Poderoso.redetoons.mp4","y":null,"sz":94,"tmdb":"Todo Poderoso","alt":"Bruce Almighty"},{"id":"1DgTP6QTuULXfXzSSd12I7x6ZqSxfBm1E","t":"Paulo, Apóstolo de Cristo","f":"Paulo,.Apostolo.de.Cristo.redetoons.mp4","y":null,"sz":93,"tmdb":"Paulo, Apóstolo de Cristo","alt":"Paul, Apostle of Christ"},{"id":"1hkCkUBWIrsS4PuKawt2i8UjdmrTiIrhB","t":"O Pequeno Órfão","f":"O.Pequeno.Orfao.redetoons.mp4","y":null,"sz":92,"tmdb":"O Pequeno Órfão","alt":"The Little Orphan"},{"id":"1tda1KhRYHPT3u2tPtCFP0rXRgQVK7Tj5","t":"Tropa de Elite","f":"Tropa de Elite","y":null,"sz":91,"tmdb":"Tropa de Elite","alt":"Elite Squad"},{"id":"1bfTuj1RFg8dfHcIFDXLzRF8qh-WKvjJG","t":"Thunderbolts*","f":"Thunderbolts.redetoons.mp4","y":null,"sz":90,"tmdb":"Thunderbolts*","alt":"Thunderbolts"},{"id":"1zKy2MnYvyFZbo4bbWxsdt8JoG6XbjBbJ","t":"Venom","f":"Venom.redetoons.mp4","y":null,"sz":89,"tmdb":"Venom"},{"id":"1hOujZftLNPDDdSuQP6A13Sh7OplCKK7O","t":"Venom: A Última Rodada","f":"Venom.A.Ultima.Rodada.redetoons.mp4","y":null,"sz":88,"tmdb":"Venom: A Última Rodada","alt":"Venom: The Last Dance"},{"id":"1JIk0MES52PHBD7KjVmhlCODMbDKVLrWJ","t":"Venom: Tempo de Carnificina","f":"Venom.Tempo.de.Carnificina.redetoons.mp4","y":null,"sz":87,"tmdb":"Venom: Tempo de Carnificina","alt":"Venom: Let There Be Carnage"},{"id":"17wYTtKDmfUCqy8JmjULGEFJ3mWjNAkk-","t":"Hulk","f":"Hulk 2003.redetoons.mp4","y":2003,"sz":86,"tmdb":"Hulk","alt":"Hulk"},{"id":"1fWPmsyBxWdPnmDqSpdo2CZG8OlDPP1mw","t":"Homem de Ferro 3","f":"Homem.de.Ferro.3.redetoons.mp4","y":null,"sz":85,"tmdb":"Homem de Ferro 3","alt":"Iron Man 3"},{"id":"1QSUU2XVRZg7QYAXEPREydGEdgbGuMmq6","t":"O Incrível Hulk","f":"O.Incrivel.Hulk.redetoons.mp4","y":null,"sz":84,"tmdb":"O Incrível Hulk","alt":"The Incredible Hulk"},{"id":"13Q0SExm2HWu4PizH92VTaCbgkL8cbpMv","t":"Homem de Ferro","f":"Homem.de.Ferro.redetoons.mp4","y":null,"sz":83,"tmdb":"Homem de Ferro","alt":"Iron Man"},{"id":"1DnoM5T3JKKvy1TzOjen0WITVY6qsITWm","t":"Homem de Ferro 2","f":"Homem.de.Ferro.2.redetoons.mp4","y":null,"sz":82,"tmdb":"Homem de Ferro 2","alt":"Iron Man 2"},{"id":"1WiQxgMpU9aXi2IPmKH7QW86HW3BprLiA","t":"Homem-Aranha 2","f":"Homem-Aranha.2 (Tobey).redetoons.mp4","y":null,"sz":81,"tmdb":"Homem-Aranha 2","alt":"Spider-Man 2"},{"id":"1glQ3F6jrvPvSttsJk2rTMbSIes8J44ZD","t":"Homem-Aranha 3","f":"Homem-Aranha.3 (Tobey).redetoons.mp4","y":null,"sz":80,"tmdb":"Homem-Aranha 3","alt":"Spider-Man 3"},{"id":"1phq9Cy9Z_GE8Tc5RN4_S9Gmmm9tbKjTS","t":"Homem-Aranha","f":"Homem-Aranha (Tobey).redetoons.mp4","y":null,"sz":79,"tmdb":"Homem-Aranha","alt":"Spider-Man"},{"id":"10U18dB7THmNUHGkWhfOuS7UGk_dXRVHk","t":"Star Wars: O Retorno de Jedi","f":"Guerra.nas.Estrelas.O.Retorno.de.Jedi.redetoons.mp4","y":null,"sz":78,"tmdb":"Star Wars: O Retorno de Jedi","alt":"Return of the Jedi"},{"id":"1q_BALR-ghxf_GwuB_i-mtRdl5FM0ERqQ","t":"Star Wars: O Império Contra-Ataca","f":"Guerra.nas.Estrelas.O.Imperio.Contra-Ataca.redetoons.mp4","y":null,"sz":77,"tmdb":"Star Wars: O Império Contra-Ataca","alt":"The Empire Strikes Back"},{"id":"10eYZaMqqIQ3uDSPrVV2ZV7v6JJ0tlhsx","t":"Star Wars: Episódio III – A Vingança dos Sith","f":"Star.Wars.Episodio.III.-.A.Vinganca.dos.Sith.redetoons.mp4","y":null,"sz":76,"tmdb":"Star Wars: Episódio III – A Vingança dos Sith","alt":"Star Wars: Episode III - Revenge of the Sith"},{"id":"1h7zAeV7q4joQDByvvTDu8HJuBidD03ll","t":"Star Wars: O Despertar da Força","f":"Star.Wars.O.Despertar.da.Forca.redetoons.mp4","y":null,"sz":75,"tmdb":"Star Wars: O Despertar da Força","alt":"Star Wars: The Force Awakens"},{"id":"1Joy0br162k4nUHCGdCg3MTju3RXF4WOs","t":"Star Wars: Episódio II – Ataque dos Clones","f":"Star.Wars.Episodio.II.-.Ataque.dos.Clones.redetoons.mp4","y":null,"sz":74,"tmdb":"Star Wars: Episódio II – Ataque dos Clones","alt":"Star Wars: Episode II - Attack of the Clones"},{"id":"1WmhGRGiMWPt3PFB0PqfO37FY8nD7V46L","t":"Star Wars: Episódio IV – Uma Nova Esperança","f":"Star Wars Episódio 4.mp4","y":null,"sz":73,"tmdb":"Star Wars: Episódio IV – Uma Nova Esperança","alt":"Star Wars: Episode IV - A New Hope"},{"id":"1W1f-pwc2eUYn-JiSUXqMiSvGXrY4dc5c","t":"Star Wars: Episódio I – A Ameaça Fantasma","f":"Star.Wars.Episodio.I.-.A.Ameaca.Fantasma.redetoons.mp4","y":null,"sz":72,"tmdb":"Star Wars: Episódio I – A Ameaça Fantasma","alt":"Star Wars: Episode I - The Phantom Menace"},{"id":"1pGAQ8Ua9jON71v4V8RPu1pcq93AceX4W","t":"Star Wars: Os Últimos Jedi","f":"Star.Wars.Os.Ultimos.Jedi.redetoons.mp4","y":null,"sz":71,"tmdb":"Star Wars: Os Últimos Jedi","alt":"Star Wars: The Last Jedi"},{"id":"16QpIZXhMlW1Kx-JrNPVK76QWFAvllBBO","t":"Star Wars: A Ascensão Skywalker","f":"Star.Wars.A.Ascensao.Skywalker.redetoons.mp4","y":null,"sz":70,"tmdb":"Star Wars: A Ascensão Skywalker","alt":"Star Wars: The Rise of Skywalker"},{"id":"171HGcokQDBcCX8Lm54oxYCnZS19ufVpU","t":"Homem-Aranha: Um Novo Dia","f":"Homem-Aranha.Um.Novo.Dia.redetoons.mp4","y":null,"sz":69,"tmdb":"Homem-Aranha: Um Novo Dia","alt":"Spider-Man: Brand New Day"},{"id":"12sRM9VBnNuatsBbYHX0PbERj4VbmiWCu","t":"Justiça Artificial","f":"Justica.Artificial.redetoons.mp4","y":null,"sz":68,"tmdb":"Justiça Artificial","alt":"A.I. Artificial Intelligence"},{"id":"16LzrdZnvEZgkcxjyM7vqaTsummUEZTjQ","t":"Bastardos Inglórios","f":"bastardos ingloriosos.mp4","y":null,"sz":67,"tmdb":"Bastardos Inglórios","alt":"Inglourious Basterds"},{"id":"1-k3w46R1dlBYTi1awdHAHw3LBYT2TBAw","t":"Homem-Aranha: Através do Aranhaverso","f":"aranha verso 2.mp4","y":null,"sz":66,"tmdb":"Homem-Aranha: Através do Aranhaverso","alt":"Spider-Man: Across the Spider-Verse"},{"id":"1bRvqYZJqAUmyGqh2j-Zjccg3qD0uI0cU","t":"Homem-Aranha no Aranhaverso","f":"aranha verso 1.mp4","y":null,"sz":65,"tmdb":"Homem-Aranha no Aranhaverso","alt":"Spider-Man: Into the Spider-Verse"},{"id":"1koyiBbAm504GDNtIKJ75JKNMMvy5ITBH","t":"Lua","f":"LUA.mp4","y":null,"sz":64,"tmdb":"Lua","alt":"Moon"},{"id":"1Ggp1wGilZG67buDIOmTjGlFCeWGdb5xl","t":"Gente Grande","f":"gente grande 1.mp4","y":null,"sz":63,"tmdb":"Gente Grande","alt":"Grown Ups"},{"id":"1iJWJlRQKlv8ykEzutOlVgAUavuIOKaGe","t":"Gente Grande 2","f":"gente grande 2.mp4","y":null,"sz":62,"tmdb":"Gente Grande 2","alt":"Grown Ups 2"},{"id":"1N5VpOurv_gpHdhBJjwRx5-4ICL5ZbS4h","t":"Esqueceram de Mim 2","f":"esqueceram de mim 2.mp4","y":null,"sz":61,"tmdb":"Esqueceram de Mim 2","alt":"Home Alone 2: Lost in New York"},{"id":"17pWXQRc135HgQHZD6XBCONuGf9sIoEA_","t":"Esqueceram de Mim","f":"esqueceram de mim 1.mp4","y":null,"sz":60,"tmdb":"Esqueceram de Mim","alt":"Home Alone"},{"id":"1AgfPE9NXGMalRuA5rJq5w09KlXyqmMk-","t":"Backrooms","f":"Backrooms.mp4","y":null,"sz":59,"tmdb":"Backrooms","alt":"The Backrooms"},{"id":"1G-JsNBxekDxfucOYv_CJyZQ-F2Sgul60","t":"Elementos","f":"elementos.mp4","y":null,"sz":58,"tmdb":"Elementos","alt":"Elemental"},{"id":"1BGXvU0gdfgv41W0Vr5jQO6EPzJhcuT3U","t":"O Menino do Pijama Listrado","f":"o menino do pijama listrado.mp4","y":null,"sz":57,"tmdb":"O Menino do Pijama Listrado","alt":"The Boy in the Striped Pyjamas"},{"id":"1-avu6bBC9Y8GMi6Ge8DVRUEXpl91Vr-l","t":"Super Mario Galaxy: O Filme","f":"Super Mario Galaxu.mp4","y":null,"sz":56,"tmdb":"Super Mario Galaxy: O Filme","alt":"The Super Mario Galaxy Movie"},{"id":"1q-5FegZGDwvEpqO6gXS9gnWuhM7S0BS2","t":"Guardiões da Galáxia Vol. 3","f":"guardioes da galaxia 3.mp4","y":null,"sz":55,"tmdb":"Guardiões da Galáxia Vol. 3","alt":"Guardians of the Galaxy Vol. 3"},{"id":"1wQA2S7Y8jKUjDyspHGgq74Ww3EOibkBI","t":"Guardiões da Galáxia Vol. 2","f":"guardioes da galaxia 2.mp4","y":null,"sz":54,"tmdb":"Guardiões da Galáxia Vol. 2","alt":"Guardians of the Galaxy Vol. 2"},{"id":"1B1ozlkdD5Sno55smfvBq0qibqCbW3QtV","t":"Guardiões da Galáxia","f":"Guardiões da Galaxia 1.mp4","y":null,"sz":53,"tmdb":"Guardiões da Galáxia","alt":"Guardians of the Galaxy"},{"id":"1CZ2HDNr_VG6o-9gMNDsHS52EXKCQf05F","t":"O Rei Leão","f":"Rei Leão.mp4","y":null,"sz":52,"tmdb":"O Rei Leão","alt":"The Lion King"},{"id":"1SbUwRiDMTRatcAp0M0YFTG9_Ve5aeC9B","t":"Trolls 3: Juntos Novamente","f":"trolls 3.mp4","y":null,"sz":51,"tmdb":"Trolls 3: Juntos Novamente","alt":"Trolls Band Together"},{"id":"1OCu74LJSf8oUI9iZ0ZAkhdB2wCzFevXx","t":"Michael","f":"michael.mp4","y":null,"sz":50,"tmdb":"Michael","alt":"Michael"},{"id":"1dZqrYUM3M9w9LOr6vsqIxOJJ0_a5jcyR","t":"Alice no País das Maravilhas","f":"alice.mp4","y":null,"sz":49,"tmdb":"Alice no País das Maravilhas","alt":"Alice in Wonderland"},{"id":"1dTlje-DEAWXg8nbMm-BysKQB2Lrh0uRA","t":"Leo","f":"LEO.mp4","y":null,"sz":48,"tmdb":"Leo","alt":"Leo"},{"id":"1GMin9Z7kLc4bv6fgPXKTKPzmOxCH4bao","t":"A Família do Futuro","f":"a familia o futuro.mp4","y":null,"sz":47,"tmdb":"A Família do Futuro","alt":"Meet the Robinsons"},{"id":"14s0H3A_LCTwBV5KaEFZfkVBiCYLqPv7G","t":"Gato de Botas","f":"gato e botas 1.mp4","y":null,"sz":46,"tmdb":"Gato de Botas","alt":"Puss in Boots"},{"id":"1bRSptkC2knaXRXemVFp8wRy2NYPm35A1","t":"Trolls 2: A União Faz a Música","f":"Trolls 2.mp4","y":null,"sz":45,"tmdb":"Trolls 2: A União Faz a Música","alt":"Trolls World Tour"},{"id":"10Xznf_oVg0bfWBwJANDDWgsSTTHZ9-4-","t":"Trolls","f":"Trolls 1.mp4","y":null,"sz":44,"tmdb":"Trolls","alt":"Trolls"},{"id":"1CdTCieItWwDrTPCOU-BTsmPurUjVGO9V","t":"Carros 3","f":"Carros 3.mp4","y":null,"sz":43,"tmdb":"Carros 3","alt":"Cars 3"},{"id":"1DxOED0h1S5DVrOIoV9SnPUNi5UVRF3z7","t":"Carros 2","f":"Carros 2.mp4","y":null,"sz":42,"tmdb":"Carros 2","alt":"Cars 2"},{"id":"1bpLtD2nJdQAyCRtIDwLyI3pVW80soCmB","t":"Carros","f":"Carros 1.mp4","y":null,"sz":41,"tmdb":"Carros","alt":"Cars"},{"id":"1a-cmO-3gSG1eWxfd7hnT04y3lTFoQr5l","t":"Um Cabra Bom de Bola","f":"Um cabra bom de bola.mp4","y":null,"sz":40,"tmdb":"Um Cabra Bom de Bola","alt":"The Benchwarmers"},{"id":"1zgMauXbleJXKONoF6uYm1wko1wPH14ql","t":"As Crônicas de Nárnia: O Leão, a Feiticeira e o Guarda-Roupa","f":"Cronicas de Narnia.mp4","y":null,"sz":39,"tmdb":"As Crônicas de Nárnia: O Leão, a Feiticeira e o Guarda-Roupa","alt":"The Chronicles of Narnia: The Lion, the Witch and the Wardrobe"},{"id":"1pbbQ_S6BbxFzzXeumbqPy8SMtMKMs7a6","t":"Os Caras Malvados","f":"Os Caras Malvados 1.mp4","y":null,"sz":38,"tmdb":"Os Caras Malvados","alt":"The Bad Guys"},{"id":"1xv_HkTb1Kby0zFY0EE3WZx9uilIdp6C_","t":"Coraline e o Mundo Secreto","f":"caroline.mp4","y":null,"sz":37,"tmdb":"Coraline e o Mundo Secreto","alt":"Coraline"},{"id":"1H9P3ZbGtW9lCOTUsBZYpttEL2fXPAyqw","t":"Pixels","f":"pixels.mp4","y":null,"sz":36,"tmdb":"Pixels","alt":"Pixels"},{"id":"1Na5a4EzzSjbAgsXtjyBe9zCA5oKLEdRk","t":"Shrek Terceiro","f":"shrek 3.mp4","y":null,"sz":35,"tmdb":"Shrek Terceiro","alt":"Shrek the Third"},{"id":"1oX59Y6lXGIsbX_CT7Y__YnPFZQCOBAES","t":"Shrek","f":"shrek.mp4","y":null,"sz":34,"tmdb":"Shrek","alt":"Shrek"},{"id":"1j7zcdx2BDqcrV1wOXVo7s1shBj3AMksr","t":"Shrek","f":"shrek 1.mp4","y":null,"sz":33,"tmdb":"Shrek","alt":"Shrek"},{"id":"1zghg-xb7Yjq_T32S7i1RR6o6yNDuIQ5W","t":"Shrek 2","f":"shrek 2.mp4","y":null,"sz":32,"tmdb":"Shrek 2","alt":"Shrek 2"},{"id":"1chF4xWOsTFaA3v7lMlckoEzWF4Wvo07v","t":"Minions: A Origem de Gru","f":"minions 2.mp4","y":null,"sz":31,"tmdb":"Minions: A Origem de Gru","alt":"Minions: The Rise of Gru"},{"id":"1mpGpY5xDzc6odKSIQyUZsf1d4HQ7xiLm","t":"Meu Malvado Favorito 3","f":"meu malvado favorito 3.mp4","y":null,"sz":30,"tmdb":"Meu Malvado Favorito 3","alt":"Despicable Me 3"},{"id":"1r04xp8t7mXxVl8SyLmPRy4Ldy0XeDS4k","t":"Minions","f":"minions 1.mp4","y":null,"sz":29,"tmdb":"Minions","alt":"Minions"},{"id":"1VERUDZalVdYspFpIQAqbhhqyvFhM4g1x","t":"Meu Malvado Favorito 2","f":"meu malvado favorito 2.mp4","y":null,"sz":28,"tmdb":"Meu Malvado Favorito 2","alt":"Despicable Me 2"},{"id":"1M5YWQFB9akkyQpng-nHPCPELNJR9j4J2","t":"Meu Malvado Favorito 4","f":"meu malvado favorito 4.mp4","y":null,"sz":27,"tmdb":"Meu Malvado Favorito 4","alt":"Despicable Me 4"},{"id":"1PKF65U5FXTnNkW1FuroxHEOiznmePDeq","t":"Meu Malvado Favorito","f":"meu malvado favorito 1.mp4","y":null,"sz":26,"tmdb":"Meu Malvado Favorito","alt":"Despicable Me"},{"id":"1BDCmSx5abxDnM9_cHsxRvFGkNFAgjehO","t":"Homem-Aranha: De Volta ao Lar","f":"homem aranha de volta ao lar.mp4","y":null,"sz":25,"tmdb":"Homem-Aranha: De Volta ao Lar","alt":"Spider-Man: Homecoming"},{"id":"1P4NxN9uiHLFzIfGzfG9h7QPSJCQ7s69o","t":"Homem-Aranha: Sem Volta para Casa","f":"homem aranha sem volta pra casa.mp4","y":null,"sz":24,"tmdb":"Homem-Aranha: Sem Volta para Casa","alt":"Spider-Man: No Way Home"},{"id":"1L_aUn8jOxWl4j1RVgnnfpV7joRYWoY2B","t":"Homem-Aranha: Longe de Casa","f":"homem aranha longe de casa.mp4","y":null,"sz":23,"tmdb":"Homem-Aranha: Longe de Casa","alt":"Spider-Man: Far From Home"},{"id":"1FQN_LyBoyfNIbnZ_BPW6J_R1kKX7NL0o","t":"Vingadores: Guerra Infinita","f":"vingadores 3.mp4","y":null,"sz":22,"tmdb":"Vingadores: Guerra Infinita","alt":"Avengers: Infinity War"},{"id":"1SR-X3syx-YUA5vi3RvZlHnGMwpIdJAnr","t":"Vingadores: Ultimato","f":"vingadores 4.mp4","y":null,"sz":21,"tmdb":"Vingadores: Ultimato","alt":"Avengers: Endgame"},{"id":"1D__gHAwIFC0hHFuXPAwIVSJUaYxeVMGU","t":"Os Vingadores","f":"vingadores 1.mp4","y":null,"sz":20,"tmdb":"Os Vingadores","alt":"The Avengers"},{"id":"1bm4iI12GvAr1-BgrVAHlN3sYtUZVvJ33","t":"Vingadores: Era de Ultron","f":"V1NGAD0RESULTRON.CINEVIBE.mp4","y":null,"sz":19,"tmdb":"Vingadores: Era de Ultron","alt":"Avengers: Age of Ultron"},{"id":"1jzxVtZDehLAFh5DQMw2xyODVRWCYois1","t":"Jurassic World: Domínio","f":"jurassic world 3.mp4","y":null,"sz":18,"tmdb":"Jurassic World: Domínio","alt":"Jurassic World Dominion"},{"id":"10tKw4VQv0yAYZ0h6xcmqivthGYcDgXKi","t":"Jurassic World: O Mundo dos Dinossauros","f":"jurassic world 1.mp4","y":null,"sz":17,"tmdb":"Jurassic World: O Mundo dos Dinossauros","alt":"Jurassic World"},{"id":"1hHC8jjDw5eEXwH6a-sbmTd_8eVRAcljw","t":"O Mundo Perdido: Jurassic Park","f":"jurassic park 2.mp4","y":null,"sz":16,"tmdb":"O Mundo Perdido: Jurassic Park","alt":"The Lost World: Jurassic Park"},{"id":"1h2ymFg6g8vE3mIqvS9PBEIt53z7Sspkw","t":"Jurassic Park: Parque dos Dinossauros","f":"jurassic park 1.mp4","y":null,"sz":15,"tmdb":"Jurassic Park: Parque dos Dinossauros","alt":"Jurassic Park"},{"id":"1WQzLj0qng0OFoCqKejMMrzjFsI8CAkx-","t":"Jurassic World: Reino Ameaçado","f":"jurassic world 2.mp4","y":null,"sz":14,"tmdb":"Jurassic World: Reino Ameaçado","alt":"Jurassic World: Fallen Kingdom"},{"id":"1MjfPkKt4g4JIj21a2EUyc7X80ZNfvc6J","t":"Jurassic Park III","f":"jurassic park 3.mp4","y":null,"sz":13,"tmdb":"Jurassic Park III","alt":"Jurassic Park III"},{"id":"18wCUBTHGExwBonKTNGOPDBfF5p25Dj5l","t":"Como Treinar o Seu Dragão","f":"Como.Treinar.o.Seu.Dragão.2025.1080p.WEB-DL.DUAL.5.1.mp4.mp4","y":2025,"sz":12,"tmdb":"Como Treinar o Seu Dragão","alt":"How to Train Your Dragon"},{"id":"1JjuQO94werZz7BuJKJgJ-e6HHyI-AVpk","t":"Como Treinar o Seu Dragão","f":"Como Treinar Seu Dragão - ToTTi9.mkv.mp4","y":null,"sz":11,"tmdb":"Como Treinar o Seu Dragão","alt":"How to Train Your Dragon"},{"id":"1iWWuLuZiKj3m2vubC6r1uuvP6CGO8rGl","t":"F1: O Filme","f":"F1.O.Filme.2025.1080p.FULL.HD.WEB-DL.DUAL.5.1.mp4.mp4","y":2025,"sz":10,"tmdb":"F1: O Filme","alt":"F1: The Movie"},{"id":"1qseKArEnfGb36y_9AA44hT6fdIMpfk5S","t":"Como Treinar o Seu Dragão 3","f":"Como.Treinar.o.Seu.Dragão.3.2019.1080p.BluRay.6CH.x264.DUAL-WWW.BLUDV.TV.mkv.mp4","y":2019,"sz":9,"tmdb":"Como Treinar o Seu Dragão 3","alt":"How to Train Your Dragon: The Hidden World"},{"id":"1pFDWeqXLD1gyNc00EWEXTk_Kg1FWsqIL","t":"Como Treinar o Seu Dragão","f":"Como Treinar o seu Dragão 2 (2014) WEB-DL 1080p Dublado - Alan_680.mkv.mp4","y":2014,"sz":8,"tmdb":"Como Treinar o Seu Dragão","alt":"How to Train Your Dragon"},{"id":"1Q2bVB4zxts5yEl9-_-fM5CiGa8nctYm_","t":"Five Nights at Freddy's: O Pesadelo Sem Fim","f":"Five Nights at Freddy_s - O Pesadelo Sem Fim 2023 Dublado_360p.mp4","y":2023,"sz":7,"tmdb":"Five Nights at Freddy's: O Pesadelo Sem Fim","alt":"Five Nights at Freddy's"},{"id":"1Ek8Dj1Cc2o8Ygap4918_QNTo73YYLPfq","t":"Five Nights at Freddy's 2","f":"Five Nights at Freddy_s 2 2025 Dublado.mp4.mp4","y":2025,"sz":6,"tmdb":"Five Nights at Freddy's 2","alt":"Five Nights at Freddy's 2"},{"id":"1CpfPa730i66fhPt-3OC1mIwfHwgOArdM","t":"TYSTRY 4","f":"TYSTRY4.mp4","y":null,"sz":5,"tmdb":"TYSTRY 4"},{"id":"13C8ss1TjuyfvGvVbWE2aA_0ftRZe1-dD","t":"TYSTRY 3","f":"TYSTRY3.mp4","y":null,"sz":4,"tmdb":"TYSTRY 3"},{"id":"1Tv8-QDt6Z8neUIssDLq0Pjlz71XZ8O8o","t":"TYSTRY 2","f":"TYSTRY2.mp4","y":null,"sz":3,"tmdb":"TYSTRY 2"},{"id":"1csiVjgYa9np5N8uG5E9maX1V6GB0HEnW","t":"TYSTRY 1","f":"TYSTRY1.mp4","y":null,"sz":2,"tmdb":"TYSTRY 1"},{"id":"1-i9HAXgryWnHYWAZ2sqAIrikkyamyRbk","t":"Toy Story 5","f":"Toy.Story.5.redetoons.mp4","y":null,"sz":1,"tmdb":"Toy Story 5"}],"series":[{"t":"Irmão do Jorel","alt":"Irmão do Jorel","s":[{"n":1,"eps":[{"e":1,"id":"17_kfa7dKoWPYP1VziGJgsAvxrfz8487H"},{"e":2,"id":"1DxSwWpzzZ7V3btWte7VrJHPhB9X7f1BV"},{"e":3,"id":"1EV3LKy1IbPNNSb572csp-EPEqQCxHvrc"},{"e":4,"id":"1c6OlIe2he4L9IiKjidR6zLZq3V0pDkto"},{"e":5,"id":"1BBa_wufF1jtVv79Ufrlb9kgZZ8Xu_yUy"},{"e":6,"id":"1AmpHWkcJwAnKaMeXI3vOfQtWXD94006X"},{"e":7,"id":"1jeoAivUwF1Wey4A7zPvO2nIK7oqaGUKe"},{"e":8,"id":"16402WP__WQM1L9itO9CvyheHPqnaoxiz"},{"e":9,"id":"1kXiXfvAVvTREPQOYCgYrfFKY6v-4_7kE"},{"e":10,"id":"1lipCTEmiTT4lJYXwpUdmMUYcessjOuJB"},{"e":11,"id":"1Hh4ibTwx69uUQnA8Gl0ji9DQ4MaEj0wD"},{"e":12,"id":"1TvQqJX1uSKOh-NPRqEXiP2OoWLwsPGOQ"},{"e":13,"id":"1J4s8EbpqSopCafrkwYa79AKM4qg2hmEI"},{"e":14,"id":"1wDePmHn2zVMwk1GpiIFV4zKT9K5vcui6"},{"e":15,"id":"1yyQjMBIKyterE_S0hkY0pqhL0QaPL_IO"},{"e":16,"id":"1KbFbibMiKTTmZITe1awb_FPM9GKcAH6C"},{"e":17,"id":"1b70iRN9LR0yy0NNrIACs2ed37LEZmkiq"},{"e":18,"id":"1VNXHj0uj_ktTP23kUttSoIr-6sMaNN-k"},{"e":19,"id":"1prfoazxoYVLd1W24sIJvm82F1pPCNsgY"},{"e":20,"id":"19jMW-okZlCYdA0ZBaUGqK0i7aWPctPlf"},{"e":21,"id":"1hI1sqJOe5YYMEvksfS-NYqjfsmKbU2Fx"},{"e":22,"id":"1Ees2mSeb8OqfTEzOHTI5_WBIEzWtvAFu"},{"e":23,"id":"1D7RtcwBfY4VvCc3x4vA1xNQoAWgY7L7m"},{"e":24,"id":"12JmMy-F4pOzQSp4SntbDCBeVDH9MTlVU"},{"e":25,"id":"12nu4afpR0dYM05CI3FaadoJxY3U-jGCX"},{"e":26,"id":"1k3IZiWU1gaqgSPPipYZUJGQ-7kWf76yt"}]},{"n":2,"eps":[{"e":1,"id":"1KKv5f5-5j5uYi_Ru10Kx2EtdQ7PIDweW"},{"e":2,"id":"1HG0NLfM-dRpElVU6-O-GvtN4AlughP8p"},{"e":3,"id":"1TZbtsBsYo955eDHolHa5PgR2K-nheUiV"},{"e":4,"id":"1Qcg4pHgdusG4aGFoQIMrwLIZuSQ91fgn"},{"e":5,"id":"1AJicx4SIkD1osQmty4_Mt_C4F-OxoCkw"},{"e":6,"id":"1ISy4g53qDV13SIL1jJ9-4lyUYkJwPLkq"},{"e":7,"id":"17lxL9XY9ZBgBcv7DXBYVKDlAr3xD1RgI"},{"e":8,"id":"1tc5LRg9P9AY3RTKvkjA1_yuo6HaJFIdG"},{"e":9,"id":"160vuGJFoKXPTpCnDtvN1flMZSNvbJDmf"},{"e":10,"id":"1YpGb8vKi-k63_UYzw7NkPS5VLeY6N5QD"},{"e":11,"id":"1yXKA8Fo7Zg8u54jOOFiqtdGchGdqvMfS"},{"e":12,"id":"14kZtTXmc_5DraFCzEs5KIvSUizzxgLtF"},{"e":13,"id":"1_mBVrjQWKOjkjrF47_AxLB9HK3-GAawY"},{"e":14,"id":"1cMfOaNudN0EvQAyVsfmL7qCiai8haXx3"},{"e":15,"id":"1AlgUUfP1WQ_VRR1zWqoA-mSMIrkUHD_j"},{"e":16,"id":"1BbKi_h3Tcp7KdUmLvt5fo7JJmgqfPwKT"},{"e":17,"id":"1dO3C6fOb5IuiVA4dxtEumYjC5Q4K-GPJ"},{"e":18,"id":"1kGOkIHt1a2OFqV9MKlicSNFUTneU0xMj"},{"e":19,"id":"1eUmAhE4qA8HxCl4yNIvuizLofzSEMYaP"},{"e":20,"id":"1x0jzbiex-0JPJwZbNhxVAteBB1sqjYuy"},{"e":21,"id":"1t1PxR6N-200gwlfJCmbaoQtRbwnsVUDN"},{"e":22,"id":"1SXUlZdgy7YeWd6TGOUGWiKoHwJ7wL2CL"},{"e":23,"id":"1u0A0UJNA2EaesmjUXnj-MFdnwAn6cM8Y"},{"e":24,"id":"168DUzm2fd9DAXz3DZQYWMMcrY39az2KZ"},{"e":25,"id":"1mVEIJHwLzXdESvLwd_ulRAldurrMWoAp"}]},{"n":3,"eps":[{"e":1,"id":"1CI0S0hxDxUaa-BzWA7Bgi0eD8ruZJ_6V"},{"e":2,"id":"1XgXkfnXk9RIke_JSZMyK3fRIBwiOzIcC"},{"e":3,"id":"19kcKE0UyNqcjhDFR7ltxI5LCMamkMu0v"},{"e":4,"id":"11Led49-OIF6i1J4eMaBGIykg6ml3ir6w"},{"e":5,"id":"19peYy0lKCOQOBZEKeQiB-LPSchn9Ahue"},{"e":6,"id":"18tLcBoFHVDlc5ETcEqWl51Yvf57V4Q92"},{"e":7,"id":"1vhY98Hs2v1HGdSy-tlzJyIG3mkIZrihc"},{"e":8,"id":"1br8KqycsNqJ8RiXojuZpmkhxKDfl2Fey"},{"e":9,"id":"1V7m9YBVLAZ_EVnOD9idoJkYC26-iSIuc"},{"e":10,"id":"15JVaKMo6tzKRINzfm8GthM0jc-18kk4_"},{"e":11,"id":"1Cun0263izEK5mi7h3xjPmmw0GkEM670V"},{"e":12,"id":"13890yfWRjDqjip8I7Ilt5hlHyzEraTDb"},{"e":13,"id":"1pcSfU3ZVmHvkYb7Yo96D11E6ae3-I7Ex"},{"e":14,"id":"1m0C5Erllcv2ialay8NEzXUpIyvlopIVU"},{"e":15,"id":"1y4FIZzIhfBgup9RIXNt3Liqqvr4P26Qs"},{"e":16,"id":"1_o5aKs-ZyzYhE3ROEY9Hjr6rv_oonnZk"},{"e":17,"id":"1g_2PZkmVUoepZFArxJxLu-gSPHXqdp1c"},{"e":18,"id":"1tGaq9dWzz7B2qV1OexXEyHvxNvme6YWE"},{"e":19,"id":"1i75RYQmCUNzYNt-gKTG44imZ95XBonD7"},{"e":20,"id":"1BGccHEfTCix4Df0S9o8QyfINlJufapld"},{"e":21,"id":"1VpNxE7tMVNu9HgNbZVYY6KbSZVCGrNCx"},{"e":22,"id":"1MHj1_E3flrGTASE88KMOy4Y3HjDbWCww"},{"e":23,"id":"1-lG1hcnxMo0zwibAZ7i6czdSjf-1rD4R"},{"e":24,"id":"1DxV_FbxctbiStDH_SrtVvN-CKSFLx2jU"},{"e":25,"id":"15Eq7VgeyMEDNiAUJc_ehl1o0m0F5lO8K"},{"e":26,"id":"1Plhyzk39i-wTKMEN43q5TEMXZn5Cm2vD"}]}]},{"t":"Loki","alt":"Loki","s":[{"n":1,"eps":[{"e":1,"id":"1SOfZUV0Nu0L7Z9kDjFOliAwHRs_tqoyc"},{"e":2,"id":"1tPM-xs9XhkEbvnfAg9Lhu1hDAGSlXhZD"},{"e":3,"id":"1GEOJjxBhzMEAcSbHewEfUHkKgn852h2E"},{"e":4,"id":"1Dm1hzswYQ2KCizV6CRqWYB2QgJ4qh1yU"},{"e":5,"id":"1sny1UTFEPTIJLKaBYCtRrDpmX44sElFC"},{"e":6,"id":"1-aNKJquMIbbir41ylEna8UBLha7jDkuX"}]},{"n":2,"eps":[{"e":1,"id":"1M9L8P6f89lTpgyXjLIDMaRVq1uMsP2D4"},{"e":2,"id":"1HGzwCvsXguzOvh2GfSOOosCqquCnhF_-"},{"e":3,"id":"1KLJOLh2R8QIsv9mquLtuVe5jl5ytWLT7"},{"e":4,"id":"1UqVJHC9HK6uXPuAg7ABzMWJ4TzRx2b-t"},{"e":5,"id":"1_yfQyPf8HKk7HOLfEtbDmBJ65J7rRIXK"},{"e":6,"id":"14yIZB4aPbYSX9IsaZIIe7tgYMw-vW1VK"}]}]},{"t":"Ultimate Homem-Aranha","alt":"Ultimate Spider-Man","s":[{"n":1,"eps":[{"e":1,"id":"1811aqGzCYNuAjTUkOwYgsLw6t7Ai60a-"},{"e":2,"id":"11VPovuNLZKiXq_Mv-XglNvfXrT3bIykf"},{"e":3,"id":"19qj92vA045DiiYNlPLOq2CGsVtyxHaOZ"},{"e":4,"id":"1RN2IYejDm5Xwa7OVYOP0Z-QYJziKlRxA"},{"e":5,"id":"1SaDNadUWz8FVam1LKU8yjJnvT0NUSJr6"},{"e":6,"id":"1aJHiqxUCWa9g4gO08L4FDRJomI9EGU7G"},{"e":7,"id":"12rfoGZMNffDnZFjlQkHgXxxyIUbRCMjj"},{"e":8,"id":"1W5CDwA9rf1raoyCSdh7zmMgrn5ISB42-"},{"e":9,"id":"1hgDh4-4B7jKtvSCOSuM2Kr3onyZlHmwI"},{"e":10,"id":"1HQrC1s1dlrS6fFtCHBxn8nXozTOCC8kq"},{"e":11,"id":"14WHY-7sfc-_XItqE6WuGIgweAZpwrWtQ"},{"e":12,"id":"1qiXpTtGOcZSMKSMTaQJbRqG8OAkG_C99"},{"e":13,"id":"1YhA1DGg1Sd2m4c6s6eQzn3uBVkPcSaed"},{"e":14,"id":"1yBjG80SjgdjjWmWF1OrRZMK7c_qru9qi"},{"e":15,"id":"1vh42j-4btTd2s23TBf1ffs4r274JOWRK"},{"e":16,"id":"1OmNg1fPLlQx2EdnkIY-mzZD0FNq0MjSA"},{"e":17,"id":"10qescAuc59J67r8Pey-A_MYBcZ4Zo4Wb"},{"e":18,"id":"1DtjwDphwU0ugHtSzfsz4ytmcYATQc83Z"},{"e":19,"id":"1P7yomt33LsiLJ7Kk6TWO5Gw9RGaftlDa"},{"e":20,"id":"1inbxFe5s5bx-52mFEl23BTKku2C99mWE"},{"e":21,"id":"1d8anWHlNX1l9GsAVRj9cvUbXQ2bKKjiZ"},{"e":22,"id":"1jfRNIuO1O6KnFnoBqRB__Q2Zok0fKQJO"},{"e":23,"id":"1D4XJyWyGH9A8yPJNaJzJ503flxmy-ba-"},{"e":24,"id":"17XdG0pfJH21NY3WWgUHlgIXoUcxc44-V"},{"e":25,"id":"1erS1P92mGCkYWW_aI3t8Y2KXscAWTO2o"},{"e":26,"id":"1LjEQbdru5-TCiN6rboD_yv4MN2Pw1fc2"}]},{"n":2,"eps":[{"e":1,"id":"1p-bHOp0P_Ky-wzndThaPfscNdpRDZMMQ"},{"e":2,"id":"15PtZnRMNfGxSiiCZOc2IPPBK4V49DMWr"},{"e":3,"id":"1VOJHHtbfw_W4ri9LFSdoqAQTJHQ727g8"},{"e":4,"id":"1pNgISzXWJ0x7N_LkJZ68odpJ-9scQeCt"},{"e":5,"id":"1ZQnpLaw-97Pgf6GGh_3gqO9jFuiSp0Ap"},{"e":6,"id":"1XgkFOs78CLw2GfiA9s5o6mZITtEX1fQ8"},{"e":7,"id":"1xvUJFhWjWWavmVk82JRjAcLuRj2XbQca"},{"e":8,"id":"16nEf7VhGogmWd_btU6VfGT8Ueyx6zrWQ"},{"e":9,"id":"1zrQFARt24EZ5vBdj0_hdyyxh28rtTQ53"},{"e":10,"id":"1YsUfNnQbX5f05R_oM5ezR9qNhUocPUx-"},{"e":11,"id":"1F-SxKiEIex27zG6w5dDKxNNzePQj7X3z"},{"e":12,"id":"1QD5tDiXGscyxXtcCg5JDfb40K-N4WVxn"},{"e":13,"id":"1X_bN_tqapMXE2Yd4ARbIWAmmxznnfQUL"},{"e":14,"id":"1iYpl4gfX7OLM11oRd7tl6bBpm9ugYCTj"},{"e":15,"id":"1jREjeUr26mg79wXawAl5tz4NAHlMByo1"},{"e":16,"id":"1CBhm7ZlU7uRQVL6zHYBH8RWcSyNYW6QM"},{"e":17,"id":"1qJ43eAQ5HO0AEO9-mrjZwuMoXgTXyZCa"},{"e":18,"id":"1ucn2x0I_bslUKtZVayespRwvP4SBXOeX"},{"e":19,"id":"1Dn44ASUbF0BZVxXqmLwRCbN7ee5vXUV3"},{"e":20,"id":"121LhqKJ1jbGjjXW6z1LRsSkFT0v0j85W"},{"e":21,"id":"1CtfXVBEVe3MwW0197xsIiHJ8GniBWk1A"},{"e":22,"id":"1h7pDn0CNFOsZ6cFsttBVntsx0syqqpsM"},{"e":23,"id":"1ddJM2n07zLQqPzYCCTdMowNWmCm8yOBb"},{"e":24,"id":"1ouID5u1OQ0OEOxfxs3hnRVjrJWoKQr55"},{"e":25,"id":"1esxSOUBShADqFledDPqJQOen1nCBYywy"},{"e":26,"id":"1YhbRBAYCncIIlH0gLk8Cy6rC_vW9KE8i"}]},{"n":3,"eps":[{"e":1,"id":"1mU7Qa_OklRcFznF_51BkIqfB8fFZ8G0E"},{"e":2,"id":"1RexE3odtXYGXGPB38L6ia7ppVDuMpXRI"},{"e":3,"id":"19z_GiLZOG3hCdjF9on-y2EQ-WzSG33C3"},{"e":4,"id":"1TIfrj7rmC6w4mgAy0tAgUYcittlTJHCb"},{"e":5,"id":"1_y2BXwgwYfRFGhyMce1cG_yeOwvh1POH"},{"e":6,"id":"1t1u24u7AuV2sE5aUHNiB2tHbx1SxC4w1"},{"e":7,"id":"12JrLtbHNxHCVjieUcjSq4rON-iRKAiSk"},{"e":8,"id":"1Rtx957hOabHAmq_1MICq3orsCt1mBFin"},{"e":9,"id":"19tVtP7aFtzidSLUHxK4oQ_b0GqZrW4SQ"},{"e":10,"id":"1hH-rgeqex8cvkiIbvm63ncbjMpqDqE1V"},{"e":11,"id":"1Ohzo4Dcf6g0frn75ScDJDR1NlmydFpYD"},{"e":12,"id":"1u0v_Hj0oHT7pcrz6Ya7iVW16JJei0Z1J"},{"e":13,"id":"1fCfcsYleeBWaYT030awtKcZLAwJbx_tr"},{"e":14,"id":"1dE7UnHO6QtWrAsE3FXKyWjbkqr1e9PfJ"},{"e":15,"id":"1G8x4t1dsd1Nu_Goe_bOvMuxBeev7eDnX"},{"e":16,"id":"14xr7Y_DrVmjcXVQuKlq7d0Ob4SPrKiTe"},{"e":17,"id":"1nc8qiswMvVyUeXPd1mCcvJ4QHtde47Th"},{"e":18,"id":"1l7Ta-Lz7J1sgU58fRxoDaSn-2TZevw7J"},{"e":19,"id":"1TgwnNrnrKu-dGRj2-WZo7J0CIQoHqLS8"},{"e":20,"id":"1H_xRt_RvNYsF0VdJ4fLmMp_33ghYytjF"},{"e":21,"id":"1NG9LMZUsQJmHae8RHRMRZUjdeEJ7V3dU"},{"e":22,"id":"12QoLmWrQ3UN8j0vaChvdnjPY5HybHQLj"},{"e":23,"id":"1moSaZXjR8aV_IngWYDQO-Ku6qhTAl8BD"},{"e":24,"id":"1FqFtrPlEi1S0jatHqyxWqpPDzkMqPYWe"},{"e":25,"id":"1Z75IF81V_xodly-fxQMi2UpRp3jXyA4p"},{"e":26,"id":"1UR3CHWAj4s6SFyAz3sr1foNXls7jI6EU"}]},{"n":4,"eps":[{"e":1,"id":"1qWGX9Z1hs80_TzNMlB7I7_u8-E7c_nRg"},{"e":2,"id":"1WVKl57x_Xkbikg1T_hVKvSavHyPpNcvB"},{"e":3,"id":"17uxUNq5JMocSIpV5p6-C17iqrnRyCoLH"},{"e":4,"id":"19AedQ0to4GN8vTu0lFZDczqLuJALFjsn"},{"e":5,"id":"1eUGysSrud4IFabFlOMBkcO_0Egf4Y4DS"},{"e":6,"id":"12hZfjhJP_oKmPwQKkWRssWDRpMBTB7cn"},{"e":7,"id":"1d1N7gCliuXzfWvhTJVUkW8OlyzWIJWcL"},{"e":8,"id":"1E99nW_KID5uvRV-nGxIwU8OVDgbGqVLZ"},{"e":9,"id":"15XyZlL5rmibweGsVROjyDMULKVMwlD2T"},{"e":10,"id":"1kWyxoQL7A8aKm3HNlS7iqImh3uKzcZpm"},{"e":11,"id":"1YjXfH4VHTPEGTEcTuCyM21fVt3am923_"},{"e":12,"id":"1sIOTjjJ9b0YanVDs1guh2njfAgx0UN9f"},{"e":13,"id":"1hNa_rfKx2XC-PTmuyOtpiqDs1Yyll9uA"},{"e":14,"id":"19NG08IocDAPpAUJN4SgWmDW_B4SKMaAe"},{"e":15,"id":"1FJVRVIYybUEAaCz_uVK0NLN2PCAQXUuI"},{"e":16,"id":"12JBJP_LBGP7pe1_b4kO1MCbkjAy5DV71"},{"e":17,"id":"1RHOJLseT8w6iy01rVDIoKGt5i0Psx_Xg"},{"e":18,"id":"1znZE63lQOac44EKhJqEvgoHxF0iOlB6T"},{"e":19,"id":"1XYIuq5LvzlMMj0axp7eFRtkNlWjMDPN8"},{"e":20,"id":"1QZUj9ysrBoGkXCv_QX3Z_Jq-Uw2bKA-c"},{"e":21,"id":"1EeW5USEgBrOhDCI5ePFdeEMScfv9BXgW"},{"e":22,"id":"1ESzkAl1X8M-rU-pDGFyNNeJBn6P63RhG"},{"e":23,"id":"1hAWlBYkRT_X0VcjFOcOpUUpvYjDAo3-3"},{"e":24,"id":"1TDWi2rzXsfFl62m3Trmu1bUH9egZow7-"},{"e":25,"id":"1kq_xwpEaAeLPqJfdJMRwdnrshMPDL0ku"},{"e":26,"id":"1wDni7zZikcrtyZxeLe0ix4Y6YFqvQIC2"}]}]},{"t":"Phineas e Ferb","alt":"Phineas and Ferb","s":[{"n":1,"eps":[{"e":1,"id":"1X0PoZE47868p-dq3sX57Q_6630Zh-009"},{"e":2,"id":"1rTQNjkguXl9R0Sf0UxWrXfwfMq4DZaLG"},{"e":3,"id":"1oVdG04hAH6gKd2dIVULMwUkuiLVEojD9"},{"e":4,"id":"1yPdGX9-T8OEt-Mca_KRP8yjC9yreQlR3"},{"e":5,"id":"1VFdxoN3bIM9fAgM7coxpTrH37ZVKkc5U"},{"e":6,"id":"1iMr9_MvbpX58Pey6oNiXkck2mz0UmxtR"},{"e":7,"id":"1lR49pcHyKt_Ek3siw0Bk3muE-IDHO719"},{"e":8,"id":"1OdjHVY6PAY5Uc-L_UU6_hSvz0kI2cNW5"},{"e":9,"id":"1NccvP56FlgjfKMkhv7IJfu8_MCZRCbmg"},{"e":10,"id":"1Mba4QxvU-F36RmFY7pAAlxLe4tNuviGa"},{"e":11,"id":"1F2yJ8vbqPq3qhiKdVDbis6WZ9q9POnnU"},{"e":12,"id":"1zPPlDQKHsClJrD7J6Eq0jjChVXJOxxi9"},{"e":13,"id":"1RFC9JNpa4Q_HmUNLtZiyjZ-QNLPgBntS"},{"e":14,"id":"1ufV77XGrqEhtUJ2Z7R6bbKCcbzAF8wmm"},{"e":15,"id":"1jKr4lc1iK8xcJ4F0xaDLdkb4oIPAAJKe"},{"e":16,"id":"1ORgVacFlfxh47kLhhHmyIAdZSHZp0mox"},{"e":17,"id":"1ovCCxbWe3TbrOWeagIp_-1tfS258h4zL"},{"e":18,"id":"13iXvqcv0IaXO3-ZJlKOawrGmnhZ1dTwF"},{"e":19,"id":"1CnQ1VcK4vfwp39MPX39IVFWsxq_BnLBt"},{"e":20,"id":"1ikH2DsWkyWV1rNZc0dSEeHxCPs-5Jpnx"},{"e":21,"id":"1_Uk8YRca9mVUrrgoAcTEpJ3Jam-cP_mc"},{"e":22,"id":"1onzbOhQv8yADx9aJkwOagTlkS3W93bYo"},{"e":23,"id":"1nhBWPr1ErXbjnKE40Jtllftcjeb97Qwo"},{"e":24,"id":"1aEgKP4pEthXcnL3sbscZvMGDraluo6MT"},{"e":25,"id":"1IfQ0mI0_9DVrmQBub25_d5tsp_Q9_uNb"},{"e":26,"id":"1RbCgVGfzvTKLZjsLJnY00Azdltho0sO1"}]},{"n":2,"eps":[{"e":1,"id":"11oV4JcARDHdmqpTpjYTCRd8tmIunfUSp"},{"e":2,"id":"1DfMpvherCas3RGfuQ9War_gPd2DP5A1V"},{"e":3,"id":"1fEvrSCDXs22Wr-KPW2QdUO6Ie7hfvtTh"},{"e":4,"id":"11f2YHZKZXapbjXhnG_lS83Ms7K96YTBG"},{"e":5,"id":"18WMR2w0nEP8NR--i0Rk5YeHvHYS_ZoHm"},{"e":6,"id":"1NEKQEWhtNPI3f3VldM7vX296SSNR8NhV"},{"e":7,"id":"1G6AJm_c3-mgDXcHTuz-rBvq9OPOxMx2R"},{"e":8,"id":"1Jo9FtEv2Wd-qEUqyYv86GyPTEjkOFBC3"},{"e":9,"id":"11dFv6wlWFSCzzsdbKKpmxpsMvHxS42CE"},{"e":10,"id":"117pm6DaY4hwnOnKTY08KemUWAYxkkiDT"},{"e":11,"id":"1tNN3kqXtr4sbjPtzKdnQ1lmGdhwJxSvI"},{"e":12,"id":"1naBGsiTYsNWHzfTcwgyO4cqg6Hsikio2"},{"e":13,"id":"1NknFebGOzKLaTXxYCQYil7N6xAZbFTAO"},{"e":14,"id":"19cBQDj8TUdatDfItLW2W2_yjEPJnlmkd"},{"e":15,"id":"1gV-tatSntndZKbflkF9xSJh6H31TyIEB"},{"e":16,"id":"1yr2vOMHspgxcu1d2D4FroJuuZRbuS0ZJ"},{"e":17,"id":"1ywHuQhv83JI_xRNIic9skAdYOnkt3gHb"},{"e":18,"id":"1O9fTbH5aCWnwE2f_L-9_H8nZS99vbWto"},{"e":19,"id":"1oQZix9czP2TJ9uRabd1wsDL6Hhy6tDPs"},{"e":20,"id":"1Jk3G7r2kOu-lc9caNxL9EUZH_Ce7WoSp"},{"e":21,"id":"1BXUUdejFC0PSahRmM86Jni0ga10gJCRu"},{"e":22,"id":"1aQbmSC9oTzcAidKPmbt4WNL0YM2tNAFv"},{"e":23,"id":"1ez6tNBrcN6xlEAXjKOT9g73j9y_5Cj2U"},{"e":24,"id":"1p-10SVC8MUUk-ofGhFGpg4nOlFDL4wbA"},{"e":25,"id":"1VSbGHk8YXnxUwCtTlSjkK3IE21ePLoW7"},{"e":26,"id":"1Y_1vD12gk_ioUzVsVB6rD_lIz1T0T654"},{"e":27,"id":"1mvCLuOdDa7fwvGbZrorwzmIMPWDkkVH4"},{"e":28,"id":"1w0qoiLf-BbUdN2mQsoDhoMT1IsmGstka"},{"e":29,"id":"1xrr0JU2C8iRgVzlrjiqVtwbwylaKXae4"},{"e":30,"id":"11KSAsQOY0DJ2rXnvYvXjZIpItXfkYTTC"},{"e":31,"id":"1ndhLtHnkUbgJns7fSrNLmKnZbJi16FP3"},{"e":32,"id":"1UvUUzW3OTVTQKpxa9-A0aK8oPiWnri7-"},{"e":33,"id":"1o6X8e5kvhTiPuhMjd0eQjnurASt62dws"},{"e":34,"id":"1KmCdHd2D-qi_-wRnKhgcV16N7W60_wHs"},{"e":35,"id":"1EGY7Z1b7u4KqF92S3C3f40XhqY-gVsjG"},{"e":36,"id":"14qzCFUWF1XBKeO1IQjl2TjGYilOHtmKT"},{"e":37,"id":"1o1SR7YKMT9oga8PLgzXRrc2wega5m2AN"},{"e":38,"id":"1e3zzVSn6k5ipRYh5p99VRH44rsabf99l"},{"e":39,"id":"1UHzh5svrkJQwdeTQT4Anvrphtd2hvXOC"}]},{"n":3,"eps":[{"e":1,"id":"1njR4W_zQDVpDcsHTZb44Bww_Tgen1umE"},{"e":2,"id":"1q8fgGoEo4k4baRCEmXXhM4tW-GQTxnmN"},{"e":3,"id":"1x6huVCsOq94TiDYPumhE3zBrgAQdxsw6"},{"e":4,"id":"1g-r6LS6DWVt4qehnoFFtGTDQOI1TbXfp"},{"e":5,"id":"1iRlLef9sj0uxoAAQh8wsXnEZK36SbwEz"},{"e":6,"id":"1P9J-JAqjNLSJNkjSqXXsPltmJckK_NVW"},{"e":7,"id":"17-T8asDzBp4226LEizqy_JnNOA2yNDy4"},{"e":8,"id":"1p8MHWz6AZ51R558cpiRpww33sYoEdqnA"},{"e":9,"id":"14v2g6XD2J1nRDa3Eqq-EiNMi6xyRgljc"},{"e":10,"id":"1wUutdxhLVzwrpKg0AhxI0FeU3iPMLrfQ"},{"e":11,"id":"1b-Q9IrhpftUHVz0bOkZlRJUPB2J_QmDw"},{"e":12,"id":"1GDIBEppMta6R7pFNkRbPe31338bxRGvx"},{"e":13,"id":"1jihObTq8D41ppTs8K4rbWMhqME2vkBpm"},{"e":14,"id":"18LOgy6OVsH38OxalrhHp0p9nA1ZdqUhT"},{"e":15,"id":"1xEboQEcx0sOOY87FJOqoi9u3zvbRohlg"},{"e":16,"id":"18BOxeYYmMKeXQmA5NMI6DyjrE-hH-kL6"},{"e":17,"id":"14BiV6Mz5g3DEFJ9MkrZ6F48D9OYoXQrF"},{"e":18,"id":"1JuJ3Sa0wT6E5dE0JgX-W590gTkzjnpjW"},{"e":19,"id":"17gizOmsD3Fig-XTgzUmBeWyNd_DTx4zz"},{"e":20,"id":"1nM6MGttB1mPjqVALQ72Mj8t2ksxUTzzX"},{"e":21,"id":"1J_tDfmBjhHDnyfzhIKRn2uUlxLywhbJk"},{"e":22,"id":"1gOTs9ZWRvRHBqXWXyOh2pHDQig3mboFm"},{"e":23,"id":"1Xt_xvveO9FVKtZRlbemKUORze2LcTdfN"},{"e":24,"id":"1MVqhyE6Uc8H-JRE2D7i8hzNb769FIsUy"},{"e":25,"id":"1d8jXHbW_qL9kK58oWP-WCJtWBoYbh5hH"},{"e":26,"id":"1H39gQpx-9BUbEAQfG-AzM9GsFfAMbiHZ"},{"e":27,"id":"1A7semLJbyCbkLpmyPgc88Dgha_5TaGco"},{"e":28,"id":"1iYCIbyVja4SAizFp5bB5UjXVC_BhO-jg"},{"e":29,"id":"1OrzYxtY1eMFXQGwkNKIEf6WeXRQT6Cs7"},{"e":30,"id":"1wIDoYQVI0N4_PaMI7B0pBLIjzpnsPD9E"},{"e":31,"id":"14If6gLLZV4VcnuERtEet2a8HTLbPN1xm"},{"e":32,"id":"1OER2SVtvg96GqKfE8CMn9jFYCuNYAkBH"},{"e":33,"id":"15EIQnG8Yn44JP3fMP276StujE2UhRR9N"},{"e":34,"id":"1UWNGGHqmCHnDXAhPGPjEcdXjknqfxPbZ"},{"e":35,"id":"17gWr_ZOzgj-ws2uubNNSd0k1v6Ii8xf8"}]},{"n":4,"eps":[{"e":1,"id":"1YveqUWgZEwZ-C6tdGfwIucmR7E9zHKmc"},{"e":2,"id":"1IisaLw4AUu0EC-gWallTqDNmYOS_S3OG"},{"e":3,"id":"11vpGQUKMnksX9-Z-3-AyZeqg4CBXQKIU"},{"e":4,"id":"18xwnHs8vDDNjmzjj1f5BheXjApo8BRqf"},{"e":5,"id":"1oD01dzV39_7yU5YzAZ9d198At5dLGBoQ"},{"e":6,"id":"1ckK9YPBG1a-nWrrWNeDJWnCBoX_aWiie"},{"e":7,"id":"1pIXvk-XM1qxZYmHvH4Hc-Eutd4NGi5lb"},{"e":8,"id":"1MB2GlzlSqmDFLkRBjO1n6OoxJtga8nKy"},{"e":9,"id":"1YSa7hmy4JnG-qO48nfeG4uwZagYp_aUj"},{"e":10,"id":"12tJqgpdRwZLJOIGcOHjhW2irx0voU430"},{"e":11,"id":"1nGfJz1glpsZPGHhmQx1OjAfBWaICcalB"},{"e":12,"id":"123tFkAydwzXlrtkQjYyy6r43GlOdtSnL"},{"e":13,"id":"1sjYxVvx6diiOLeAws0zPQctHWfPcjnN5"},{"e":14,"id":"1UaUFLpI2D6MPPTKBxYsgwxmBHYBUvlpe"},{"e":15,"id":"11JyHEH3yA_dkvHlym7xja15to84NNWDV"},{"e":16,"id":"1hdqvzvSYS1kL6qggUxauWNjioGcBeuvS"},{"e":17,"id":"1-ww_9oSaaI2Y5itJvSqaqWLE2g5Bivh4"},{"e":18,"id":"12urJqdAw_3SyIg29KjIce1GgqsmUlcxd"},{"e":19,"id":"1XXzcB8rwlUlRmf741a_l7b3t0YhwTdOP"},{"e":20,"id":"1swNHGoLyR7nbOhuTNUoG6B-3gusPrIh-"},{"e":21,"id":"1gTxQHSjpF3MOwYy-iPTr4McqtzQJ8Uqa"},{"e":22,"id":"1VkDQ2Hmo8ja-_WuMzTLISSnw7GC9eCcx"},{"e":23,"id":"1M-of51El-gr5g1w3TUqLNnpEmkRUoRBM"},{"e":24,"id":"18Gqin69P_6R9UKAU-Pp2AlT00HdPPmOO"},{"e":25,"id":"18WUs7HI8Y8D8CxaXHQvtNrgMjV2wVj1L"},{"e":26,"id":"1XZVgdCoHjITWcQP21JZKCGdrdQqZ9Pqi"},{"e":27,"id":"19wKB54xHQXzn8lw-H8EUFcaF76-4PLUw"},{"e":28,"id":"1mMgJZyFfQ52SMF3TClRfDV0uR_sWKGJy"},{"e":29,"id":"1av6Tt7IGDFlGe0vqOEx1nmFCL6dJzg_I"},{"e":30,"id":"1_tBGTFlHTmgIoEsdTuREYewOBUaF7ORA"},{"e":31,"id":"1X0u1VpaEZa8F1nMds4YsdXWqpb_H32N8"},{"e":32,"id":"1PBtlPEbFH0WsgLXIKmW68UaRbH1hovZ_"},{"e":33,"id":"1ZCBzr2aNFFSc1ottKQ5d_tRyEyme--s1"},{"e":34,"id":"1ipRa8HosOSg6nbOV9jp2XlHswDRUUI3Q"},{"e":35,"id":"1jW3sInzaw2WE910-BMpgmz4nsXedVvvS"},{"e":36,"id":"12j26Hrmyo3mj1EvJ8ZYuIAlpZbOm5Pay"}]}]},{"t":"O Incrível Mundo de Gumball","alt":"The Amazing World of Gumball","s":[{"n":1,"eps":[{"e":1,"id":"1K9ofZoeioidv-3WeGYUXjq3Qebp93XXu"},{"e":2,"id":"1v3bn_0WOJA0apYRgomZugjqFM5l_fIK_"},{"e":3,"id":"1yyzzxhE4jQ3F_m4g9J0CX6z_oZmUxP6f"},{"e":4,"id":"1TGu2VfrCIGQzVgeI7eiu4w05ird9toMS"},{"e":5,"id":"1YSwqoMzK3IDH3PbjFt5ne76TJR5up2Kz"},{"e":6,"id":"16KnSBNuaVWxxwynjx2-G1KkErGa5TKWF"},{"e":7,"id":"1F4BBwh8sBRNr5yfWrxULDNSjyKUCjr5n"},{"e":8,"id":"1nyE-wuDhxE2_t190LQmz-Sk5ik3-vQwV"},{"e":9,"id":"1lsUtMIRB-odtNxg1R6DCHEPiAJ6iL5Kj"},{"e":10,"id":"1A1OAm1_N0Kq88FOwd2jKG0SIdzAfchvZ"},{"e":11,"id":"1yTBY7DjPjDPWOORKvyCz-YZKM3isjgXV"},{"e":12,"id":"1JKDLl-kIk61SF-0O_J6ayqiRw0E2hLRy"},{"e":13,"id":"1qrFGRwmXnOreBK_H-dyKHgUYGvRR4NG8"},{"e":14,"id":"1x43i3j4TtZlie6AOhUeqTOiVyQddjIkX"},{"e":15,"id":"1_tXPHym3OFl6wYsADCuiUMe71B-teK5b"},{"e":16,"id":"1ib7HhchL9HGKJ_QLyiKlPQ9csmuYD42j"},{"e":17,"id":"1vKptBVo-1GsAvat_JG5M-FGGib5FitpF"},{"e":18,"id":"1ed7OJ9vXSF3vKQtY9m39RluV5oMYK8-j"},{"e":19,"id":"1Jrww89rczXiYTB2tFRjqjs2S0LxskU8h"},{"e":20,"id":"1DHQiahk14ZpsQTC1C2-dDroY2Mhzt739"},{"e":21,"id":"1HvbvO_FzMeztj_uBI18TJKPp0QVKEV_X"},{"e":22,"id":"1V-mboXKHZ_IVn4-D1bbv3HihgU-RJJYn"},{"e":23,"id":"1bSojRx8cHD2CircgGJ2Djzw5wOD_sNao"},{"e":24,"id":"1LWttgA81wlQgpSU02h0BH3Nai0Ov7SAh"},{"e":25,"id":"1V02VkJiXEnuo0sF0UJ42NBVlU0cI7SHO"},{"e":26,"id":"1nExB_Dnoj9u-9WPY_xY1MWySTBOHMtlT"},{"e":27,"id":"1ZwgIdC0LMzRiU3uBQRz74XgCkx40m9WQ"},{"e":28,"id":"1W91Fy24mBM97ftkmYs1hcwpKm93D94Bb"},{"e":29,"id":"1v3onbTyWVdOng8tuEPs9jmQDhN7dZZW-"},{"e":30,"id":"15-RenrVPWapi308F6UQN8GP8qZ5Eov4x"},{"e":31,"id":"1mqwotjBQgLztBNtAOXzgx7_JvOsaphmH"},{"e":32,"id":"1WIxIBcaSEEctUO5nbFiDjxz4K2mZWbO1"},{"e":33,"id":"1fUQj5oMpX3l6HWeHeiFGF9s9mbIL3PM5"},{"e":34,"id":"1nrRp183D0VJ7i1l7L609orWkWVbiSzrW"},{"e":35,"id":"1G4_2ZT5qbi97Ojl58HQMWhkNPv5LAovO"},{"e":36,"id":"1H0dltIkLaAPEq5RYNmkXDFMrxqffMWA9"}]},{"n":2,"eps":[{"e":1,"id":"10JJqT6zk-oH0NDfwFqxAs58g8fTu8Msx"},{"e":2,"id":"14cGgboOE1cLiDRx06MYxcGQ9eydmc84-"},{"e":3,"id":"1xotDWuT6TGFcxWo3i-RHc29gjkZ8EBKP"},{"e":4,"id":"1l8YaXEx5mlq2JocYMFGmNNmamvUf9I0s"},{"e":5,"id":"1CpNWNa6Mfa19Oe1UlPUN04BjVC_b9WV1"},{"e":6,"id":"1-OtEldWF5-1jjxcNEnpsx-8xn4_7qyDb"},{"e":7,"id":"16Gkul3hYgmTIyVVO2wEbLN1w8PPEHU7M"},{"e":8,"id":"1CQSCvl7G8D61qcaJr_0tSVB6O2rJeNj6"},{"e":9,"id":"1vgGu6pocN6094luhkEPHWMp6TQV0ozvJ"},{"e":10,"id":"1ZDzXc75Wi-FGQ5Z7q_dnRbB37BCbdiIk"},{"e":11,"id":"1OBNRA__nni97VE0E2yyc4tTkkWV8vwkl"},{"e":12,"id":"1xAIG0zMoSruXNY6B5zmHHo2haOkTgoEH"},{"e":13,"id":"18F1gKnsrS3iMw3r6VbReZUQfbZ0ahxky"},{"e":14,"id":"1pALAREQDLzXC3K4Cgsj9YLmBfrh2-DJy"},{"e":15,"id":"11zW7Z2GrBBPz28zjrmj7BfMvJezpn1oy"},{"e":16,"id":"1V9LvRoybBT8BFpOLA7s3l211_eArefyv"},{"e":17,"id":"1gxjGUgBomAzaAfWw7_CtnZGukSWiikvE"},{"e":18,"id":"1JKVnRri819Ntsy4gRViUAvSR7WIL6X8H"},{"e":19,"id":"1-Le60pTpW51BtzF_91BMhh_5jwi_ccBy"},{"e":20,"id":"157NGo2CswIazQ-KGQccLMNdIlyFG75u6"},{"e":21,"id":"1nEdm6ZCQrmcp9N3Ow-8A-JMwnjuxgkm8"},{"e":22,"id":"18GqBHcPiqXjakam3ivzZd9p4E6pgVgXP"},{"e":23,"id":"1YI82TPCQG-8rCGUlVrrZn2Yr1WIu4bGm"},{"e":24,"id":"1OlMcZkUqOFSm2ieqh-R-7HzmJfkDU1S2"},{"e":25,"id":"1A07ihX8VmtHtcBYGIO8pu_56CaX1EZfm"},{"e":26,"id":"1G6uMPikop9BMma_onoUmcndvg_4J09m9"},{"e":27,"id":"1hNRxVKdLOZiqF-TnqEecJE7lBIVdz01g"},{"e":28,"id":"1iqjfNFEYTsUinPCrgJdqeqSyyOMDeLJq"},{"e":29,"id":"1ezpk7GhvnC9eXFCsZhPoqYJSkP7EwrxT"},{"e":30,"id":"1v9_KcvDECO8pT602Y3OYE4KSb1Wk5z4b"},{"e":31,"id":"18cJdoHnPlHRKI4D5WSj5LO5VNQoPxcyQ"},{"e":32,"id":"1BIUjMOt4ZnsHojQzNzScxyT-7lnYcHuf"},{"e":33,"id":"1R8AEuVR0WtAsH8ZZm_APStCt82tRj-Ey"},{"e":34,"id":"1LEXss-oHpwTXsfxiCMaYNJfh5Gzt1iew"},{"e":35,"id":"1JGqAisob0pPY89R-A4XU3pJR-64DxkT6"},{"e":36,"id":"1Ewto5aRyRehN6PGsTsrLq2mTRcjTNens"},{"e":37,"id":"1k86xvccXTAGNkIbM0_DpVGlGe9Gt4HPW"},{"e":38,"id":"1GKstVKrskkPDGj8z9beMeWWYdvLmUDGX"},{"e":39,"id":"1kY-n1kn210ERzwyar3zhut7jrb10FdwE"},{"e":40,"id":"1PiBxUrMLETSR7v6nRUwXtUXw0PNvgtvf"}]},{"n":3,"eps":[{"e":1,"id":"1nyGX1f6XjdxfVv6bZxnqG_I1wtfYTKLK"},{"e":2,"id":"1FDTUh9JHYntaFB-07xeBUZXJxt7rf_R3"},{"e":3,"id":"1FVf8xvUMKS_XJ4f1kgMXq9PkTG-lulpZ"},{"e":4,"id":"1SHJtubppYhLy9NrIDunyMnq4Tbqu8Krp"},{"e":5,"id":"1td6x3hFONkIwGlEbUQWCwaN93dGo_5cG"},{"e":6,"id":"1oDsAEbeqAa7MPZmu8MtsT7vUoIgMGAKw"},{"e":7,"id":"1zRO-D26eoJ6Mudxd2uoVVNCJFgZEFNLJ"},{"e":8,"id":"1HX8NJ1X0gKUVD60GQ1zMLvOxBaiNyulS"},{"e":9,"id":"13Pc_osuuY4wfAqHmeJOQOjzu-mSsHcnj"},{"e":10,"id":"18eaNkjI71tCjE2m_0jG4BhSeZzXue3AD"},{"e":11,"id":"1CRt0OJZkQ7pc-08C9LZYy2Nr7T_wWPcU"},{"e":12,"id":"1K_4DG-aAG-mZSjpIpNPFQv8ac-eCtCh7"},{"e":13,"id":"1N197fmZe6dmtkTH4nWcN6EuzGVTezVSd"},{"e":14,"id":"1CsNDsJL26l39pmWZU56E_wV3KcOB5VIw"},{"e":15,"id":"14Hd_pPYlmOU5n_fYkoZpgHmF7_62qIcj"},{"e":16,"id":"12nsUcgS_6rQaGk_sP1wzgU1gv_a9MUJt"},{"e":17,"id":"1_uvEISYyz2u75qKD1Q6NqOzqvluondnk"},{"e":18,"id":"1N3BDaITcQtBIcnSmMkCDhEyXRwzB5oRW"},{"e":19,"id":"1h5QxwggQpdTsibQ-7J-4vGYa2R4r5U0k"},{"e":20,"id":"1FqbP8LzK-tlKacy2LOyKya7WxsMiSL0Q"},{"e":21,"id":"1iKHpMpH6cMi7IHBlzwAr1zIYBkszCRkv"},{"e":22,"id":"1hk57BiI--8NyRNidyWYJdGjmVXlC1kSx"},{"e":23,"id":"1Wh8ddtUoVA8ESmMPgbPvK9b8LLPljAW1"},{"e":24,"id":"1PkxI1yq1AxD4WivHkK-TIW5tV0aqA7os"},{"e":25,"id":"14-Ac5GcLDHhFMwli_Ez-IpsC7E7srxbt"},{"e":26,"id":"10JpcuhwVFwzUDyWAGtuD1CZ3H2qxPA6e"},{"e":27,"id":"1BiLV3nOVBCuF6hg8A0squpS78APa_mtT"},{"e":28,"id":"1Vz6v27WvY-XQQ4qaEgDh2x0e_S2RBh4I"},{"e":29,"id":"1gLUU9nj6w8qFHNfP77eULnLqBo_gWqx7"},{"e":30,"id":"1qAHucxYGt1c5WvDQosaCdLFrq7NMtvyy"},{"e":31,"id":"1ByPy_N0Byhg8MwrRUaKReNP3pYQ4iHco"},{"e":32,"id":"1IILAE7O-1GSMFHHzus1YqrcAb94o2JWM"},{"e":33,"id":"1pk_Vd25vnGHrh1vxbDe_pnPysDL-_7VL"},{"e":34,"id":"17lY2KPaT3iPcRPjFT-pRhD4AOSiFRBn2"},{"e":35,"id":"1HCAoq1UF6yKkRqN-6lmCvqUTqZgxZero"},{"e":36,"id":"1HGwu63sdi62-7U54YGTo6KJfaMCbHOVd"},{"e":37,"id":"1O2e6ZrUyBOQBnkFZPLater7Q4NwdROhS"},{"e":38,"id":"1qaIhPyxjki2Vyju_cd0AC_FQ8nQltBIh"},{"e":39,"id":"1Pm1NKSI_LPVjBgaJj4RciONdF22oKtbN"},{"e":40,"id":"1lI5bEZYlIJ8HVTgqQWfMADZfF-1GAWtQ"}]},{"n":4,"eps":[{"e":1,"id":"16vSQ416P-By91YjsdYAgtoKwy-k4nx3A"},{"e":2,"id":"1Yf_NDl97c9I6HTTfAorWBhf9QK__HGGf"},{"e":3,"id":"1rZqtiNfBUC-H8-Cge5uMUgyO_rQb568J"},{"e":4,"id":"1PVJaTPTBI4-eTHLyekNj4B5MVSqHCAdq"},{"e":5,"id":"1tJz-npWEATKkl-9vq5tN5zSTCAnySX2a"},{"e":6,"id":"1dREgDCik1LC-J4J6HA6Wdud18Ul1FhqE"},{"e":7,"id":"12fJdnvfLOGdubpjuM1L0BG-7zBVqaYiY"},{"e":8,"id":"1omAlydC5tgS_oRzcubWHBjF1trRbPa1Z"},{"e":9,"id":"1281nb0Hx88VP9FTvzPvEdtHB0qxU5XDe"},{"e":10,"id":"14vP-4Xpeqa3XEZsf8qf5YelqY3vNYu3n"},{"e":11,"id":"1jyGYb4-d2O7BVNexOlGFNr9pGGXhj8x4"},{"e":12,"id":"1b8tZKBB7d8wq7At6ljgw2Lqb2B0EeoKE"},{"e":13,"id":"1BUaD24BlHIX4u6LNy_tl3eCt7SypqYmN"},{"e":14,"id":"1Hrox5mKx_XsgqzNr4C7OTXBzUcPASGp-"},{"e":15,"id":"1zYkSYwJq8DBZfTQ1YqncfEReV6PaaiVM"},{"e":16,"id":"1I7GwfNWakO--tJHuei_cZHZcNZM5YPw9"},{"e":17,"id":"1RMe0B-PHYHoCmvR1fsGi6TOL7eSb9qZ-"},{"e":18,"id":"1lb6A1PdP8vNFtbNO9gxwviYO1PnC3eou"},{"e":19,"id":"1gakh9eJXEF8COA2Z_1YbdYRD54bRApaZ"},{"e":20,"id":"10h7k1tBDQaodQQYH8kjEqn4rBpvej47f"},{"e":21,"id":"1GB0-ybtIxFBEqIrQk2MPlf0yMghH78yv"},{"e":22,"id":"1n4sxRo2V0JRvlUMMs855CjXU6Ge4MlvB"},{"e":23,"id":"1qxJzfV_55RJUNelF-fh43PX97Zzpq0kU"},{"e":24,"id":"1LPbeF0p8UR0DGoBVcKbCvME5bUThXr8D"},{"e":25,"id":"1ZTyARErpVxtCIPkn-qFUg2ypBQHhiO-o"},{"e":26,"id":"1xejfamPN5EJ9uAwL9MbmibbRDXrOoYq_"},{"e":27,"id":"1Agbzk-vpVmKJjhA2WFz8TDul0sRdOOPk"},{"e":28,"id":"1a0LRnB6c7xOjKX8b5NQc0oe220zIu6G9"},{"e":29,"id":"1wPbuiUmLBXJeubjbJzK5spZWX4CfPheI"},{"e":30,"id":"10pKQ_i6Y5CNZxRwdlnokGDtE5CfPBkve"},{"e":31,"id":"1DLHBn-aNge5bxiPHnqlfIXBZ-ehR51uT"},{"e":32,"id":"14RRNa8r3xzTyGDkcP5iTZ5D4a0BHliv-"},{"e":33,"id":"1mdoVFgkYLKvBQnJyLMsNFk3D6yiEtcYq"},{"e":34,"id":"1qChgbT3fgvIEMcG0rTY4aevNqYbQ1xSb"},{"e":35,"id":"1QaxgFJ3cpVQorU-gOsX8MfWQJu7Hrwk4"},{"e":36,"id":"1JDtXs_0jycyrzhUfh7AzVHVvPvkU97eR"},{"e":37,"id":"1H_gIWu3bdxy2gECBlQNmVxaajek4ubFd"},{"e":38,"id":"1ieZzmxa45ILbUghp30NEsrG14Q6hTLLS"},{"e":39,"id":"1TWmqcDvubzJbf-6_gQ50m9tRVDPj70_D"},{"e":40,"id":"15Q4rOoraZfO7l5N-NWcbQ8LnSHaQsmAq"}]},{"n":5,"eps":[{"e":1,"id":"1s2tcVeXxNttSRzYmzTXUH7s7XsT7AWF2"},{"e":2,"id":"1FdcNKyoLV8D2Im0ofYqjmRvMp5K0ImVv"},{"e":3,"id":"19afkaVmc9bT1qBNu3kkyAUG29Q4w6pT3"},{"e":4,"id":"1huqj9o2tYyHaUVSPqAhfz6du__fWEGeD"},{"e":5,"id":"1Li1Sip3csbrzaRdAbc7xoZTF58vReQU-"},{"e":6,"id":"1XvUkG3IQzgCmi0PqsSXm8YNfiO9Nhpjk"},{"e":7,"id":"11R_k671o_NflfdJUuMy012cPZRH-xImy"},{"e":8,"id":"1mdgZbGw8BzQNZGjvkPSBeJNN7dp0QhVy"},{"e":9,"id":"1MZc8ApGWJ35bcJvkig3qsvNW7hmY5olN"},{"e":10,"id":"1bEbTQALW_cNBdqcpMAwtTS34PxgygEBg"},{"e":11,"id":"1m0jdbGBSgKazSA6qTuwUOc_RwWjVywTT"},{"e":12,"id":"1HHmvpv3Mqel8oBci3VVcgKj3HPoNJ44p"},{"e":13,"id":"1ns9kHhw-Owa39ZXJzyQAXVPtz6omzWAX"},{"e":14,"id":"18q2eK-ygVLqakKewEe0LjJx3neRbwMpn"},{"e":15,"id":"1j17YHuF_3JodkpAgWTjHn3FeOULPFZzy"},{"e":16,"id":"1PTcB_b6sPlDR6PydW-30S9sVlGeKo6J-"},{"e":17,"id":"1GO66zbTJcG8cbJXV1vRO86iQRItkKpc3"},{"e":18,"id":"1kj4X5Nggn0h_L65sZVAGAN-dg7fmZMBq"},{"e":19,"id":"1cnHgY4uJVeC3faf17WfLSQ2oS82_6BBw"},{"e":20,"id":"1TqP_aVbZbVXTisH5uOzcB_D2iw2YupJg"},{"e":21,"id":"1GY8EHc6cbQY_ipi2X7j2SiVXqRweVS1o"},{"e":22,"id":"1qcDsrgWi8D7DBVYGpb7xAJf498X0xCFv"},{"e":23,"id":"1EH1Bey3p_LSpTf8AB08ao2prVjlRWv2z"},{"e":24,"id":"1NuFlZxP2aomwZhSkAlAUWeDT-0vh5bU8"},{"e":25,"id":"1p2m4R4PEldEH9itdbvDkooCDknM2xCHc"},{"e":26,"id":"167z46ciqecgXqZCTgM02z6AFfyluvOcR"},{"e":27,"id":"1DiTzmIv9y15kvZWQTvCx1xdf1vJt9bx0"},{"e":28,"id":"1OqBymVHrP2eUdjcMFAAXS-DYVfYXyYln"},{"e":29,"id":"12VGSszqJFpYD8tr3XpNoiRUt7UqE02i7"},{"e":30,"id":"15EhK6VvP3G7dbg248LosLNAgQmgaN9ke"},{"e":31,"id":"16JQYM7fQ3gVIi1V15_oESZO1I-PKdsEw"},{"e":32,"id":"1lzed6WIukBKBzL1SVxVpPJoRbIP_M4Yg"},{"e":33,"id":"17Acq6kNPR8tc0bQCpzZ972u4ayUvRZRl"},{"e":34,"id":"109ISCqLVvg6wsTa0BDv5mbVxPZDyvmNP"},{"e":35,"id":"1neSTmbkapThL6H8IFBcOIPDrZBZ9_2TQ"},{"e":36,"id":"1ydccWO__aUwAoqglZMP8DqflY-1OMFCj"},{"e":37,"id":"1SifsO2aZjg9dEI_FyXzoT7bqBwLWL2gw"},{"e":38,"id":"1Xu02ZqZvlbFJA7QEq87pIa6-W_8JuwFY"},{"e":39,"id":"1WBbi2pSIuHJvAkETpShawu9v7H_-PaVX"},{"e":40,"id":"1FH8NkBWyvn-13_qs9gQ_iWQKhgHdhpar"}]},{"n":6,"eps":[{"e":1,"id":"1wcUmejmgOLxrpL7PsHIorB4y3fwQnn51"},{"e":2,"id":"1wtUfRt6Ox2tVTWPNi4MOSEY2tzhx4-lK"},{"e":3,"id":"18f4kwXOY7Qa7kj7mTEIxkNa8B9m1--Wa"},{"e":4,"id":"1cFGPJNN8bjBvz3MQQLCkdtVQW0snIzIO"},{"e":5,"id":"1j9ozxUhhnkZ-n1rxWilHl0BL49g9oXz3"},{"e":6,"id":"19icPjxZkI-IGcoIf8hbumVT6gMugmjdh"},{"e":7,"id":"1Bg0KbCQx38yzyVGUzRTei1Sp9n_B7qno"},{"e":8,"id":"1sWSc5MAwpMDaToFYEtBXCJk-OWWuRq7_"},{"e":9,"id":"1g_Wz0ietLvXIk4Y69ijc-l-JCXRAztIj"},{"e":10,"id":"1JHSNi0Vn9CK-S_9iVgL_5BbY_gBhWNA8"},{"e":11,"id":"1PF8qfsSi8qvgbYcwUPMsj7DBQF96ffsJ"},{"e":12,"id":"1lATGCVTpt5He7vzCZQe68-KnY4gFKEtT"},{"e":13,"id":"1RH9Ss0xhjQZiEbkEre9oAQP_U6Hhgg-E"},{"e":14,"id":"1i51NUjpoCpoc3rXEO8a46OUZq2dMs0DY"},{"e":15,"id":"1E6Y_Yfrn_j04PcTyx-ZENtAEzSudUVTf"},{"e":16,"id":"1pP1_Ju1ufC61rB4pY2dGlKnvrNHmagCs"},{"e":17,"id":"1qpQlTtPNdGIGTCqZ9zSVOMvilv7syY3V"},{"e":18,"id":"1mMICMV3ochvtVjPKfF8XK_L_Lkgfl1co"},{"e":19,"id":"1zrDhAP_luLYrEm0DvexdQxQfbH456thM"},{"e":20,"id":"1HUJQP4vCZZ4-lLsc4oiW7kD_1XSsyDEE"},{"e":21,"id":"1fsRuhzCv8K2INxpjy4d0R71B3pMNnGyQ"},{"e":22,"id":"1_y7MA72sE_EuBQoU8zTxly_ZTqQaNEHp"},{"e":23,"id":"1a8LzCN-2bSQ1azHSFcJCQxEdca0xPggk"},{"e":24,"id":"1dYYuDElg-sLBN2FRBXwTMJmHpHtBa_Vt"},{"e":25,"id":"1DSClxCj5WvrNXqJWeLA6qGJ-8vZbiAGC"},{"e":26,"id":"1npiu0xgUDIgWhsokJotr9SzzBwipzizB"},{"e":27,"id":"1kMBvZ42V1aI5Y2790xvBMG0yDAZXew4h"},{"e":28,"id":"11oggG1ucy7-neaDXmujIP7bKWemz3P8P"},{"e":29,"id":"11w2w5ew53wAEMBkh5wnxYbSs1n8H8el_"},{"e":30,"id":"1CPnXM6ph7f_d-KAlzXJ0x4ILZaR37jEe"},{"e":31,"id":"16R0PhP5pfH9cl_TGrk3YDC81KNJAO39p"},{"e":32,"id":"1UAiEz74ZlO6pM1EEncrSIqIF9Zt4mk9_"},{"e":33,"id":"1aqMA7eMjiCuMk-hEhY2qRmQarf_CIDg2"},{"e":34,"id":"1Fp475fxhoiGtIkWj1bRZrwWlHqATFvsL"},{"e":35,"id":"1r0q8ZPkk2VnWhLUrBKdtDuY5hlwmRPcF"},{"e":36,"id":"13OLWp80Ua5BwFECNSJyx_-XN8LshNMXF"},{"e":37,"id":"1YZr2TLwileLY2KFfdquW6ThBRy6_vNwD"},{"e":38,"id":"1f2gvlVlY7S6o_hBKqG3VgfmS-G2Q6TwD"},{"e":39,"id":"1yhSfopvP2pI5gVjny139vlRzbCMQucEn"},{"e":40,"id":"1mevzxgV3sIzb35UJISZSEnq9mYhPKw6d"},{"e":41,"id":"16rl3YvpFjbzaeY8_-JmfbAqhHp96JONy"},{"e":42,"id":"18QVrFuqpEoMWk_1mp6Ncaw5GfxI2E2uk"},{"e":43,"id":"15221iNMb275eBY7ThUaa43EHl7BapN_F"},{"e":44,"id":"10688e5nQzSZuQ011V-BzJk8POGMd4d3G"}]}]}]};
@@ -3293,10 +3200,7 @@ function fecharTrailer(){
   trailer.classList.remove('on'); trailer.innerHTML = ''; T = null;
   _cheioAntesDoTrailer = false;
   if (modal.classList.contains('escondido')) document.body.classList.remove('travado');
-  /* fecha para a FICHA, não para a home — igual ao fluxo de trailer da Netflix */
-  if (!modal.classList.contains('escondido')){
-    setTimeout(() => { const b = $('#m-trailer') || $('#m-play'); if (b) navMarcar(b); }, 70);
-  }
+  /* fecha para a FICHA, não para a home — igual ao fluxo de trailer da Netflix. */
   if (voltarCheio) setTimeout(() => { if (!document.fullscreenElement) entrarTelaCheia(); }, 120);
 }
 
@@ -3436,12 +3340,7 @@ function abrirConfig(){
           <input type="checkbox" id="cfg-cheio" ${cfg.telaCheia !== false ? 'checked' : ''} style="width:18px;height:18px;accent-color:#e50914">
           Entrar em tela cheia automaticamente (site e vídeo)
         </label>
-        <label style="margin-top:14px;display:flex;align-items:center;gap:10px;text-transform:none;letter-spacing:0;font-size:14px;color:#e5e5e5">
-          <input type="checkbox" id="cfg-controle" ${controleTelaLigado() ? 'checked' : ''} style="width:18px;height:18px;accent-color:#e50914">
-          Mostrar o CONTROLE NA TELA (setas + OK + voltar, para TV)
-        </label>
-        <div style="font-size:12px;color:#8c8c8c;margin-top:8px">Na TV/tablet, o movimento de um <b style="color:#e5e5e5">mouse/ponteiro físico é literalmente traduzido em setas</b>: mover envia ← ↑ → ↓, clique envia OK e botão direito envia VOLTAR. O cursor continua visível. O CONTROLE NA TELA continua como reserva. No computador, o mouse segue normal.</div>
-        <div style="font-size:12px;color:#8c8c8c;margin-top:8px">No computador o app tenta tela cheia no seu primeiro toque, clique ou rolagem. Movimento do mouse e setas do teclado não pedem mais tela cheia. A abertura começa <b style="color:#e5e5e5">sempre muda</b>; se quiser ouvi-la, use só o botão <b style="color:#e5e5e5">Ligar o som</b>. O atalho <b>ABRIR-FAMOVIE-CHEIO</b> continua recomendado para tela cheia e trailers dentro do app.</div>
+        <div style="font-size:12px;color:#8c8c8c;margin-top:8px">No computador o app tenta tela cheia no seu primeiro toque, clique ou rolagem. Movimento do mouse e setas do teclado não pedem mais tela cheia. A abertura tenta tocar <b style="color:#e5e5e5">com som automaticamente</b>; se o navegador bloquear autoplay com áudio, o botão manual aparece. O atalho <b>ABRIR-FAMOVIE-CHEIO</b> continua recomendado para tela cheia e trailers dentro do app.</div>
           <button class="btn-linha" id="cfg-cheio-agora" style="margin-left:8px">Entrar em tela cheia agora</button></div>
       </div>
     </div>
@@ -3463,7 +3362,6 @@ function abrirConfig(){
   </div>`;
   $('#cfg-cheio-agora').onclick = () => entrarTelaCheia();
   $('#cfg-cheio').onchange = e => { cfg.telaCheia = e.target.checked; salvar(LS.cfg, cfg); if (e.target.checked) entrarTelaCheia(); };
-  $('#cfg-controle').onchange = e => { cfg.controleTela = e.target.checked; salvar(LS.cfg, cfg); aplicarControleTela(); };
   $('#cfg-fechar').onclick = () => { cfg.telaCheia = $('#cfg-cheio').checked; salvar(LS.cfg, cfg); config.classList.remove('on'); };
   config.onclick = e => { if (e.target === config) config.classList.remove('on'); };
   $('#cfg-limpar').onclick = () => {
@@ -3760,53 +3658,7 @@ function abrirEditor(idx){
   $('#ed-nome').focus();
 }
 
-/* ---------------- INTRO TUDUM ---------------- */
-function tudumSom(){
-  if (!cfg.som) return;
-  try{
-    const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return;
-    const ctx = new AC();
-    /* sem gesto do usuário o navegador deixa o áudio suspenso: tenta retomar; se não voltar
-       na hora, segue sem som (a abertura nunca trava por causa disso) */
-    if (ctx.state === 'suspended' && ctx.resume) { try{ ctx.resume(); }catch(e){} }
-    const master = ctx.createGain(); master.gain.value = .5; master.connect(ctx.destination);
-    const rev = ctx.createConvolver();
-    const len = ctx.sampleRate * 1.2, buf = ctx.createBuffer(2, len, ctx.sampleRate);
-    for (let c=0;c<2;c++){ const d = buf.getChannelData(c);
-      for (let i=0;i<len;i++) d[i] = (Math.random()*2-1) * Math.pow(1 - i/len, 2.6); }
-    rev.buffer = buf;
-    const revG = ctx.createGain(); revG.gain.value = .35; rev.connect(revG); revG.connect(master);
-    function golpe(freq, t0, dur, vol){
-      const g = ctx.createGain(); g.connect(master); g.connect(rev);
-      g.gain.setValueAtTime(0, t0);
-      g.gain.linearRampToValueAtTime(vol, t0 + .015);
-      g.gain.exponentialRampToValueAtTime(.0001, t0 + dur);
-      const f = ctx.createBiquadFilter(); f.type = 'lowpass'; f.frequency.setValueAtTime(1400, t0);
-      f.frequency.exponentialRampToValueAtTime(320, t0 + dur); f.connect(g);
-      [[1,1],[2,.5],[3,.28],[4.5,.14],[6,.07]].forEach(([m,v]) => {
-        const o = ctx.createOscillator(); o.type = m === 1 ? 'triangle' : 'sine';
-        o.frequency.setValueAtTime(freq*m, t0);
-        o.frequency.exponentialRampToValueAtTime(freq*m*.985, t0+dur);
-        const og = ctx.createGain(); og.gain.value = v; o.connect(og); og.connect(f);
-        o.start(t0); o.stop(t0 + dur + .05);
-      });
-    }
-    const t = ctx.currentTime + .04;
-    golpe(58.27, t, .70, .95);          // "TU"  — 1ª batida (junto com o feixe de luz)
-    golpe(87.31, t + .52, 2.4, 1.15);   // "DUM" — 2ª batida (junto com o nome FaMovie)
-    golpe(46.25, t + .78, 1.1, .22);    // eco
-    golpe(40.00, t + 1.05, .9, .12);    // eco distante
-    /* zumbido de sintetizador que se espalha até o silêncio */
-    const zumb = ctx.createOscillator(), zg = ctx.createGain(), lp = ctx.createBiquadFilter();
-    zumb.type = 'sawtooth'; zumb.frequency.setValueAtTime(41, t + .5); zumb.frequency.linearRampToValueAtTime(36, t + 3.8);
-    lp.type = 'lowpass'; lp.frequency.value = 210;
-    zg.gain.setValueAtTime(0, t + .5);
-    zg.gain.linearRampToValueAtTime(.05, t + 1.1);
-    zg.gain.exponentialRampToValueAtTime(.0001, t + 3.8);
-    zumb.connect(lp); lp.connect(zg); zg.connect(master); zg.connect(rev); rev.connect(master);
-    zumb.start(t + .5); zumb.stop(t + 3.9);
-  }catch(e){}
-}
+/* ---------------- ABERTURA EM VÍDEO ---------------- */
 function tocarIntro(){
   if (!cfg.intro){ intro.classList.add('escondido'); return; }
   intro.classList.remove('escondido');
@@ -3819,27 +3671,35 @@ function tocarIntro(){
   if (temVideo){
     const fontesVideo = `<source src="${INTRO_VIDEO}" type="video/mp4">`;
     intro.innerHTML = `
-      <div class="in-video"><video id="in-vid" preload="auto" autoplay muted playsinline disablepictureinpicture>${fontesVideo}</video></div>
+      <div class="in-video"><video id="in-vid" preload="auto" playsinline disablepictureinpicture>${fontesVideo}</video></div>
       <button class="pular" id="pular-intro">Pular abertura</button>`;
     vid = $('#in-vid');
-    /* ÁUDIO MANUAL, como você pediu: a abertura sempre começa MUDA.
-       Nenhum temporizador, movimento, rolagem ou clique neutro liga o som sozinho. Quem quiser
-       ouvir escolhe conscientemente o botão "Ligar o som" — o vídeo continua tocando sem travar. */
-    try{
-      vid.currentTime = 0; vid.volume = 1; vid.muted = true;
-      const p1 = vid.play(); if (p1 && p1.catch) p1.catch(() => {});
+    /* Primeiro tenta o áudio real do MP4 automaticamente. Hospedar o MP4 junto ao HTML evita
+       falhas de origem; ainda assim alguns navegadores proíbem áudio sem gesto — nesse caso o
+       vídeo segue mudo e oferece um único botão para a pessoa liberar o som. */
+    const mostrarBotaoSom = () => {
+      if (!vid || !vid.isConnected || $('#som-intro')) return;
       const b = el('button'); b.className = 'pular som'; b.id = 'som-intro'; b.textContent = 'Ligar o som';
       intro.appendChild(b);
       b.onclick = ev => {
         ev.stopPropagation();
         if (!vid.isConnected) return;
         vid.muted = false; try{ vid.volume = 1; }catch(e){}
-        const pronto = () => { if (!vid.muted && b.isConnected) b.remove(); };
+        const p = vid.play();
+        const pronto = () => { if (b.isConnected && !vid.muted) b.remove(); };
         const falhou = () => { vid.muted = true; b.textContent = 'Tentar ligar o som'; };
-        const p2 = vid.play();
-        if (p2 && p2.then) p2.then(pronto).catch(falhou); else pronto();
+        if (p && p.then) p.then(pronto).catch(falhou); else pronto();
       };
-    }catch(e){}
+    };
+    try{
+      vid.currentTime = 0; vid.volume = 1; vid.muted = false;
+      const p1 = vid.play();
+      if (p1 && p1.catch) p1.catch(() => {
+        /* Política de autoplay do navegador: mantém a abertura visível/rodando, sem travar. */
+        try{ vid.muted = true; const p2 = vid.play(); if (p2 && p2.catch) p2.catch(() => {}); }catch(e){}
+        mostrarBotaoSom();
+      });
+    }catch(e){ mostrarBotaoSom(); }
     try{ vid.onended = () => fim(false); }catch(e){}
   }
   if (!temVideo){
@@ -3864,319 +3724,8 @@ function tocarIntro(){
   };
   $('#pular-intro').onclick = () => fim(true);
   setTimeout(fim, temVideo ? 4600 : 4050);   /* rede de segurança: se o vídeo engasgar, a abertura sai sozinha */
-  document.addEventListener('keydown', function esc(e){
-    if (e.key === 'Enter' || e.key === 'OK' || e.keyCode === 13 || e.keyCode === 29443 || e.keyCode === 10009){
-      fim(true); document.removeEventListener('keydown', esc);
-    }
-  });
 }
 let sessaoIniciada = false;
-
-/* ---------------- NAVEGAÇÃO POR SETAS (controle de TV e teclado do computador) ----------------
-   As setas não empurram o "mouse" do navegador: elas MOVEM A SELEÇÃO de item em item, como numa
-   TV. Cada elemento ganha um anel branco (e os cartões crescem, igual ao hover), a tela rola
-   sozinha para manter o selecionado à vista, OK/Enter abre e o botão VOLTAR do controle sai. */
-const NAV_SEL = [
-  '#lateral .logo-mini', '#lateral .ic', '#lateral #menu-perfil',
-  '#lateral .dropdown a', '#lateral .painel-sino .linha',
-  '#hero .btn', '#hero .btn-info',
-  '#tela-busca #q', '#tela-busca #limpa-busca', '#filtros .chip', '#grade .card',
-  '.fileira h2 .ver-tudo', '.fileira .card',
-  '#modal .fechar', '#modal .acao', '#modal #m-temp', '#modal .trilho-eps .ep',
-  '#modal .card-sem', '#modal .voltar-flutuante',
-  '#perfis .perfil', '#perfis .btn-gerenciar',
-  '#config button', '#config input', '#config select',
-  '#editor-perfil button', '#editor-perfil input',
-  '#player .voltar-flutuante', '#trailer .voltar-flutuante'
-].join(',');
-
-function navVisivel(el){
-  if (!el || el.disabled || el.tabIndex < 0) return false;
-  if (el.closest('.escondido')) return false;
-  /* fora de cena (home escondida pela aba Busca/Explorar, fileira fechada…) não é destino */
-  try{ const b = el.getBoundingClientRect(); if (b.width < 2 || b.height < 2) return false; }catch(e){}
-  /* painéis que aparecem com a classe '.on' (config, editor, sino) */
-  if (el.closest('#config') && !el.closest('#config').classList.contains('on')) return false;
-  if (el.closest('#editor-perfil') && !el.closest('#editor-perfil').classList.contains('on')) return false;
-  const r = el.getBoundingClientRect();
-  if (r.width < 3 || r.height < 3) return false;
-  const st = getComputedStyle(el);
-  if (st.visibility === 'hidden' || st.display === 'none' || +st.opacity < .06) return false;
-  /* aceita o que está um pouco fora da tela (a rolagem acompanha depois) */
-  return r.bottom > -innerHeight * 1.4 && r.top < innerHeight * 2.4 && r.right > -innerWidth && r.left < innerWidth * 2;
-}
-function navLista(){
-  const playerOn = player && player.classList.contains('on');
-  const trailerOn = trailer && trailer.classList.contains('on');
-  const modalOn = modal && !modal.classList.contains('escondido');
-  const perfisOn = telaPerfis && !telaPerfis.classList.contains('escondido');
-  const cfgOn = config && config.classList.contains('on');
-  const edEl = $('#editor-perfil');
-  const edOn = edEl && edEl.classList.contains('on');
-  let raiz = document;
-  if (playerOn) raiz = player;
-  else if (trailerOn) raiz = trailer;
-  else if (cfgOn) raiz = config;
-  else if (edOn) raiz = edEl;
-  else if (modalOn) raiz = modal;
-  else if (perfisOn) raiz = telaPerfis;
-  /* Busca/Explorar são páginas: a barra lateral continua valendo (antes a seta ← não achava a lateral) */
-  return [...raiz.querySelectorAll(NAV_SEL)].filter(navVisivel);
-}
-function navMarcar(el){
-  document.querySelectorAll('.foco-tv').forEach(x => x.classList.remove('foco-tv'));
-  if (!el) return;
-  el.classList.add('foco-tv');
-  /* margens de rolagem: o item selecionado nunca fica por baixo da barra da busca nem colado na borda */
-  let topo = 10;
-  if (telaBusca && telaBusca.classList.contains('on')){
-    try{
-      medirTopoBusca();
-      const v = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--topo-busca-h'));
-      if (v) topo = v + 14;
-    }catch(e){}
-  }
-  el.style.scrollMarginTop = topo + 'px';
-  el.style.scrollMarginBottom = '44px';
-  try{ el.focus({preventScroll:true}); }catch(e){ try{ el.focus(); }catch(e2){} }
-  try{ el.scrollIntoView({block:'nearest', inline:'nearest', behavior:'smooth'}); }
-  catch(e){ try{ if (typeof el.scrollIntoView === 'function') el.scrollIntoView(); }catch(e2){} }
-}
-function navAtual(){
-  const a = document.activeElement;
-  if (a && a.classList && a.classList.contains('foco-tv')) return a;
-  const dentro = navLista();
-  return dentro.includes(a) ? a : null;
-}
-function navMover(dir){
-  const lista = navLista();
-  if (!lista.length) return false;
-  const atual = navAtual();
-  if (!atual){ navMarcar(lista[0]); return true; }
-  const horiz = (dir === 'esq' || dir === 'dir');
-  const naLateral = !!(atual.closest && atual.closest('#lateral'));
-  const alvo = atual.getBoundingClientRect();
-  const separacao = (r1, r2, eixo) => eixo === 'y'
-    ? Math.max(0, Math.max(r1.top, r2.top) - Math.min(r1.bottom, r2.bottom))
-    : Math.max(0, Math.max(r1.left, r2.left) - Math.min(r1.right, r2.right));
-  const ax = alvo.left + alvo.width / 2, ay = alvo.top + alvo.height / 2;
-  let mesma = null, mesmaNota = Infinity;      /* vizinho natural: mesma linha (esq/dir) ou mesma coluna (cima/baixo) */
-  let trilho = null, trilhoNota = Infinity;    /* barra lateral: a coluna de referência da TV */
-  let outro = null, outroNota = Infinity;      /* plano B (só cima/baixo e saída da lateral) */
-  lista.forEach(el => {
-    if (el === atual) return;
-    const r = el.getBoundingClientRect();
-    if (r.width < 2 || r.height < 2) return;
-    const bx = r.left + r.width / 2, by = r.top + r.height / 2;
-    const dx = bx - ax, dy = by - ay;
-    let principal, secundaria;
-    if (dir === 'dir'){ if (dx < 6) return; principal = dx; secundaria = Math.abs(dy); }
-    else if (dir === 'esq'){ if (dx > -6) return; principal = -dx; secundaria = Math.abs(dy); }
-    else if (dir === 'baixo'){ if (dy < 6) return; principal = dy; secundaria = Math.abs(dx); }
-    else { if (dy > -6) return; principal = -dy; secundaria = Math.abs(dx); }
-    /* está "na mesma linha/coluna"? a folga é pequena, medida pelo vão entre os dois (não pelo centro) */
-    const folga = horiz ? separacao(alvo, r, 'y') <= Math.min(alvo.height, r.height) * .18
-                        : separacao(alvo, r, 'x') <= Math.max(16, Math.min(alvo.width, r.width) * .3);
-    const nota = principal + secundaria * (horiz ? 1.5 : .2);
-    if (folga && nota < mesmaNota){ mesmaNota = nota; mesma = el; }
-    /* plano B (só cima/baixo e saída da barra lateral): vale o mais perto na direção, mas ainda "na coluna".
-       Na barra lateral a folga é livre: acabou a coluna de ícones, descer entra no conteúdo. */
-    if (!horiz && (naLateral || separacao(alvo, r, 'x') <= Math.max(40, Math.min(alvo.width, r.width) * .6))){
-      if (secundaria + principal * .35 < outroNota){ outroNota = secundaria + principal * .35; outro = el; }
-    } else if (horiz && secundaria + principal * .35 < outroNota){ outroNota = secundaria + principal * .35; outro = el; }
-    /* candidatos na barra lateral (trilho de ícones da esquerda) */
-    if (horiz && !naLateral && el.closest && el.closest('#lateral')){
-      const nLat = Math.abs(dy) + principal * .25;
-      if (nLat < trilhoNota){ trilhoNota = nLat; trilho = el; }
-    }
-  });
-  if (mesma){ navMarcar(mesma); return true; }
-  if (horiz){
-    /* ← sem vizinho na linha: entra na BARRA LATERAL (nunca nas categorias por engano) */
-    if (dir === 'esq' && !naLateral && trilho){ navMarcar(trilho); return true; }
-    /* → estando na barra lateral: sai para o conteúdo mais próximo naquela altura */
-    if (dir === 'dir' && naLateral && outro){ navMarcar(outro); return true; }
-    return false;                 /* fim da linha: fica onde está (não pula para os chips nem para o topo) */
-  }
-  if (outro){ navMarcar(outro); return true; }
-  return false;
-}
-function navAtivar(){
-  const el = navAtual();
-  if (!el) return false;
-  if (el.tagName === 'INPUT' || el.tagName === 'SELECT' || el.tagName === 'TEXTAREA'){
-    try{ el.focus(); }catch(e){}
-    return true;
-  }
-  el.click();
-  return true;
-}
-function navVoltar(){
-  if (player && player.classList.contains('on')){ fecharPlayer(); return true; }
-  if (trailer && trailer.classList.contains('on')){ fecharTrailer(); return true; }
-  if (modal && !modal.classList.contains('escondido')){
-    const f = $('#m-fechar'); if (f) f.click(); else modal.classList.add('escondido');
-    return true;
-  }
-  const edEl = $('#editor-perfil');
-  if (edEl && edEl.classList.contains('on')){ const x = $('#ed-cancelar') || $('#ed-salvar'); if (x) x.click(); return true; }
-  const cfgEl = $('#config');
-  if (cfgEl && cfgEl.classList.contains('on')){ const x = $('#cfg-fechar'); if (x) x.click(); return true; }
-  if (telaBusca.classList.contains('on')){ fecharBusca(); return true; }
-  return false;
-}
-/* a temporada muda com as setas laterais quando o seletor está selecionado (jeito "TV") */
-function navTemporada(dir){
-  const sel = document.activeElement;
-  if (!sel || sel.id !== 'm-temp') return false;
-  const i = sel.selectedIndex + (dir === 'dir' ? 1 : -1);
-  if (i < 0 || i >= sel.options.length) return true;               /* engole a tecla no limite */
-  sel.selectedIndex = i;
-  sel.dispatchEvent(new Event('change', {bubbles:true}));
-  return true;
-}
-function tratarTecla(ev){
-  const bloqueado = { 'ArrowUp':1, 'ArrowDown':1, 'ArrowLeft':1, 'ArrowRight':1 };
-  const mapa = { 37:'esq', 38:'cima', 39:'dir', 40:'baixo',     /* teclado e controle padrão */
-                 4:'esq', 5:'dir', 29460:'cima', 29461:'baixo' };
-  /* Trailer também é uma tela de reprodução: VOLTAR fecha para a ficha e as setas não viram mouse na TV. */
-  if (trailer && trailer.classList.contains('on')){
-    if (ev.keyCode === 10009 || ev.key === 'Backspace' || ev.key === 'Escape' || ev.key === 'Back'){ ev.preventDefault(); fecharTrailer(); return true; }
-    if (mapa[ev.keyCode || ev.which] || ev.key === 'Enter' || ev.keyCode === 13 || ev.keyCode === 29443){ ev.preventDefault(); return true; }
-    return false;
-  }
-  /* dentro do player (vídeo), as setas são do vídeo */
-  if (player && player.classList.contains('on')){
-    if (ev.keyCode === 10009 || ev.key === 'Backspace' || ev.key === 'Escape'){ ev.preventDefault(); fecharPlayer(); return true; }
-    return false;
-  }
-  const k = ev.key || '';
-  const ativo = document.activeElement;
-  const emCampo = ativo && (ativo.tagName === 'INPUT' || ativo.tagName === 'TEXTAREA');
-  /* aceita key moderna também: assim eventos traduzidos do mouse não dependem de keyCode legado */
-  const porNome = {ArrowLeft:'esq', ArrowUp:'cima', ArrowRight:'dir', ArrowDown:'baixo'};
-  const dir = mapa[ev.keyCode || ev.which] || porNome[k];
-  /* escrevendo num campo: ← → andam o cursor (↑ ↓ saem do campo e navegam) */
-  if (emCampo && (k === 'ArrowLeft' || k === 'ArrowRight' || ev.keyCode === 37 || ev.keyCode === 39)){
-    if (ativo.value && ativo.value.length) return false;
-  }
-  if (emCampo && ativo.type && ativo.type !== 'text' && (k === 'ArrowUp' || k === 'ArrowDown')) return false;
-  if (dir && (bloqueado[k] || (ev.keyCode || ev.which) in mapa || !k)){
-    if (navTemporada(dir)){ ev.preventDefault(); return true; }
-    if (navMover(dir)){ ev.preventDefault(); return true; }   /* andou a seleção: a tecla é nossa, a página não rola */
-    return false;                                             /* nada naquela direção: deixa o navegador rolar */
-  }
-  if (k === 'Enter' || ev.keyCode === 13 || ev.keyCode === 29443 || k === 'OK'){
-    if (navAtual()){ ev.preventDefault(); navAtivar(); return true; }
-    return false;
-  }
-  if (ev.keyCode === 10009 || k === 'Back' || k === 'BrowserBack' || k === 'XF86Back' || k === 'GoBack'){
-    if (navVoltar()){ ev.preventDefault(); return true; }
-    return false;
-  }
-  if (k === 'Backspace'){
-    if (navVoltar()){ ev.preventDefault(); return true; }
-  }
-  return false;
-}
-
-function ligarNavegacaoSetas(){
-  document.addEventListener('keydown', ev => {
-    if (ev.__nfv) return;          /* o trecho do <head> já tratou (é o caminho que funciona na TV) */
-    tratarTecla(ev);
-  }, true);
-  /* o mesmo tratador é entregue ao <head>: é ele que salva as teclas quando a TV só as manda ANTES do app subir */
-  window.__NF_NAV = tratarTecla;
-
-  /* ao abrir algo, o foco já vai para dentro (a seleção continua de onde o dedo/controle estava) */
-  let focoAntes = null;
-  const obs = new MutationObserver(() => {
-    const modalOn = modal && !modal.classList.contains('escondido');
-    const perfisOn = telaPerfis && !telaPerfis.classList.contains('escondido');
-    const playerOn = player && player.classList.contains('on');
-    const trailerOn = trailer && trailer.classList.contains('on');
-    if (trailerOn){
-      const v = $('#tr-voltar'); if (v) navMarcar(v);
-      return;
-    }
-    if (playerOn){
-      const v = $('#player .voltar-flutuante'); if (v) navMarcar(v);
-      return;
-    }
-    if (modalOn){
-      if (!focoAntes) focoAntes = document.activeElement;
-      if (!modal.querySelector('.foco-tv')){
-        const alvo = $('#m-play') || modal.querySelector('.acao') || $('#m-fechar');
-        setTimeout(() => { if (!modal.classList.contains('escondido') && !modal.querySelector('.foco-tv') && alvo) navMarcar(alvo); }, 60);
-      }
-      return;
-    }
-    if (perfisOn){
-      if (!telaPerfis.querySelector('.foco-tv')){ const p2 = $('#perfis .perfil'); if (p2) setTimeout(() => navMarcar(p2), 80); }
-      return;
-    }
-    /* busca aberta: o controle já cai dentro do campo, pronto para digitar */
-    if (telaBusca.classList.contains('on')){
-      if (!focoAntes) focoAntes = document.activeElement;
-      if (!telaBusca.querySelector('.foco-tv')){
-        const q = $('#q', telaBusca);
-        if (q) setTimeout(() => { if (telaBusca.classList.contains('on') && !telaBusca.querySelector('.foco-tv') && q) navMarcar(q); }, 70);
-      }
-      return;
-    }
-    /* nada aberto: devolve o foco para onde estava */
-    if (focoAntes && document.contains(focoAntes)) { navMarcar(focoAntes); focoAntes = null; }
-  });
-  [modal, telaPerfis, player, trailer, telaBusca].forEach(alvo => { try{ obs.observe(alvo, {attributes:true, attributeFilter:['class']}); }catch(e){} });
-}
-
-/* ---------------- CONTROLE NA TELA (para TV: quando o controle da TV vira o "mouse" do navegador) ---------------- */
-function ehAparelhoTV(){
-  if (window.__NF_TV) return true;
-  try{ if (window.tizen) return true; }catch(e){}
-  const ua = navigator.userAgent || '';
-  return /smart-?tv|tizen|web0s|webos|netcast|hbbtv|bravia|viera|ce-html|googletv|aft[bmst]|crkey|silk|\bTV\b/i.test(ua);
-}
-function emQuadro(){ try{ return window.self !== window.top; }catch(e){ return true; } }
-function controleTelaLigado(){
-  if (cfg.controleTela === true) return true;
-  if (cfg.controleTela === false) return false;
-  return ehAparelhoTV() || emQuadro();
-}
-function montarControleTela(){
-  const cx = el('div'); cx.id = 'controle-tela';
-  cx.innerHTML = `
-    <button class="fechar-ctl" data-a="fechar" aria-label="Esconder o controle na tela">✕</button>
-    <div class="nome">CONTROLE NA TELA</div>
-    <div class="pads">
-      <button class="ctl cima" data-d="cima" aria-label="Para cima">▲</button>
-      <button class="ctl esq" data-d="esq" aria-label="Para a esquerda">◀</button>
-      <button class="ctl ok" data-a="ok" aria-label="OK">OK</button>
-      <button class="ctl dir" data-d="dir" aria-label="Para a direita">▶</button>
-      <button class="ctl baixo" data-d="baixo" aria-label="Para baixo">▼</button>
-      <button class="ctl voltar" data-a="voltar" aria-label="Voltar">VOLTAR</button>
-    </div>`;
-  document.body.appendChild(cx);
-  const agir = ev => {
-    const b = ev.target && ev.target.closest ? ev.target.closest('[data-d],[data-a]') : null;
-    if (!b) return;
-    ev.preventDefault(); ev.stopPropagation();
-    if (b.dataset.d){ if (!navTemporada(b.dataset.d)) navMover(b.dataset.d); return; }
-    if (b.dataset.a === 'ok') navAtivar();
-    else if (b.dataset.a === 'voltar') navVoltar();
-    else if (b.dataset.a === 'fechar'){ cfg.controleTela = false; salvar(LS.cfg, cfg); aplicarControleTela(); }
-  };
-  cx.addEventListener('click', agir);
-  cx.addEventListener('mousedown', ev => ev.preventDefault());   /* clique não rouba o foco nem fecha painéis */
-  cx.addEventListener('touchstart', ev => { ev.preventDefault(); agir(ev); }, {passive:false});
-  return cx;
-}
-function aplicarControleTela(){
-  const ligado = controleTelaLigado();
-  let cx = $('#controle-tela');
-  if (ligado && !cx) cx = montarControleTela();
-  if (cx) cx.classList.toggle('sumiu', !ligado);
-}
 
 /* ---------------- TOAST ---------------- */
 function toast(msg){
@@ -4250,17 +3799,6 @@ function boot(){
   if (!cfg.intro) renderizarAppDepois(0);
   tocarIntro();              /* a abertura começa na hora, sem esperar a home */
   ligarTelaCheiaAutomatica();
-  ligarNavegacaoSetas();   /* setas do controle da TV e do teclado movem a SELEÇÃO, item por item */
-  aplicarControleTela();   /* na TV (ou dentro de outra página) aparece o CONTROLE NA TELA para clicar com o mouse */
-  /* se a TV estiver mandando o mouse do navegador em vez das teclas, avisa do controle na tela (1x) */
-  setTimeout(() => {
-    try{
-      if (!controleTelaLigado() || (window.__NF_TECLAS_VISTAS || 0) > 0) return;
-      if (localStorage.getItem('nfc_dica_controle')) return;
-      localStorage.setItem('nfc_dica_controle', '1');
-      toast('Se as setas do controle estiverem mexendo o mouse do navegador, use o CONTROLE NA TELA (canto inferior direito) — dá para clicar com esse mesmo mouse.');
-    }catch(e){}
-  }, 11000);
   /* dica única: quem abre o arquivo direto (sem o atalho) fica sabendo do atalho de som + tela cheia */
   setTimeout(() => {
     try{
@@ -4295,5 +3833,5 @@ window.NF = { ITENS, FILMES, SERIES, meta, TRAILERS, abrirModal, tocar, abrirTra
 })();
 
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a4b2b206af99d985',t:'MTc5MjEwNzkwNQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a4b2cbca2a926237',t:'MTc5MjEwODk2MA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
