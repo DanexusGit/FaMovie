@@ -755,7 +755,8 @@ footer .cols a:hover{color:#fff;text-decoration:underline}
 /* ================= v8: player em tela cheia, X destacado, semelhantes ================= */
 #player.on{display:block}
 #player .quadro-cheio{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;background:#000}
-#player .quadro-cheio iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
+#player .quadro-cheio iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000;touch-action:manipulation;overscroll-behavior:none;outline:0}
+body.assistindo{overscroll-behavior:none}
 /* seta de voltar flutuante (único controle) */
 .voltar-flutuante{
   position:fixed;top:18px;left:18px;z-index:5010;width:58px;height:58px;border-radius:50%;
@@ -3545,6 +3546,19 @@ let P = null;
 function urlPreviewDrive(id){
   return `https://drive.google.com/file/d/${encodeURIComponent(id)}/preview`;
 }
+/* TVs costumam mandar Pausar/OK ao documento que está com foco. Ao abrir,
+   entregamos o foco diretamente ao iframe do Drive — sem converter controles
+   remotos em rolagem nem capturar as teclas do visualizador. */
+function focarVisualizadorDrive(sessao){
+  const frame = $('#p-frame', player); if (!frame) return;
+  const focar = () => {
+    if (P !== sessao || !player.classList.contains('on')) return;
+    try { frame.focus({preventScroll:true}); } catch(_e){ try { frame.focus(); } catch(_e2){} }
+  };
+  frame.addEventListener('load', () => setTimeout(focar, 0), {once:true});
+  setTimeout(focar, 180);
+  setTimeout(focar, 900);
+}
 function tocar(item, ep){
   if (trailer.classList.contains('on')) fecharTrailer();
   if (!ep) ep = primeiroEp(item);
@@ -3559,7 +3573,7 @@ function tocar(item, ep){
   registrarHistorico(item, ep);
   player.innerHTML = `
     <div class="quadro-cheio">
-      <iframe id="p-frame" src="${urlPreviewDrive(ep.id)}" title="${esc(item.titulo)}"
+      <iframe id="p-frame" class="frame-drive" tabindex="0" src="${urlPreviewDrive(ep.id)}" title="${esc(item.titulo)}"
         allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </div>
     <div class="controles-player" aria-label="Controles de navegação">
@@ -3570,6 +3584,7 @@ function tocar(item, ep){
   prog[ep.id] = {t:inicio, d:duracaoEstimada(item, ep), item:item.chave, ep:ep.n, temp:ep.temp, at:Date.now()}; salvarProg();
   P = {item, ep, prox:proxEp, modo:'estimado', inicio:Date.now(), base:inicio, timer:null, autoAgendado:false};
   P.timer = setInterval(() => atualizarProgressoPlayer(false), 15000);
+  focarVisualizadorDrive(P);
   $('#p-voltar').onclick = fecharPlayer;
   const btProx = $('#p-proximo'); if (btProx) btProx.onclick = () => { atualizarProgressoPlayer(true); tocar(item, proxEp); };
   tentarTelaCheia();
@@ -4245,5 +4260,6 @@ window.NF = { ITENS, FILMES, SERIES, meta, TRAILERS, abrirModal, tocar, abrirTra
 })();
 
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a4baa2c3de660316',t:'MTc5MjE5MTE2Ng=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a4d3d2f178aff213',t:'MTc5MjQ1NTI4Mw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"1954b47c125f43f8b4338b3c4f804e4f","spa":2}' crossorigin="anonymous"></script>
+</body>
 </html>
